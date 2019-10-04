@@ -1,0 +1,246 @@
+﻿@model Fate.ViewModels.VMNA01
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>測試你潛意識的理想情人</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="@Url.Content("~/images/icons/favicon-na01.ico")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/bootstrap/css/bootstrap.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/fonts/font-awesome-4.7.0/css/font-awesome.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/animate/animate.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/bootstrap.na01.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/util.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/na01.css")" />
+    <style>
+        #NewWordBlock input {
+            max-width: 200px;
+        }
+
+        .blackBlock {
+            position: fixed;
+            top: 0px;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9999999;
+            display: none;
+        }
+
+        .loader {
+            border: 16px solid #eee; /* Light grey */
+            border-top: 16px solid #666; /* Blue */
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            margin: 10% auto;
+        }
+
+        @@keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-contact100">
+        <div class="wrap-contact100">
+            <nav class="navbar navbar-top navbar-expand-lg bg-pink text-white">
+                <span class="navbar-brand mx-auto">
+                    <span></span>
+                </span>
+            </nav>
+
+            <div class="banner-border">
+                <img src="@Url.Content("~/images/back2.jpg")" class="banner" />
+            </div>
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "contact100-form validate-form form-wrap", id = "NA01Form" }))
+            {
+                <img src="@Url.Content("~/images/card.png")" class="input-bg" />
+                <div class="wrap-input100">
+                    <span class="input-title">姓氏</span>
+                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control input-content", maxlength = "2" })
+                </div>
+
+                <div class="wrap-input100">
+                    <span class="input-title">名字</span>
+                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control input-content", maxlength = "2" })
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="container-contact100-form-btn">
+                    <div class="wrap-contact100-form-btn">
+                        <div class="contact100-form-bgbtn"></div>
+                        <button class="contact100-form-btn" type="button" id="GoBtn">
+                            立即測算
+                        </button>
+                    </div>
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.Result))
+            {
+                <div class="mt-5 result" id="Result">
+                    <h4 class="result-title">測算內容</h4>
+                    <div class="result-detail">
+                        @Model.Result
+                    </div>
+                    <img src="@Url.Content("~/images/cherry1.png")" alt="" class="cherry1">
+                    <img src="@Url.Content("~/images/cherry2.png")" alt="" class="cherry2">
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="popup-for-purchaseLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 style="color:red;">您的姓名內有不在我們資料庫的文字<br /><samll style="color:#808080; font-size:0.5em;">請輸入該文字筆畫，讓我們為您更精準的算出您的結果</samll></h5>
+
+                </div>
+                <div class="modal-body">
+                    <div id="NewWordBlock">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="AddNewWordBtn" class="btn btn-primary">送出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="blackBlock">
+        <div class="loader"></div>
+    </div>
+
+    <script src="@Url.Content("~/vendor/jquery/jquery-3.2.1.min.js") "></script>
+    <script src="@Url.Content("~/vendor/bootstrap/js/popper.js")"></script>
+    <script src="@Url.Content("~/vendor/bootstrap/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/na01.js")"></script>
+    <script>
+        $(function () {
+
+            @if (!string.IsNullOrEmpty(Model.Result))
+            {
+                <text>$("html, body").animate({ scrollTop: $("#Result").offset().top - 20 });</text>
+            }
+
+
+            $('#GoBtn').click(function () {
+                    if (validate()) {
+                        var wordlist = ($('#LastName').val() + $('#FirstName').val()).split('');
+
+                        $('.blackBlock').show();
+                        $.ajax({
+                            type: "POST",
+                            async: true,
+                            dataType: "json",
+                            data: JSON.stringify(wordlist),
+                            url: '@Url.Action("WordingCheck", "Fate")',
+                            contentType: 'application/json; charset=UTF-8',
+                            success: function (result) {
+                                console.log(result);
+                                if (result.length == 0) {
+                                    $('#NA01Form').submit();
+                                }
+                                else {
+                                    var wordingBlockElement = '<div><span>{{word}}</span><input class="form-control" data-word="{{word}}" name="newWord" type="text" placeholder="請輸入筆畫" /></div >';
+                                    var temp = '';
+                                    for (var index in result) {
+                                        temp += wordingBlockElement.replace(/{{word}}/g, result[index])
+                                    }
+                                    $('#NewWordBlock').html(temp);
+                                    $('.blackBlock').hide();
+                                    $('#popup').modal('show');
+                                }
+                            }
+                        });
+                    }
+                });
+
+            $('#AddNewWordBtn').click(function () {
+                    var IntRegular = /^[0-9]*[1-9][0-9]*$/;
+                    var newWordList = [];
+                    var count = true;
+                $('input[name=newWord]').each(function () {
+                        console.log(IntRegular.test($(this).val()));
+                        if (!IntRegular.test($(this).val()) || !($(this).val() < 100 && $(this).val() > 0) ) {
+                            alert($(this).data('word') + '的筆畫請輸入1到2位數的整數，且不可為0');
+                        $(this).val('');
+                            count = false;
+                        }
+
+                        newWordList.push({ Word: $(this).data('word'), Stroke: $(this).val()})
+                });
+
+                    if (count) {
+                        SaveNewWords(newWordList);
+                    }
+                });
+            });
+
+        function validate() {
+            var message = '';
+            if (!$('#LastName').val()) {
+                message += '請輸入姓氏\n';
+            }
+            else if ($('#LastName').val().length > 2) {
+                message += '姓氏長度最多2個字\n';
+            }
+
+            if (!$('#FirstName').val()) {
+                message += '請輸入名字\n';
+            }
+            else if ($('#FirstName').val().length > 2) {
+                message += '名字長度最多2個字\n';
+            }
+
+            if (message) {
+                alert(message);
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+        function SaveNewWords(newWords) {
+            $('.blackBlock').show();
+            $.ajax({
+                type: "POST",
+                async: true,
+                dataType: "json",
+                data: JSON.stringify(newWords),
+                url: '@Url.Action("SaveWordStroke", "Fate")',
+                contentType: 'application/json; charset=UTF-8',
+                success: function (result) {
+                    console.log(result.Success);
+                    if (result.Success) {
+                        $('#NA01Form').submit();
+                    }
+                    else {
+                        alert('寫入新的文字筆畫失敗!');
+                        $('.blackBlock').hide();
+                        console.log(result.Message);
+                    }
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

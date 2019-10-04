@@ -1,0 +1,9 @@
+C:\Eden\Projects\Fate\Fate.Resource\bin\Release\Fate.Resource.dll
+C:\Eden\Projects\Fate\Fate.Resource\bin\Release\Fate.Resource.pdb
+C:\Eden\Projects\Fate\Fate.Resource\obj\Release\Fate.Resource.csprojAssemblyReference.cache
+C:\Eden\Projects\Fate\Fate.Resource\obj\Release\Fate.Resource.Operation.Ziwei.resources
+C:\Eden\Projects\Fate\Fate.Resource\obj\Release\Fate.Resource.Share.Branch.resources
+C:\Eden\Projects\Fate\Fate.Resource\obj\Release\Fate.Resource.Share.Heavenly.resources
+C:\Eden\Projects\Fate\Fate.Resource\obj\Release\Fate.Resource.csproj.GenerateResource.cache
+C:\Eden\Projects\Fate\Fate.Resource\obj\Release\Fate.Resource.dll
+C:\Eden\Projects\Fate\Fate.Resource\obj\Release\Fate.Resource.pdb

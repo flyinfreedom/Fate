@@ -1,0 +1,705 @@
+﻿@model Fate.ViewModels.VMST01
+
+@{
+    ViewBag.Title = "ST01";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>我的前世今生</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="@Url.Content("~/images/icons/favicon.ico")" />
+    <link rel="stylesheet"
+          ype="text/css"
+          href="@Url.Content("~/vendor/bootstrap/css/bootstrap.min.css")" />
+    <link rel="stylesheet"
+          type="text/css"
+          href="@Url.Content("~/fonts/font-awesome-4.7.0/css/font-awesome.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/animate/animate.css")" />
+    <link rel="stylesheet"
+          type="text/css"
+          href="@Url.Content("~/vendor/css-hamburgers/hamburgers.min.css")" />
+    <link rel="stylesheet"
+          type="text/css"
+          href="@Url.Content("~/vendor/animsition/css/animsition.min.css")" />
+    <link rel="stylesheet"
+          type="text/css"
+          href="@Url.Content("~/vendor/select2/select2.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/bootstrap.extent.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/util.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/main.css")" />
+    <style>
+        .blackBlock {
+            position: fixed;
+            top: 0px;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9999999;
+            display: none;
+        }
+
+        .loader {
+            border: 16px solid #eee; /* Light grey */
+            border-top: 16px solid #666; /* Blue */
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            margin: 10% auto;
+        }
+
+        @@keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .modal-body .form-check {
+            padding-left: 0px;
+        }
+
+        .resultTitle {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #1a6226;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-contact100">
+        <div class="wrap-contact100">
+            <nav class="navbar navbar-top navbar-expand-lg bg-primary text-white">
+                <span class="navbar-brand mx-auto">
+                    <span>&nbsp;</span>
+                </span>
+            </nav>
+            <img src="@Url.Content("~/Images/dharma.png")" class="img-fluid dharma" />
+            <form class="contact100-form validate-form">
+                <img src="@Url.Content("~/Images/ad.png")" class="img-fluid" />
+                <div class="wrap-input100 input100-select mt-3">
+                    <span class="label-input100">性別</span>
+                    <div>
+                        <div class="form-group custom-radio-btn">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="GenderMale" name="Gender" value="True" class="custom-control-input" checked />
+                                <label class="custom-control-label" for="GenderMale">男</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="GenderFemale" name="Gender" value="False" class="custom-control-input" />
+                                <label class="custom-control-label" for="GenderFemale">女</label>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 input100-select mt-3">
+                    <span class="label-input100">生日</span>
+
+                    <div class="form-group custom-radio-btn">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="DateTypeCE" name="DateType" class="custom-control-input" value="CE" checked="" />
+                            <label class="custom-control-label" for="DateTypeCE" checked>國曆</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="DateTypeCN" name="DateType" class="custom-control-input" value="CN" />
+                            <label class="custom-control-label" for="DateTypeCN">農曆</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <select id="Year" class="selection-2 changeDay changeDate">
+                                @for (int y = 1940; y <= 2040; y++)
+                                {
+                                    <option value="@y">@y.ToString() 年</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select id="Month" class="selection-2 changeDay changeDate"></select>
+                        </div>
+                        <div class="col">
+                            <select id="Day" class="selection-2 changeDate"></select>
+                        </div>
+                    </div>
+                    <div>
+                        <input class="input100" id="BirthDay" name="BirthDay" type="hidden" value="1960/1/1" readonly />
+                        @*<span id="birthdayMessage" style="position:absolute; top: 35px; right: 5px; color:#ff0000; display:none;">生日為必填</span>*@
+                    </div>
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 input100-select">
+                    <span class="label-input100">生辰</span>
+                    <div>
+                        <select id="BirthHour" name="BirthHour" class="selection-2">
+                            <option value="-1">時晨未知</option>
+                            <option value="1">00-01 (子)</option>
+                            <option value="2">01-03 (丑)</option>
+                            <option value="3">03-05 (寅)</option>
+                            <option value="4">05-07 (卯)</option>
+                            <option value="5">07-09 (辰)</option>
+                            <option value="6">09-11 (巳)</option>
+                            <option value="7">11-13 (午)</option>
+                            <option value="8">13-15 (未)</option>
+                            <option value="9">15-17 (申)</option>
+                            <option value="10">17-19 (酉)</option>
+                            <option value="11">19-21 (戌)</option>
+                            <option value="12">21-23 (亥)</option>
+                            <option value="0">23-00 (子)</option>
+                        </select>
+                    </div>
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="container-contact100-form-btn">
+                    <div class="wrap-contact100-form-btn">
+                        <div class="contact100-form-bgbtn"></div>
+                        <button class="contact100-form-btn" type="button" id="GoBtn">
+                            <span>
+                                立刻測算
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row mt-3 mb-3" id="FourthDescription">
+                <div class="col-3 align-middle">
+                    <img src="@Url.Content("~/Images/3.png")" alt="" class="intro-img" />
+                </div>
+                <div class="col-9 intro">
+                    前四世其代表的是「父母宮」：其所對應並影響到你此生與父母長輩間的互動關係及祖先庇佑情形，亦代表你由幼年時期到青少年間(0-15)
+                    歲成長的背景。
+                </div>
+            </div>
+            <hr style="border: 0.5px solid #DDD" />
+            <div class="row mt-3 mb-3" id="ThirdDescription">
+                <div class="col-3 align-middle">
+                    <img src="@Url.Content("~/Images/4.png")" alt="" class="intro-img" />
+                </div>
+                <div class="col-9 intro">
+                    前三世其代表的是「事業宮」：其所對應並影響到你此生事業發展、兄弟相處及朋友交往，也代表著青年時期(16-32)歲這段時期你的主要運勢。
+                </div>
+            </div>
+            <hr style="border: 0.5px solid #DDD" />
+            <div class="row mt-3 mb-3" id="SecondDescription">
+                <div class="col-3 align-middle">
+                    <img src="@Url.Content("~/Images/2.png")" alt="" class="intro-img" />
+                </div>
+                <div class="col-9 intro">
+                    前二世其代表的是「夫妻宮」：由於也很接近今生，相對應的是影響到你夫妻之前的相處關係，也代表著中年時期(33-47)
+                    歲，這段時期你的主要運勢。
+                </div>
+            </div>
+            <hr style="border: 0.5px solid #DDD" />
+            <div class="row mt-3 mb-3" id="FirstDescription">
+                <div class="col-3 align-middle">
+                    <img src="@Url.Content("~/Images/1.png")" alt="" class="intro-img" />
+                </div>
+                <div class="col-9 intro">
+                    前一世其代表的是「命宮」：由於最接近今生，所以對此生影響力也最大，會影響到你的個性行為，也代表你壯年以後(48歲)的主要運勢及與子女後嗣的互動對關係。
+                </div>
+            </div>
+
+            <div class="mt-5 result four" id="ResultDiv" style="display:none;">
+                <div class="result-title">結果</div>
+                <div class="result-detail">
+                    <div class="result-content">
+                        <div class="h5">第四世</div>
+                        <div id="FourthResult">
+
+                        </div>
+                        <div id="FourthSuggestResult" class="mt-3 mb-3">
+
+                        </div>
+                        <hr />
+                        <div id="AllResult" style="display:none;">
+                            <div class="h5 mt-3">第三世</div>
+                            <div id="ThirdResult">
+
+                            </div>
+                            <div id="ThirdSuggestResult" class="mt-3">
+
+                            </div>
+                            <hr />
+                            <div class="h5 mt-3">第二世</div>
+                            <div id="SecondResult">
+
+                            </div>
+                            <div id="SecondSuggestResult" class="mt-3">
+
+                            </div>
+                            <hr />
+                            <div class="h5 mt-3">第一世</div>
+                            <div id="FirstResult">
+
+                            </div>
+                            <div id="FirstSuggestResult" class="mt-3">
+
+                            </div>
+                        </div>
+                        @*<div class="is-mask"></div>*@
+                        <div class="purchase text-center" style="margin-top: 0px;">
+                            <button class="btn btn-warning btn-purchase" id="PayBtn">
+                                進一步更了解你的前三世
+                            </button>
+                        </div>
+
+                        <div class="container-contact100-form-btn">
+                            <div class="wrap-contact100-form-btn">
+                                <div class="contact100-form-bgbtn"></div>
+                                <button class="contact100-form-btn" type="button" style="display:none;" id="ReTest">
+                                    <span>
+                                        重新測算
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-footer"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade"
+         id="popupInvoice"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="popup-for-purchaseLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" id="modelTitle">
+                    確認IP位址...
+                </div>
+                <div class="modal-body">
+                    <div id="CheckIpAddressLoad">
+                        <div class="loader"></div>
+                    </div>
+                    <div id="ValidateMessage" style="color:red; margin-bottom: 1rem;">
+
+                    </div>
+
+                    <div class="form-check receipt">
+                        <div id="NameBlock">
+                            <label>姓名</label>
+                            <input type="text" class="form-control" name="Name" id="Name" maxlength="20" placeholder="建議填寫，利於電子發票中獎時方便聯繫" />
+                        </div>
+                    </div>
+                    <div class="form-check receipt" id="EmailForm">
+                        <label style="color:red;">＊E-Mail</label><small class="float-right" style="position:absolute; top:5px; right: 5px; color:red;">留下您的Email，我們會將測試結果寄給您</small>
+                        <input type="text" class="form-control" name="Email" id="Email" maxlength="50" />
+                    </div>
+                    <div id="InvoiceForm">
+                        <hr />
+                        <div class="form-check receipt">
+                            <label class="receipt-title">發票類型</label>
+                            <div style="width: 100%;">
+                                <label class="form-check-label" style=" padding-left: 0px;">
+                                    <input type="radio"
+                                           class="form-check-input"
+                                           name="InvoiceHandle"
+                                           id="options1"
+                                           value="DU" checked />
+                                    二聯式
+                                </label>
+                                <label class="form-check-label">
+                                    <input type="radio"
+                                           class="form-check-input"
+                                           name="InvoiceHandle"
+                                           id="options2"
+                                           value="TU" />
+                                    三聯式
+                                </label>
+                                <label class="form-check-label">
+                                    <input type="radio"
+                                           class="form-check-input"
+                                           name="InvoiceHandle"
+                                           id="options3"
+                                           value="DO" />
+                                    捐贈
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-check receipt">
+                            <div id="VATNumberBlock">
+                                <label class="mt-3" style="color:red;">抬頭</label>
+                                <input type="text" class="form-control" name="VATTitle" id="VATTitle" />
+
+                                <label class="mt-3" style="color:red;">統編</label>
+                                <input type="text" class="form-control" name="VATNumber" id="VATNumber" maxlength="8" />
+                            </div>
+
+                            <div id="AddressBlock">
+                                <label class="mt-3">地址</label>
+                                <input type="text" class="form-control" name="ContactAddress" id="ContactAddress" placeholder="建議填寫，利於電子發票中獎時直接寄送實體發票" />
+                                <label class="mt-3">電話</label>
+                                <input type="text" class="form-control" name="ContactPhone" id="ContactPhone" placeholder="建議填寫，利於電子發票中獎時方便聯繫" />
+                            </div>
+
+                            <div id="CaringBlock" style="">
+                                <label class="mt-3">捐贈單位</label>
+                                <select class="form-control" name="CaringCode" id="CaringCode">
+                                    <option value="25885">伊甸基金會</option>
+                                    <option value="8595">婦援會</option>
+                                    <option value="1234">慈善會</option>
+                                    <option value="2595">幼安教養會</option>
+                                    <option value="000">世界和平會</option>
+                                    <option value="2885">慈愛教養院</option>
+                                    <option value="8330522">老人協會</option>
+                                    <option value="1979322">心生活協會</option>
+                                    <option value="235757">婦幼協會</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="SendBtn" class="btn btn-warning">送出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="dropDownSelect1"></div>
+    <div class="blackBlock">
+        <div class="loader"></div>
+    </div>
+    <!--
+      <div>
+        Icons made by
+        <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from
+        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+        is licensed by
+        <a
+          href="http://creativecommons.org/licenses/by/3.0/"
+          title="Creative Commons BY 3.0"
+          target="_blank"
+          >CC 3.0 BY</a
+        >
+      </div>
+    -->
+    <!--===============================================================================================-->
+    <script src="@Url.Content("~/vendor/jquery/jquery-3.2.1.min.js") "></script>
+    <!--===============================================================================================-->
+    <script src="@Url.Content("~/vendor/animsition/js/animsition.min.js")"></script>
+    <!--===============================================================================================-->
+    <script src="@Url.Content("~/vendor/bootstrap/js/popper.js")"></script>
+    <script src="@Url.Content("~/vendor/bootstrap/js/bootstrap.min.js")"></script>
+    <!--===============================================================================================-->
+    <script src="@Url.Content("~/vendor/select2/select2.min.js")"></script>
+    <script>
+        $('.selection-2').select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $('#dropDownSelect1')
+        })
+    </script>
+    <!--===============================================================================================-->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="@Url.Content("~/Vendor/jquery/datepicker-zh-TW.js")"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+    <!--===============================================================================================-->
+    <script src="@Url.Content("~/vendor/countdowntime/countdowntime.js")"></script>
+    <!--===============================================================================================-->
+    <script src="@Url.Content("~/Scripts/main.js")"></script>
+    <script>
+        $.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
+        $('#BirthDay').datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-100:+0"
+        });
+
+        $(function () {
+            $("html, body").animate({ scrollTop: 0 }, 1000);
+            initDatetimeSelector();
+
+            $('#ReTest').click(function () {
+                location.reload();
+            });
+
+            var isTWIP = null;
+            $('#InvoiceForm').hide();
+            $.ajax({
+                type: "GET",
+                async: true,
+                url: '/api/Pay',
+                contentType: 'application/json; charset=UTF-8',
+                success: function (result) {
+                    $('#modelTitle').html('進一步了解您的前三世');
+                    $('#CheckIpAddressLoad').hide();
+                    $('#InvoiceForm').show();
+                    //--- 若不是台灣IP，則直接輸入Email進入付費流程
+                    if (!result.Success) {
+                        $('#InvoiceForm > div:not(#EmailForm)').hide();
+                    }
+
+                    isTWIP = result.Success;
+                }
+            });
+
+            $('#GoBtn').click(function () {
+                if (Validate()) {
+                    $('.blackBlock').show();
+                    $.ajax({
+                        type: "POST",
+                        async: true,
+                        dataType: "json",
+                        data: JSON.stringify({ BirthDay: $('#BirthDay').val(), BirthHour: $('#BirthHour').val(), Gender: $('input[name=Gender]:checked').val(), DateType: $('input[name=DateType]:checked').val() }),
+                        url: '/Fate/ST01',
+                        contentType: 'application/json; charset=UTF-8',
+                        success: function (result) {
+                            if (result.Message) {
+                                alert(result.Message);
+                                $('.blackBlock').hide();
+                                return;
+                            }
+                            $('#FourthResult').before($('#FourthDescription').clone());
+                            $('#FourthResult').html('<span class="resultTitle">測算內容</span><br/>' + result.FourthLife);
+                            $('#FourthSuggestResult').html(ReplaceSuggestFormat(result.FourthLifeSuggest) + '<br/><br/>');
+                            $('#ResultDiv').show();
+
+                            $("html, body").animate({ scrollTop: $("#ResultDiv").offset().top }, 1000);
+
+                            $('.blackBlock').hide();
+                            $('#GoBtn').hide();
+                        }
+                    });
+                }
+                else {
+                    $('#birthdayMessage').show();
+                }
+            });
+
+            $('#PayBtn').click(function () {
+                $('#popupInvoice').modal('show');
+            });
+
+            $('#SendBtn').click(function () {
+                var validateStr = SendValidate();
+                if (validateStr) {
+                    $('#ValidateMessage').html(validateStr);
+                    return;
+                }
+
+                $('.blackBlock').show();
+
+                var postData = { BirthDay: $('#BirthDay').val(), BirthHour: $('#BirthHour').val(), Gender: $('input[name=Gender]:checked').val(), InvoiceHandle: $('input[name=InvoiceHandle]:checked').val(), Name: $('#Name').val(), ContactAddress: $('#ContactAddress').val(), ContactPhone: $('#ContactPhone').val(), VATNumber: $('#VATNumber').val(), VATTitle: $('#VATTitle').val(), CaringCode: ($('input[name=InvoiceHandle]:checked').val() == "DO" ? $('#CaringCode').val() : ''), Email: $('#Email').val(), DateType: $('input[name=DateType]:checked').val() };
+               
+                $.ajax({
+                    type: "POST",
+                    async: true,
+                    dataType: "json",
+                    data: JSON.stringify(postData),
+                    url: '/Fate/ST01',
+                    contentType: 'application/json; charset=UTF-8',
+                    success: function (result) {
+                        if (result.Message) {
+                            alert(result.Message);
+                            $('.blackBlock').hide();
+                            return;
+                        }
+
+                        $('#FourthResult').html('<span class="resultTitle">測算內容</span><br/>' + result.FourthLife);
+                        $('#FourthSuggestResult').html(ReplaceSuggestFormat(result.FourthLifeSuggest));
+
+                        $('#ThirdResult').before($('#ThirdDescription').clone());
+                        $('#ThirdResult').html('<span class="resultTitle">測算內容</span><br/>' + result.ThirdLife);
+                        $('#ThirdSuggestResult').html(ReplaceSuggestFormat(result.ThirdSuggest));
+
+                        $('#SecondResult').before($('#SecondDescription').clone());
+                        $('#SecondResult').html('<span class="resultTitle">測算內容</span><br/>' + result.SecondLife);
+                        $('#SecondSuggestResult').html(ReplaceSuggestFormat(result.SecondLifeSuggest));
+
+                        $('#FirstResult').before($('#FirstDescription').clone());
+                        $('#FirstResult').html('<span class="resultTitle">測算內容</span><br/>' + result.FirstLife);
+                        $('#FirstSuggestResult').html(ReplaceSuggestFormat(result.FirstLifeSuggest));
+                        $('#AllResult').show();
+
+                        $('#PayBtn').hide();
+                        $('#popupInvoice').modal('hide');
+                        $("html, body").animate({ scrollTop: $("#AllResult").offset().top }, 1000);
+
+
+                        $('.blackBlock').hide();
+
+                        $('#ReTest').show();
+                    }
+                });
+            });
+
+            $('input[name=DateType]').change(function () {
+                initDatetimeSelector();
+            });
+
+            $('.changeDay').change(function () {
+                if ($('input[name=DateType]:checked').val() != 'CE') {
+                    return;
+                }
+
+                var tempYear = $('#Year').val();
+                var tempMonth = $('#Month').val();
+
+                var tempDate = new Date(tempYear, tempMonth, 1);
+                tempDate.setDate(tempDate.getDate() - 1);
+                $('#Day').html('');
+                for (var i = 1; i <= tempDate.getDate(); i++) {
+                    $('#Day').append('<option value="' + i.toString() + '">' + i.toString() + ' 日</option>')
+                }
+            });
+
+            $('.changeDate').change(function () {
+                $('#BirthDay').val($('#Year').val() + '/' + $('#Month').val() + '/' + $('#Day').val());
+            });
+        });
+
+        function Validate() {
+            if (!$('#BirthDay').val()) {
+                return false;
+            }
+            return true;
+        }
+
+        function SendValidate() {
+            var errorMessage = '';
+
+            if ($('#Name').val()) {
+                if ($('#Name').val().length > 21) {
+                    errorMessage += '＊姓名長度最多為20個字<br/>';
+                }
+            }
+
+            if (!$('#Email').val()) {
+                errorMessage += '＊Email 欄位為必填 <br/>';
+            }
+            else if (!validateEmail($('#Email').val())) {
+                errorMessage += '＊Email 格式錯誤 <br/>';
+            }
+
+            if ($('#VATNumberBlock').css('display') != 'none' && !$('#VATTitle').val()) {
+                errorMessage += '＊抬頭為必填 <br/>';
+            }
+
+            if ($('#VATNumberBlock').css('display') != 'none' && !$('#VATNumber').val()) {
+                errorMessage += '＊統編為必填 <br/>';
+            }
+            else {
+                var chknumStr = chknum();
+                if (chknumStr && $('#VATNumberBlock').css('display') != 'none') {
+                    errorMessage += '＊' + chknumStr;
+                }
+            }
+            //else if ($('#VATNumber').val().length != 8 && $('#VATNumberBlock').css('display') != 'none') {
+            //    errorMessage += '＊統編必須為8碼 <br/>';
+            //}
+
+            //if ($('#AddressBlock').css('display') != 'none' && !$('#ContactAddress').val()) {
+            //    errorMessage += '＊地址為必填 <br/>';
+            //}
+
+            return errorMessage;
+        }
+
+        function validateEmail(email) {
+            var re = /^(([^<>()\[\]\\.,;:\s@@"]+(\.[^<>()\[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+
+        function chknum() {
+            var NO = $('#VATNumber').val();
+            var cx = new Array;
+            cx[0] = 1;
+            cx[1] = 2;
+            cx[2] = 1;
+            cx[3] = 2;
+            cx[4] = 1;
+            cx[5] = 2;
+            cx[6] = 4;
+            cx[7] = 1;
+            var SUM = 0;
+            if (NO.length != 8) {
+                return "統編錯誤，要有 8 個數字";
+            }
+            var cnum = NO.split("");
+            for (i = 0; i <= 7; i++) {
+                if (NO.charCodeAt() < 48 || NO.charCodeAt() > 57) {
+                    return "統編錯誤，要有 8 個 0-9 數字組合";
+                }
+                SUM += cc(cnum[i] * cx[i]);
+            }
+            if (SUM % 10 == 0) {
+                return '';
+            }
+            else if (cnum[6] == 7 && (SUM + 1) % 10 == 0) {
+                return '';
+            }
+            else {
+                console.log(NO);
+                return "統一編號：" + NO + " 錯誤!";
+            }
+        }
+
+        function cc(n) {
+            if (n > 9) {
+                var s = n + "";
+                n1 = s.substring(0, 1) * 1;
+                n2 = s.substring(1, 2) * 1;
+                n = n1 + n2;
+            }
+            return n;
+        }
+
+
+        function initDatetimeSelector() {
+            $('#Month').html('');
+            $('#Day').html('');
+            if ($('input[name=DateType]:checked').val() == 'CE') {
+                for (var m = 1; m <= 12; m++) {
+                    $('#Month').append('<option value="' + m.toString() + '">' + m.toString() + ' 月</option>')
+                }
+
+                for (var d = 1; d <= 31; d++) {
+                    $('#Day').append('<option value="' + d.toString() + '">' + d.toString() + ' 日</option>')
+                }
+            }
+            else if ($('input[name=DateType]:checked').val() == 'CN') {
+                var _cnMonth = ["正月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月",
+                    "閏正月", "閏二月", "閏三月", "閏四月", "閏五月", "閏六月", "閏七月", "閏八月", "閏九月", "閏十月", "閏十一月", "閏十二月"];
+
+                for (var m = 1; m <= 24; m++) {
+                    $('#Month').append('<option value="' + m.toString() + '">' + _cnMonth[m - 1] + '</option>')
+                }
+
+                for (var d = 1; d <= 30; d++) {
+                    $('#Day').append('<option value="' + d.toString() + '">' + d.toString() + ' 日</option>')
+                }
+            }
+        }
+
+        function ReplaceSuggestFormat(str) {
+            var strSplit = str.split(':');
+            var strTitle = '<span class="resultTitle">' + strSplit[0] + '：</span><br/>';
+            return strTitle + strSplit[1];
+        }
+
+
+    </script>
+</body>
+</html>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

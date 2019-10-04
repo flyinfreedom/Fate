@@ -1,0 +1,229 @@
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\ApplicationInsights.config
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Fate.dll.config
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Fate.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Fate.pdb
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\csc.exe
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\csc.exe.config
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\csc.rsp
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\csi.exe
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\csi.exe.config
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\csi.rsp
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.AppContext.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.Console.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.IO.Compression.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.IO.Pipes.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.Security.Claims.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.ValueTuple.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\vbc.exe
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\vbc.exe.config
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\vbc.rsp
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\VBCSCompiler.exe
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Antlr3.Runtime.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\EntityFramework.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\EntityFramework.SqlServer.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Microsoft.AI.Web.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Microsoft.ApplicationInsights.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Newtonsoft.Json.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Net.Http.Formatting.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Web.Helpers.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Web.Http.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Web.Http.WebHost.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Web.Mvc.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Web.Optimization.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Web.Razor.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Web.WebPages.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Web.WebPages.Razor.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\WebGrease.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\EntityFramework.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\EntityFramework.SqlServer.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Newtonsoft.Json.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Net.Http.Formatting.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Web.Helpers.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Web.Http.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Web.Http.WebHost.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Web.Mvc.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Web.Optimization.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Web.Razor.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Web.WebPages.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Web.WebPages.Razor.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Antlr3.Runtime.pdb
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Microsoft.AI.Web.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\zh-Hant\EntityFramework.resources.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\zh-Hant\System.Net.Http.Formatting.resources.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\zh-Hant\System.Web.Helpers.resources.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\zh-Hant\System.Web.Http.resources.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\zh-Hant\System.Web.Http.WebHost.resources.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\zh-Hant\System.Web.Mvc.resources.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\zh-Hant\System.Web.Optimization.resources.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\zh-Hant\System.Web.Razor.resources.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\zh-Hant\System.Web.WebPages.resources.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\zh-Hant\System.Web.WebPages.Deployment.resources.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\zh-Hant\System.Web.WebPages.Razor.resources.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\obj\Debug\Fate.csprojAssemblyReference.cache
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\obj\Debug\Fate.csproj.CoreCompileInputs.cache
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\obj\Debug\Fate.csproj.CopyComplete
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\obj\Debug\Fate.dll
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\obj\Debug\Fate.pdb
+C:\Users\Eden\Documents\Visual Studio 2017\Projects\Fate\Fate\bin\zh-Hant\EntityFramework.SqlServer.resources.dll
+C:\Eden\Projects\Fate\Fate\bin\ApplicationInsights.config
+C:\Eden\Projects\Fate\Fate\bin\Fate.dll.config
+C:\Eden\Projects\Fate\Fate\bin\Fate.dll
+C:\Eden\Projects\Fate\Fate\bin\Fate.pdb
+C:\Eden\Projects\Fate\Fate\bin\roslyn\csc.exe
+C:\Eden\Projects\Fate\Fate\bin\roslyn\csc.exe.config
+C:\Eden\Projects\Fate\Fate\bin\roslyn\csc.rsp
+C:\Eden\Projects\Fate\Fate\bin\roslyn\csi.exe
+C:\Eden\Projects\Fate\Fate\bin\roslyn\csi.exe.config
+C:\Eden\Projects\Fate\Fate\bin\roslyn\csi.rsp
+C:\Eden\Projects\Fate\Fate\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Eden\Projects\Fate\Fate\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Eden\Projects\Fate\Fate\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.AppContext.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.Collections.Immutable.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.Console.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.IO.Compression.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.IO.FileSystem.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.IO.Pipes.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.Reflection.Metadata.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.Security.AccessControl.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.Security.Claims.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.ValueTuple.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.Xml.XPath.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Eden\Projects\Fate\Fate\bin\roslyn\vbc.exe
+C:\Eden\Projects\Fate\Fate\bin\roslyn\vbc.exe.config
+C:\Eden\Projects\Fate\Fate\bin\roslyn\vbc.rsp
+C:\Eden\Projects\Fate\Fate\bin\roslyn\VBCSCompiler.exe
+C:\Eden\Projects\Fate\Fate\bin\roslyn\VBCSCompiler.exe.config
+C:\Eden\Projects\Fate\Fate\bin\Antlr3.Runtime.dll
+C:\Eden\Projects\Fate\Fate\bin\EntityFramework.dll
+C:\Eden\Projects\Fate\Fate\bin\EntityFramework.SqlServer.dll
+C:\Eden\Projects\Fate\Fate\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Eden\Projects\Fate\Fate\bin\Microsoft.AI.DependencyCollector.dll
+C:\Eden\Projects\Fate\Fate\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Eden\Projects\Fate\Fate\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Eden\Projects\Fate\Fate\bin\Microsoft.AI.Web.dll
+C:\Eden\Projects\Fate\Fate\bin\Microsoft.AI.WindowsServer.dll
+C:\Eden\Projects\Fate\Fate\bin\Microsoft.ApplicationInsights.dll
+C:\Eden\Projects\Fate\Fate\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\Eden\Projects\Fate\Fate\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Eden\Projects\Fate\Fate\bin\Microsoft.Web.Infrastructure.dll
+C:\Eden\Projects\Fate\Fate\bin\Newtonsoft.Json.dll
+C:\Eden\Projects\Fate\Fate\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Eden\Projects\Fate\Fate\bin\System.Net.Http.Formatting.dll
+C:\Eden\Projects\Fate\Fate\bin\System.Web.Helpers.dll
+C:\Eden\Projects\Fate\Fate\bin\System.Web.Http.dll
+C:\Eden\Projects\Fate\Fate\bin\System.Web.Http.WebHost.dll
+C:\Eden\Projects\Fate\Fate\bin\System.Web.Mvc.dll
+C:\Eden\Projects\Fate\Fate\bin\System.Web.Optimization.dll
+C:\Eden\Projects\Fate\Fate\bin\System.Web.Razor.dll
+C:\Eden\Projects\Fate\Fate\bin\System.Web.WebPages.Deployment.dll
+C:\Eden\Projects\Fate\Fate\bin\System.Web.WebPages.dll
+C:\Eden\Projects\Fate\Fate\bin\System.Web.WebPages.Razor.dll
+C:\Eden\Projects\Fate\Fate\bin\WebGrease.dll
+C:\Eden\Projects\Fate\Fate\bin\EntityFramework.xml
+C:\Eden\Projects\Fate\Fate\bin\EntityFramework.SqlServer.xml
+C:\Eden\Projects\Fate\Fate\bin\Newtonsoft.Json.xml
+C:\Eden\Projects\Fate\Fate\bin\System.Net.Http.Formatting.xml
+C:\Eden\Projects\Fate\Fate\bin\System.Web.Helpers.xml
+C:\Eden\Projects\Fate\Fate\bin\System.Web.Http.xml
+C:\Eden\Projects\Fate\Fate\bin\System.Web.Http.WebHost.xml
+C:\Eden\Projects\Fate\Fate\bin\System.Web.Mvc.xml
+C:\Eden\Projects\Fate\Fate\bin\System.Web.Optimization.xml
+C:\Eden\Projects\Fate\Fate\bin\System.Web.Razor.xml
+C:\Eden\Projects\Fate\Fate\bin\System.Web.WebPages.xml
+C:\Eden\Projects\Fate\Fate\bin\System.Web.WebPages.Deployment.xml
+C:\Eden\Projects\Fate\Fate\bin\System.Web.WebPages.Razor.xml
+C:\Eden\Projects\Fate\Fate\bin\Antlr3.Runtime.pdb
+C:\Eden\Projects\Fate\Fate\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Eden\Projects\Fate\Fate\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\Eden\Projects\Fate\Fate\bin\Microsoft.AI.DependencyCollector.xml
+C:\Eden\Projects\Fate\Fate\bin\Microsoft.AI.WindowsServer.xml
+C:\Eden\Projects\Fate\Fate\bin\Microsoft.AI.Web.xml
+C:\Eden\Projects\Fate\Fate\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Eden\Projects\Fate\Fate\bin\zh-Hant\EntityFramework.resources.dll
+C:\Eden\Projects\Fate\Fate\bin\zh-Hant\EntityFramework.SqlServer.resources.dll
+C:\Eden\Projects\Fate\Fate\bin\zh-Hant\System.Net.Http.Formatting.resources.dll
+C:\Eden\Projects\Fate\Fate\bin\zh-Hant\System.Web.Helpers.resources.dll
+C:\Eden\Projects\Fate\Fate\bin\zh-Hant\System.Web.Http.resources.dll
+C:\Eden\Projects\Fate\Fate\bin\zh-Hant\System.Web.Http.WebHost.resources.dll
+C:\Eden\Projects\Fate\Fate\bin\zh-Hant\System.Web.Mvc.resources.dll
+C:\Eden\Projects\Fate\Fate\bin\zh-Hant\System.Web.Optimization.resources.dll
+C:\Eden\Projects\Fate\Fate\bin\zh-Hant\System.Web.Razor.resources.dll
+C:\Eden\Projects\Fate\Fate\bin\zh-Hant\System.Web.WebPages.resources.dll
+C:\Eden\Projects\Fate\Fate\bin\zh-Hant\System.Web.WebPages.Deployment.resources.dll
+C:\Eden\Projects\Fate\Fate\bin\zh-Hant\System.Web.WebPages.Razor.resources.dll
+C:\Eden\Projects\Fate\Fate\obj\Debug\Fate.csprojAssemblyReference.cache
+C:\Eden\Projects\Fate\Fate\obj\Debug\Fate.csproj.CopyComplete
+C:\Eden\Projects\Fate\Fate\obj\Debug\Fate.dll
+C:\Eden\Projects\Fate\Fate\obj\Debug\Fate.pdb
+C:\Eden\Projects\Fate\Fate\bin\Fate.Resource.dll
+C:\Eden\Projects\Fate\Fate\bin\Fate.Resource.pdb
+C:\Eden\Projects\Fate\Fate\bin\System.ValueTuple.dll
+C:\Eden\Projects\Fate\Fate\bin\System.ValueTuple.xml

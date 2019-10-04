@@ -1,0 +1,77 @@
+﻿@model Fate.ViewModels.VMST01
+
+@{
+    ViewBag.Title = "ST01";
+    Layout = "~/Views/Mail/_LayoutMail.cshtml";
+}
+
+<h2>測試你的前世今生</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt style="font-size: 1.2em; font-weight: bold; color: #1a6226;">
+            您的第一世
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstLife)
+        </dd>
+
+        <dt style="font-size: 1.2em; font-weight: bold; color: #1a6226; margin-top: 1rem;">
+            老師給您第一世的建議
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstLifeSuggest)
+        </dd>
+
+        <dt style="font-size: 1.2em; font-weight: bold; color: #1a6226; margin-top: 1rem;">
+            您的第二世
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondLife)
+        </dd>
+
+        <dt style="font-size: 1.2em; font-weight: bold; color: #1a6226; margin-top: 1rem;">
+            老師給您第二世的建議
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondLifeSuggest)
+        </dd>
+
+        <dt style="font-size: 1.2em; font-weight: bold; color: #1a6226; margin-top: 1rem;">
+            您的第三世
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThirdLife)
+        </dd>
+
+        <dt style="font-size: 1.2em; font-weight: bold; color: #1a6226; margin-top: 1rem;">
+            老師給您第三世的建議
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThirdSuggest)
+        </dd>
+
+        <dt style="font-size: 1.2em; font-weight: bold; color: #1a6226; margin-top: 1rem;">
+            您的第四世
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FourthLife)
+        </dd>
+
+        <dt style="font-size: 1.2em; font-weight: bold; color: #1a6226; margin-top: 1rem;">
+            老師給您第四世的建議
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FourthLifeSuggest)
+        </dd>
+    </dl>
+</div>

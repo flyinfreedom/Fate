@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FortuneTellingModelStoreContainer" CdmEntityContainer="FortuneTellingEntities">
+    <EntitySetMapping Name="Order">
+      <EntityTypeMapping TypeName="FortuneTellingModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="IsPayed" ColumnName="IsPayed" />
+          <ScalarProperty Name="RecipientCode" ColumnName="RecipientCode" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="VATNumber" ColumnName="VATNumber" />
+          <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+          <ScalarProperty Name="ContactAddress" ColumnName="ContactAddress" />
+          <ScalarProperty Name="InvoiceHandle" ColumnName="InvoiceHandle" />
+          <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetail">
+      <EntityTypeMapping TypeName="FortuneTellingModel.OrderDetail">
+        <MappingFragment StoreEntitySet="OrderDetail">
+          <ScalarProperty Name="IsLeap" ColumnName="IsLeap" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="BirthHour" ColumnName="BirthHour" />
+          <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+          <ScalarProperty Name="DateType" ColumnName="DateType" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product">
+      <EntityTypeMapping TypeName="FortuneTellingModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Result">
+      <EntityTypeMapping TypeName="FortuneTellingModel.Result">
+        <MappingFragment StoreEntitySet="Result">
+          <ScalarProperty Name="FullDescription" ColumnName="FullDescription" />
+          <ScalarProperty Name="Brief" ColumnName="Brief" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Taiwanlunisolar">
+      <EntityTypeMapping TypeName="FortuneTellingModel.Taiwanlunisolar">
+        <MappingFragment StoreEntitySet="Taiwanlunisolar">
+          <ScalarProperty Name="IsLeap" ColumnName="IsLeap" />
+          <ScalarProperty Name="CNDD" ColumnName="CNDD" />
+          <ScalarProperty Name="CNMM" ColumnName="CNMM" />
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
+          <ScalarProperty Name="Heavenl" ColumnName="Heavenl" />
+          <ScalarProperty Name="CNYYYY" ColumnName="CNYYYY" />
+          <ScalarProperty Name="DD" ColumnName="DD" />
+          <ScalarProperty Name="MM" ColumnName="MM" />
+          <ScalarProperty Name="YYYY" ColumnName="YYYY" />
+          <ScalarProperty Name="YYYYMMDD" ColumnName="YYYYMMDD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WordLibrary">
+      <EntityTypeMapping TypeName="FortuneTellingModel.WordLibrary">
+        <MappingFragment StoreEntitySet="WordLibrary">
+          <ScalarProperty Name="Stroke" ColumnName="Stroke" />
+          <ScalarProperty Name="Word" ColumnName="Word" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WordLibraryUserInput">
+      <EntityTypeMapping TypeName="FortuneTellingModel.WordLibraryUserInput">
+        <MappingFragment StoreEntitySet="WordLibraryUserInput">
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Stroke" ColumnName="Stroke" />
+          <ScalarProperty Name="Word" ColumnName="Word" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

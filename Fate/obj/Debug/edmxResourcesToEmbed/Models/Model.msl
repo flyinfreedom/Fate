@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Order">
       <EntityTypeMapping TypeName="FortuneTellingModel.Order">
         <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="IsPayed" ColumnName="IsPayed" />
           <ScalarProperty Name="RecipientCode" ColumnName="RecipientCode" />
           <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
@@ -68,6 +69,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="VideoType">
+      <EntityTypeMapping TypeName="FortuneTellingModel.VideoType">
+        <MappingFragment StoreEntitySet="VideoType">
+          <ScalarProperty Name="Enable" ColumnName="Enable" />
+          <ScalarProperty Name="VideoType1" ColumnName="VideoType" />
+          <ScalarProperty Name="VideoTypeId" ColumnName="VideoTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="WordLibrary">
       <EntityTypeMapping TypeName="FortuneTellingModel.WordLibrary">
         <MappingFragment StoreEntitySet="WordLibrary">
@@ -82,6 +92,17 @@
           <ScalarProperty Name="Created" ColumnName="Created" />
           <ScalarProperty Name="Stroke" ColumnName="Stroke" />
           <ScalarProperty Name="Word" ColumnName="Word" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Video">
+      <EntityTypeMapping TypeName="FortuneTellingModel.Video">
+        <MappingFragment StoreEntitySet="Video">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Enable" ColumnName="Enable" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="VideoTypeId" ColumnName="VideoTypeId" />
+          <ScalarProperty Name="VideoId" ColumnName="VideoId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

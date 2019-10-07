@@ -251,6 +251,7 @@ namespace Fate.Service.Strategy
                 .Add(GetStarResult(Star.WenChang, BranchOperation((int)Branch.Xu, (int)_time, false)));
             AstrologyChart.FirstOrDefault(x => x.branch == BranchOperation((int)Branch.Shen, (int)_time, true)).timeStars
                 .Add(GetStarResult(Star.WenQu, BranchOperation((int)Branch.Shen, (int)_time, true)));
+
             int huoXingBase = 0;
             int lingXingBase = 0;
             if (_branch == Branch.Yin || _branch == Branch.Wu || _branch == Branch.Xu)
@@ -267,20 +268,20 @@ namespace Fate.Service.Strategy
 
             if (_branch == Branch.Si || _branch == Branch.You || _branch == Branch.Chou)
             {
-                huoXingBase = (int)Branch.Shen;
+                huoXingBase = (int)Branch.You;
                 lingXingBase = (int)Branch.Yin;
             }
 
             if (_branch == Branch.Hai || _branch == Branch.Mao || _branch == Branch.Wei)
             {
                 huoXingBase = (int)Branch.Mao;
-                lingXingBase = (int)Branch.Chou;
+                lingXingBase = (int)Branch.Yin;
             }
 
             AstrologyChart.FirstOrDefault(x => x.branch == BranchOperation(huoXingBase, (int)_time, true)).timeStars.Add(GetStarResult(Star.HuoXing, BranchOperation(huoXingBase, (int)_time, true)));
             AstrologyChart.FirstOrDefault(x => x.branch == BranchOperation(lingXingBase, (int)_time, true)).timeStars.Add(GetStarResult(Star.LingXing, BranchOperation(lingXingBase, (int)_time, true)));
             AstrologyChart.FirstOrDefault(x => x.branch == BranchOperation((int)Branch.Chou, (int)_time, true)).timeStars.Add(GetStarResult(Star.DiJie, BranchOperation((int)Branch.Chou, (int)_time, true)));
-            AstrologyChart.FirstOrDefault(x => x.branch == BranchOperation((int)Branch.Hai, (int)_time, true)).timeStars.Add(GetStarResult(Star.DiKong, BranchOperation((int)Branch.Hai, (int)_time, true)));
+            AstrologyChart.FirstOrDefault(x => x.branch == BranchOperation((int)Branch.Hai, (int)_time, false)).timeStars.Add(GetStarResult(Star.DiKong, BranchOperation((int)Branch.Hai, (int)_time, true)));
             AstrologyChart.FirstOrDefault(x => x.branch == BranchOperation((int)Branch.Wu, (int)_time, true)).timeStars.Add(GetStarResult(Star.TaiFu, BranchOperation((int)Branch.Wu, (int)_time, true)));
             AstrologyChart.FirstOrDefault(x => x.branch == BranchOperation((int)Branch.Xu, (int)_time, true)).timeStars.Add(GetStarResult(Star.FengGqu, BranchOperation((int)Branch.Xu, (int)_time, true)));
         }
@@ -533,7 +534,7 @@ namespace Fate.Service.Strategy
                 item.MinorStars = item.GetStars().Where(x => _starTypeMapping.Any(t => t.Key == x.Star) && _starTypeMapping[x.Star] == StarType.Minor).ToList();
                 item.RighteousStars = item.GetStars().Where(x => _starTypeMapping.Any(t => t.Key == x.Star) && _starTypeMapping[x.Star] == StarType.Righteous).ToList();
                 item.SecondaryStars = item.GetStars().Where(x => _starTypeMapping.Any(t => t.Key == x.Star) && _starTypeMapping[x.Star] == StarType.Secondary).ToList();
-                item.Score = 70 + item.GetStars().Sum(s => _starScoreMapping.Any(d => d.Key == s.Star)
+                item.Score = 65 + item.GetStars().Sum(s => _starScoreMapping.Any(d => d.Key == s.Star)
                     ? _starScoreMapping[s.Star].Any(status => status.Key == s.Status)
                         ? _starScoreMapping[s.Star][s.Status]
                         : _starScoreMapping[s.Star][StarStatus.Normal]
@@ -1279,6 +1280,24 @@ namespace Fate.Service.Strategy
                 },
                 {
                     Star.HuoXing,
+                    new Dictionary<Branch, StarStatus>
+                    {
+                        { Branch.Zi, StarStatus.Terrible },
+                        { Branch.Chou, StarStatus.Good },
+                        { Branch.Yin, StarStatus.Excellent },
+                        { Branch.Mao, StarStatus.Normal },
+                        { Branch.Chen, StarStatus.Terrible },
+                        { Branch.Si, StarStatus.Good },
+                        { Branch.Wu, StarStatus.Excellent },
+                        { Branch.Wei, StarStatus.Normal },
+                        { Branch.Shen, StarStatus.Terrible },
+                        { Branch.You, StarStatus.Good },
+                        { Branch.Xu, StarStatus.Excellent },
+                        { Branch.Hai, StarStatus.Normal }
+                    }
+                },
+                {
+                    Star.LingXing,
                     new Dictionary<Branch, StarStatus>
                     {
                         { Branch.Zi, StarStatus.Terrible },

@@ -29,7 +29,7 @@ namespace Fate.Controllers
                 var order = db.Order.FirstOrDefault(x => x.OrderId == request.OrderId && x.OrderDetail.Any(d => d.ProductId == "Ziwei"));
                 isPayed = order != null;
 
-                var dateTimeHelper = new DateTimeHelper(db, request.DateType, request.Year, request.Month, request.Day, request.BirthTime, request.IsLeap);
+                DateTimeHelper dateTimeHelper;
 
                 var palaceList = (new Palace[] { Palace.Siblings, Palace.Parents, Palace.Travel }).ToList();
 
@@ -40,7 +40,12 @@ namespace Fate.Controllers
                     dateTimeHelper = new DateTimeHelper(db, (DateType)ziweiDetail.DateType, date[0], date[1], date[2], ziweiDetail.BirthHour.Value, ziweiDetail.IsLeap ?? false);
                     palaceList = Enum.GetValues(typeof(Palace)).Cast<Palace>().ToList();
                 }
+                else
+                {
+                    dateTimeHelper = new DateTimeHelper(db, request.DateType, request.Year, request.Month, request.Day, request.BirthTime, request.IsLeap);
+                }
 
+                //palaceList = Enum.GetValues(typeof(Palace)).Cast<Palace>().ToList();
 #if DEBUG
                 palaceList = Enum.GetValues(typeof(Palace)).Cast<Palace>().ToList();
 #endif 
@@ -104,8 +109,8 @@ namespace Fate.Controllers
                 result.Heavenly = language.GetHeavenlyString(dateTimeHelper.Heavenly.ToString());
                 result.Branch = language.GetBranchString(dateTimeHelper.Branch.ToString());
                 result.BirthTime = language.GetBranchString(dateTimeHelper.Birthtime.ToString());
-                result.Month = dateTimeHelper.CNMonth.ToString();
-                result.Day = dateTimeHelper.CNDay.ToString();
+                result.Month = dateTimeHelper.RequestCNMonth.ToString();
+                result.Day = dateTimeHelper.RequestCNDay.ToString();
                 result.FiveElements = language.GetZiweiString(ziwei.FiveElements.ToString());
                 result.LifeMajorStar = language.GetZiweiString(ziwei.LifeMajorStar.ToString());
                 result.BodyMajorStar = language.GetZiweiString(ziwei.BodyMajorStar.ToString());
@@ -114,6 +119,45 @@ namespace Fate.Controllers
                 result.HuaKe = language.GetZiweiString(ziwei.HuaKe.ToString());
                 result.HuaJi = language.GetZiweiString(ziwei.HuaJi.ToString());
                 result.BirthDay = dateTimeHelper.DateTime.ToString("yyyy-MM-dd");
+
+                string videoBaseUrl = "/Videos/";
+
+#if DEBUG
+                isPayed = true;
+#endif
+
+                if (isPayed)
+                {
+                    result.Name = order.Name;
+                    result.Gender = order.Gender ?? true;
+
+                    List<VideoResult> videoResult = new List<VideoResult>();
+                    var v1 = db.Video.FirstOrDefault(v => v.VideoTypeId == 1 && v.Code == dateTimeHelper.RequestCNMonth.ToString());
+                    videoResult.Add(new VideoResult { 
+                        url = videoBaseUrl + v1.Name,
+                        description = v1.VideoType.VideoType1
+                    });
+                    var v2 = db.Video.FirstOrDefault(v => v.VideoTypeId == 2 && v.Code == dateTimeHelper.DateTime.Year.ToString().Remove(0, 3));
+                    videoResult.Add(new VideoResult
+                    {
+                        url = videoBaseUrl + v2.Name,
+                        description = v2.VideoType.VideoType1
+                    });
+                    var v3 = db.Video.FirstOrDefault(v => v.VideoTypeId == 3 && v.Code == dateTimeHelper.RequestCNMonth.ToString());
+                    videoResult.Add(new VideoResult
+                    {
+                        url = videoBaseUrl + v3.Name,
+                        description = v3.VideoType.VideoType1
+                    });
+                    var v4 = db.Video.FirstOrDefault(v => v.VideoTypeId == 4 && v.Code == dateTimeHelper.RequestCNMonth.ToString());
+                    videoResult.Add(new VideoResult
+                    {
+                        url = videoBaseUrl + v4.Name,
+                        description = v4.VideoType.VideoType1
+                    });
+
+                    result.Videos = videoResult;
+                }
             }
 
             return result;

@@ -20,7 +20,10 @@ namespace Fate.ViewModels
         public string HuaLu { get; set; }
         public string HuaChiuan { get; set; }
         public string HuaKe { get; set; }
-        public string HuaJi { get; set; }
+        public string HuaJi { get; set; }        
+        public List<VideoResult> Videos { get; set; }
+        public string Name { get; set; }
+        public bool Gender { get; set; }
     }
 
     public class AstrologyChartCulture
@@ -52,5 +55,11 @@ namespace Fate.ViewModels
     {
         public string Star { get; set; }
         public string Status { get; set; }
+    }
+
+    public class VideoResult
+    { 
+        public string url { get; set; }
+        public string description { get; set; }
     }
 }

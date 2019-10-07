@@ -246,6 +246,12 @@
     <Compile Include="Models\Taiwanlunisolar.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Video.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VideoType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\WordLibrary.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -516,6 +522,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Mobile\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

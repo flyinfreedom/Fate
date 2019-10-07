@@ -34,6 +34,7 @@ namespace Fate.Controllers
                     Email = email,
                     ContactPhone = string.IsNullOrEmpty(email) ? request.uid : string.Empty,
                     Name = request.name,
+                    Gender = condition.Gender,
                     IPAddress = GetClientIp(Request)
                 };
 
@@ -74,7 +75,7 @@ namespace Fate.Controllers
                 }//end using  
             }
 
-            string paymentDataStr = JsonConvert.SerializeObject(new { requestModel.amount, responseObj.txId });
+            string paymentDataStr = JsonConvert.SerializeObject(new { requestModel.amount, responseObj.orderId });
             string paymentData = AESHelper.Encrypt(paymentDataStr);
 
              return new GetTxIdResponse { 
@@ -87,7 +88,7 @@ namespace Fate.Controllers
         private string GetGameUrl(string productId, string orderId)
         {
             string baseUrl = WebConfigVariable.BaseUrl;
-            return $"{baseUrl}/index.html#/results?orderId={orderId}";
+            return $"{baseUrl}/index.html#/results?orderid={orderId}";
         }
         private string GetClientIp(HttpRequestMessage request = null)
         {

@@ -18,6 +18,9 @@ namespace Fate.Helper
         public int CNDay { get; set; }
         public bool IsLeap { get; set; }
 
+        public int RequestCNMonth { get; set; }
+        public int RequestCNDay { get; set; }
+
         public DateTimeHelper(FortuneTellingEntities db, DateType type, int year, int month, int day, int birthtime, bool isLeap = false)
         {
             _db = db;
@@ -51,6 +54,8 @@ namespace Fate.Helper
             }
 
             DateTime = new DateTime(taiwanlunisolar.YYYY, taiwanlunisolar.MM, taiwanlunisolar.DD);
+            RequestCNMonth = taiwanlunisolar.CNMM;
+            RequestCNDay = taiwanlunisolar.CNDD;
 
             Heavenly = (Heavenly)taiwanlunisolar.Heavenl;
             Branch = (Branch)taiwanlunisolar.Branch;

@@ -6,8 +6,10 @@
     <EntitySet Name="Product" EntityType="FortuneTellingModel.Product" />
     <EntitySet Name="Result" EntityType="FortuneTellingModel.Result" />
     <EntitySet Name="Taiwanlunisolar" EntityType="FortuneTellingModel.Taiwanlunisolar" />
+    <EntitySet Name="VideoType" EntityType="FortuneTellingModel.VideoType" />
     <EntitySet Name="WordLibrary" EntityType="FortuneTellingModel.WordLibrary" />
     <EntitySet Name="WordLibraryUserInput" EntityType="FortuneTellingModel.WordLibraryUserInput" />
+    <EntitySet Name="Video" EntityType="FortuneTellingModel.Video" />
     <AssociationSet Name="FK_OrderDetail_Order" Association="FortuneTellingModel.FK_OrderDetail_Order">
       <End Role="Order" EntitySet="Order" />
       <End Role="OrderDetail" EntitySet="OrderDetail" />
@@ -15,6 +17,10 @@
     <AssociationSet Name="FK_OrderDetail_Product" Association="FortuneTellingModel.FK_OrderDetail_Product">
       <End Role="Product" EntitySet="Product" />
       <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Video_VideoType" Association="FortuneTellingModel.FK_Video_VideoType">
+      <End Role="VideoType" EntitySet="VideoType" />
+      <End Role="Video" EntitySet="Video" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Order">
@@ -33,6 +39,7 @@
     <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="RecipientCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IsPayed" Type="Boolean" Nullable="false" />
+    <Property Name="Gender" Type="Boolean" />
     <NavigationProperty Name="OrderDetail" Relationship="FortuneTellingModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
   </EntityType>
   <EntityType Name="OrderDetail">
@@ -84,6 +91,15 @@
     <Property Name="CNDD" Type="Int32" Nullable="false" />
     <Property Name="IsLeap" Type="Boolean" Nullable="false" />
   </EntityType>
+  <EntityType Name="VideoType">
+    <Key>
+      <PropertyRef Name="VideoTypeId" />
+    </Key>
+    <Property Name="VideoTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VideoType1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Enable" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Video" Relationship="FortuneTellingModel.FK_Video_VideoType" FromRole="VideoType" ToRole="Video" />
+  </EntityType>
   <EntityType Name="WordLibrary">
     <Key>
       <PropertyRef Name="Word" />
@@ -98,6 +114,21 @@
     <Property Name="Word" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="Stroke" Type="Int32" Nullable="false" />
     <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Video">
+    <Key>
+      <PropertyRef Name="VideoId" />
+      <PropertyRef Name="VideoTypeId" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Enable" />
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="VideoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VideoTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Enable" Type="Boolean" Nullable="false" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="VideoType" Relationship="FortuneTellingModel.FK_Video_VideoType" FromRole="Video" ToRole="VideoType" />
   </EntityType>
   <Association Name="FK_OrderDetail_Order">
     <End Type="FortuneTellingModel.Order" Role="Order" Multiplicity="1" />
@@ -120,6 +151,18 @@
       </Principal>
       <Dependent Role="OrderDetail">
         <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Video_VideoType">
+    <End Type="FortuneTellingModel.VideoType" Role="VideoType" Multiplicity="1" />
+    <End Type="FortuneTellingModel.Video" Role="Video" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VideoType">
+        <PropertyRef Name="VideoTypeId" />
+      </Principal>
+      <Dependent Role="Video">
+        <PropertyRef Name="VideoTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

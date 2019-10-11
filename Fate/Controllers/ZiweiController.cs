@@ -1,5 +1,6 @@
 ﻿using Fate.Helper;
 using Fate.Models;
+using Fate.Service;
 using Fate.Service.Strategy;
 using Fate.ViewModels;
 using Newtonsoft.Json;
@@ -27,7 +28,15 @@ namespace Fate.Controllers
             using (var db = new FortuneTellingEntities())
             {
                 var order = db.Order.FirstOrDefault(x => x.OrderId == request.OrderId && x.OrderDetail.Any(d => d.ProductId == "Ziwei"));
-                isPayed = order != null;
+
+                if (order != null && !order.IsPayed) {
+                    PaymentService payment = new PaymentService();
+                    var query = payment.QueryTxIdStatus(order.OrderId, order.TxId);
+                    if (query.resultCode == "0000") {
+                        order.IsPayed = true;
+                        isPayed = true;
+                    }
+                }
 
                 DateTimeHelper dateTimeHelper;
 
@@ -108,9 +117,11 @@ namespace Fate.Controllers
 
                 result.Heavenly = language.GetHeavenlyString(dateTimeHelper.Heavenly.ToString());
                 result.Branch = language.GetBranchString(dateTimeHelper.Branch.ToString());
-                result.BirthTime = language.GetBranchString(dateTimeHelper.Birthtime.ToString());
+                result.BirthTime = $"{GetZiPeriod(result.BirthTimeValue)}{language.GetBranchString(dateTimeHelper.Birthtime.ToString())}";
+                result.BirthTimeValue = (int)dateTimeHelper.Birthtime;
                 result.Month = dateTimeHelper.RequestCNMonth.ToString();
                 result.Day = dateTimeHelper.RequestCNDay.ToString();
+                result.IsLeap = dateTimeHelper.IsLeap;
                 result.FiveElements = language.GetZiweiString(ziwei.FiveElements.ToString());
                 result.LifeMajorStar = language.GetZiweiString(ziwei.LifeMajorStar.ToString());
                 result.BodyMajorStar = language.GetZiweiString(ziwei.BodyMajorStar.ToString());
@@ -121,10 +132,6 @@ namespace Fate.Controllers
                 result.BirthDay = dateTimeHelper.DateTime.ToString("yyyy-MM-dd");
 
                 string videoBaseUrl = "/Videos/";
-
-#if DEBUG
-                isPayed = true;
-#endif
 
                 if (isPayed)
                 {
@@ -158,11 +165,12 @@ namespace Fate.Controllers
 
                     result.Videos = videoResult;
                 }
+                db.SaveChanges();
             }
 
             return result;
 
-            string GetBriefByCode(List<Result> source, StarResult starResult, Palace palace)
+            string GetBriefByCode(List<Fate.Models.Result> source, StarResult starResult, Palace palace)
             {
                 var tempss = source;
                 string temp = GetStarCode(starResult.Star, palace, starResult.Status);
@@ -172,6 +180,15 @@ namespace Fate.Controllers
                         ? source.FirstOrDefault(x => x.Code == GetStarCode(starResult.Star, palace)).Brief
                         : string.Empty;
             }
+        }
+
+        private object GetZiPeriod(int birthTimeValue)
+        {
+            if (birthTimeValue == 1 || birthTimeValue == 13)
+            {
+                return birthTimeValue == 1 ? "早" : "晚";
+            }
+            return string.Empty;
         }
 
         private string GetStarCode(Star star, Palace palace, StarStatus status = StarStatus.Normal)

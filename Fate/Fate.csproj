@@ -263,7 +263,7 @@
     <Compile Include="Service\FateService.cs" />
     <Compile Include="Service\Interface\IFateService.cs" />
     <Compile Include="Service\Interface\IResult.cs" />
-    <Compile Include="Service\PayService.cs" />
+    <Compile Include="Service\PaymentService.cs" />
     <Compile Include="Service\Result.cs" />
     <Compile Include="Service\Strategy\NA01.cs" />
     <Compile Include="Service\Strategy\Ziwei.cs" />
@@ -274,6 +274,7 @@
     <Compile Include="ViewModels\Payment\GetTxIdModel.cs" />
     <Compile Include="ViewModels\Payment\GetTxIdRequest.cs" />
     <Compile Include="ViewModels\Payment\GetTxIdResponse.cs" />
+    <Compile Include="ViewModels\Payment\QueryTxIdStatus.cs" />
     <Compile Include="ViewModels\VMAPIResult.cs" />
     <Compile Include="ViewModels\VMFateBase.cs" />
     <Compile Include="ViewModels\VMInvoice.cs" />

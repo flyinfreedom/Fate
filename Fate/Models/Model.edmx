@@ -22,6 +22,7 @@
           <Property Name="RecipientCode" Type="nvarchar" MaxLength="50" />
           <Property Name="IsPayed" Type="bit" Nullable="false" />
           <Property Name="Gender" Type="bit" />
+          <Property Name="TxId" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -219,6 +220,7 @@
           <Property Name="RecipientCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsPayed" Type="Boolean" Nullable="false" />
           <Property Name="Gender" Type="Boolean" />
+          <Property Name="TxId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="OrderDetail" Relationship="FortuneTellingModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
         </EntityType>
         <EntityType Name="OrderDetail">
@@ -354,6 +356,7 @@
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="FortuneTellingModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="TxId" ColumnName="TxId" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="IsPayed" ColumnName="IsPayed" />
                 <ScalarProperty Name="RecipientCode" ColumnName="RecipientCode" />

@@ -40,6 +40,7 @@
     <Property Name="RecipientCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IsPayed" Type="Boolean" Nullable="false" />
     <Property Name="Gender" Type="Boolean" />
+    <Property Name="TxId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="OrderDetail" Relationship="FortuneTellingModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
   </EntityType>
   <EntityType Name="OrderDetail">

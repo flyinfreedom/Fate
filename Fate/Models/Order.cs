@@ -33,6 +33,7 @@ namespace Fate.Models
         public string RecipientCode { get; set; }
         public bool IsPayed { get; set; }
         public Nullable<bool> Gender { get; set; }
+        public string TxId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetail { get; set; }

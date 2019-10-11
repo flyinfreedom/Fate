@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Order">
       <EntityTypeMapping TypeName="FortuneTellingModel.Order">
         <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="TxId" ColumnName="TxId" />
           <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="IsPayed" ColumnName="IsPayed" />
           <ScalarProperty Name="RecipientCode" ColumnName="RecipientCode" />

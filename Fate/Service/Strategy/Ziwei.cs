@@ -1422,6 +1422,7 @@ namespace Fate.Service.Strategy
                 { Star.GuChen, StarType.Secondary },
                 { Star.TianKui, StarType.Secondary },
                 { Star.TianYue_year, StarType.Minor },
+                { Star.MingMa, StarType.Minor }
             };
             _starScoreMapping = new Dictionary<Star, Dictionary<StarStatus, int>>()
             {

@@ -17,6 +17,7 @@
     <Property Name="RecipientCode" Type="nvarchar" MaxLength="50" />
     <Property Name="IsPayed" Type="bit" Nullable="false" />
     <Property Name="Gender" Type="bit" />
+    <Property Name="TxId" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="OrderDetail">
     <Key>

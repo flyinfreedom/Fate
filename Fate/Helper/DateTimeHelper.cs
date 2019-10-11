@@ -13,13 +13,14 @@ namespace Fate.Helper
         public Heavenly Heavenly { get; set; }
         public Branch Branch { get; set; }
         public BirthTimePeriod Birthtime { get; set; }
+        public int BirthtimeValue { get; set; }
         public DateTime DateTime { get; set; }
         public int CNMonth { get; set; }
         public int CNDay { get; set; }
         public bool IsLeap { get; set; }
 
         public int RequestCNMonth { get; set; }
-        public int RequestCNDay { get; set; }
+        public int RequestCNDay { get; set; } 
 
         public DateTimeHelper(FortuneTellingEntities db, DateType type, int year, int month, int day, int birthtime, bool isLeap = false)
         {
@@ -32,7 +33,7 @@ namespace Fate.Helper
                         d.YYYY == year &&
                         d.CNMM == month &&
                         d.CNDD == day &&
-                        d.IsLeap == IsLeap);
+                        d.IsLeap == isLeap);
 
                 if (taiwanlunisolar == null)
                 {
@@ -56,6 +57,7 @@ namespace Fate.Helper
             DateTime = new DateTime(taiwanlunisolar.YYYY, taiwanlunisolar.MM, taiwanlunisolar.DD);
             RequestCNMonth = taiwanlunisolar.CNMM;
             RequestCNDay = taiwanlunisolar.CNDD;
+            IsLeap = taiwanlunisolar.IsLeap;
 
             Heavenly = (Heavenly)taiwanlunisolar.Heavenl;
             Branch = (Branch)taiwanlunisolar.Branch;
@@ -138,9 +140,17 @@ namespace Fate.Helper
                         birthtime = (int)BirthTimePeriod.Hai;
                         break;
                 }
-            }
 
-            if (birthtime == 13)
+                if (hour == 23)
+                {
+                    BirthtimeValue = 13;
+                }
+                else
+                {
+                    BirthtimeValue = (int)birthtime;
+                }
+            }
+            else if (birthtime == 13)
             {
                 DateTime addDay = new DateTime(taiwanlunisolar.YYYY, taiwanlunisolar.MM, taiwanlunisolar.DD);
                 addDay = addDay.AddDays(1);
@@ -149,6 +159,12 @@ namespace Fate.Helper
                         d.YYYY == addDay.Year &&
                         d.MM == addDay.Month &&
                         d.DD == addDay.Day);
+
+                BirthtimeValue = 13;
+            }
+            else
+            {
+                BirthtimeValue = (int)birthtime;
             }
 
 
@@ -162,7 +178,6 @@ namespace Fate.Helper
 
             Birthtime = birthtime == 13 ? BirthTimePeriod.Zi : (BirthTimePeriod)birthtime;
             CNDay = taiwanlunisolar.CNDD;
-            IsLeap = isLeap;
         }
     }
     public enum DateType

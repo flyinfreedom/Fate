@@ -11,8 +11,10 @@ namespace Fate.ViewModels
         public string Branch { get; set; }
         public string BirthDay { get; set; }
         public string BirthTime { get; set; }
+        public int BirthTimeValue { get; set; }
         public string Month { get; set; }
         public string Day { get; set; }
+        public bool IsLeap { get; set; }
         public List<AstrologyChartCulture> AstrologyChart { get; set; }
         public string FiveElements { get; set; }
         public string LifeMajorStar { get; set; }

@@ -26,5 +26,7 @@ namespace Fate.ViewModels
         public bool Gender { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
+
+        public string OrderId { get; set; }
     }
 }

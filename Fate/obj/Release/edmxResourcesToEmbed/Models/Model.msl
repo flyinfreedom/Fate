@@ -39,6 +39,7 @@
     <EntitySetMapping Name="Product">
       <EntityTypeMapping TypeName="FortuneTellingModel.Product">
         <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
           <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />

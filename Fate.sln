@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fate", "Fate\Fate.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fate.Resource", "Fate.Resource\Fate.Resource.csproj", "{E3EE8F78-1C37-4B6C-9AEF-592F242DB25E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fate.Backoffice", "Fate.Backoffice\Fate.Backoffice.csproj", "{3500289A-AA52-41B1-9247-C21CFE8B50C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E3EE8F78-1C37-4B6C-9AEF-592F242DB25E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3EE8F78-1C37-4B6C-9AEF-592F242DB25E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3EE8F78-1C37-4B6C-9AEF-592F242DB25E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3500289A-AA52-41B1-9247-C21CFE8B50C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3500289A-AA52-41B1-9247-C21CFE8B50C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3500289A-AA52-41B1-9247-C21CFE8B50C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3500289A-AA52-41B1-9247-C21CFE8B50C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

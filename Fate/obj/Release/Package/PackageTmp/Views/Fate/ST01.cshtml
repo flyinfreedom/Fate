@@ -267,7 +267,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="result-footer"></div>
+                <div class="result-footer">
+                    <form id="paymentForm" method="post">
+                        <input type="hidden" name="data" id="paymentData" />
+                        <input type="hidden" name="txId" id="paymentTxId" />
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -299,71 +304,85 @@
                     </div>
                     <div class="form-check receipt" id="EmailForm">
                         <label style="color:red;">＊E-Mail</label><small class="float-right" style="position:absolute; top:5px; right: 5px; color:red;">留下您的Email，我們會將測試結果寄給您</small>
-                        <input type="text" class="form-control" name="Email" id="Email" maxlength="50" />
+                        <input type="text" class="form-control" name="Email" id="Email" maxlength="50" placeholder="請輸入Email" />
                     </div>
-                    <div id="InvoiceForm">
-                        <hr />
-                        <div class="form-check receipt">
-                            <label class="receipt-title">發票類型</label>
-                            <div style="width: 100%;">
-                                <label class="form-check-label" style=" padding-left: 0px;">
-                                    <input type="radio"
-                                           class="form-check-input"
-                                           name="InvoiceHandle"
-                                           id="options1"
-                                           value="DU" checked />
-                                    二聯式
-                                </label>
-                                <label class="form-check-label">
-                                    <input type="radio"
-                                           class="form-check-input"
-                                           name="InvoiceHandle"
-                                           id="options2"
-                                           value="TU" />
-                                    三聯式
-                                </label>
-                                <label class="form-check-label">
-                                    <input type="radio"
-                                           class="form-check-input"
-                                           name="InvoiceHandle"
-                                           id="options3"
-                                           value="DO" />
-                                    捐贈
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-check receipt">
-                            <div id="VATNumberBlock">
-                                <label class="mt-3" style="color:red;">抬頭</label>
-                                <input type="text" class="form-control" name="VATTitle" id="VATTitle" />
-
-                                <label class="mt-3" style="color:red;">統編</label>
-                                <input type="text" class="form-control" name="VATNumber" id="VATNumber" maxlength="8" />
-                            </div>
-
-                            <div id="AddressBlock">
-                                <label class="mt-3">地址</label>
-                                <input type="text" class="form-control" name="ContactAddress" id="ContactAddress" placeholder="建議填寫，利於電子發票中獎時直接寄送實體發票" />
-                                <label class="mt-3">電話</label>
-                                <input type="text" class="form-control" name="ContactPhone" id="ContactPhone" placeholder="建議填寫，利於電子發票中獎時方便聯繫" />
-                            </div>
-
-                            <div id="CaringBlock" style="">
-                                <label class="mt-3">捐贈單位</label>
-                                <select class="form-control" name="CaringCode" id="CaringCode">
-                                    <option value="25885">伊甸基金會</option>
-                                    <option value="8595">婦援會</option>
-                                    <option value="1234">慈善會</option>
-                                    <option value="2595">幼安教養會</option>
-                                    <option value="000">世界和平會</option>
-                                    <option value="2885">慈愛教養院</option>
-                                    <option value="8330522">老人協會</option>
-                                    <option value="1979322">心生活協會</option>
-                                    <option value="235757">婦幼協會</option>
-                                </select>
-                            </div>
-                        </div>
+                    <div class="form-check receipt" id="PhoneForm">
+                        <label style="color:red;">＊手機號碼</label>
+                        <select id="CountryNumber" class="form-control" style="margin-bottom: 5px;">
+                            <option value="+886" selected>台灣 +886</option>
+                            <option value="+86">中國 +86</option>
+                            <option value="+852">香港 +852</option>
+                            <option value="+853">澳門 +853</option>
+                            <option value="+65">新加玻 +65</option>
+                            <option value="+60">馬來西亞 +60</option>
+                            <option value="other">其他</option>
+                        </select>
+                        <input type="text" class="form-control" style="display:none; margin-bottom: 5px;" id="Country" maxlength="50" placeholder="請輸入國碼：ex +886" />
+                        <input type="text" class="form-control" id="Phone" maxlength="50" placeholder="請輸入手機號碼" />
                     </div>
+                    @*<div id="InvoiceForm">
+                            <hr />
+                            <div class="form-check receipt">
+                                <label class="receipt-title">發票類型</label>
+                                <div style="width: 100%;">
+                                    <label class="form-check-label" style=" padding-left: 0px;">
+                                        <input type="radio"
+                                               class="form-check-input"
+                                               name="InvoiceHandle"
+                                               id="options1"
+                                               value="DU" checked />
+                                        二聯式
+                                    </label>
+                                    <label class="form-check-label">
+                                        <input type="radio"
+                                               class="form-check-input"
+                                               name="InvoiceHandle"
+                                               id="options2"
+                                               value="TU" />
+                                        三聯式
+                                    </label>
+                                    <label class="form-check-label">
+                                        <input type="radio"
+                                               class="form-check-input"
+                                               name="InvoiceHandle"
+                                               id="options3"
+                                               value="DO" />
+                                        捐贈
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-check receipt">
+                                <div id="VATNumberBlock">
+                                    <label class="mt-3" style="color:red;">抬頭</label>
+                                    <input type="text" class="form-control" name="VATTitle" id="VATTitle" />
+
+                                    <label class="mt-3" style="color:red;">統編</label>
+                                    <input type="text" class="form-control" name="VATNumber" id="VATNumber" maxlength="8" />
+                                </div>
+
+                                <div id="AddressBlock">
+                                    <label class="mt-3">地址</label>
+                                    <input type="text" class="form-control" name="ContactAddress" id="ContactAddress" placeholder="建議填寫，利於電子發票中獎時直接寄送實體發票" />
+                                    <label class="mt-3">電話</label>
+                                    <input type="text" class="form-control" name="ContactPhone" id="ContactPhone" placeholder="建議填寫，利於電子發票中獎時方便聯繫" />
+                                </div>
+
+                                <div id="CaringBlock" style="">
+                                    <label class="mt-3">捐贈單位</label>
+                                    <select class="form-control" name="CaringCode" id="CaringCode">
+                                        <option value="25885">伊甸基金會</option>
+                                        <option value="8595">婦援會</option>
+                                        <option value="1234">慈善會</option>
+                                        <option value="2595">幼安教養會</option>
+                                        <option value="000">世界和平會</option>
+                                        <option value="2885">慈愛教養院</option>
+                                        <option value="8330522">老人協會</option>
+                                        <option value="1979322">心生活協會</option>
+                                        <option value="235757">婦幼協會</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>*@
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="SendBtn" class="btn btn-warning">送出</button>
@@ -414,6 +433,7 @@
     <script src="@Url.Content("~/vendor/countdowntime/countdowntime.js")"></script>
     <!--===============================================================================================-->
     <script src="@Url.Content("~/Scripts/main.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.url.js")"></script>
     <script>
         $.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
         $('#BirthDay').datepicker({
@@ -431,6 +451,41 @@
                 location.reload();
             });
 
+            @if (!string.IsNullOrEmpty(Model.OrderId))
+            {
+                <text>
+            
+                $('#FourthResult').before($('#FourthDescription').clone());
+                $('#ResultDiv').show();
+
+                $("html, body").animate({ scrollTop: $("#ResultDiv").offset().top }, 1000);
+
+                $('.blackBlock').hide();
+                $('#GoBtn').hide();
+
+                $('#FourthResult').html('<span class="resultTitle">測算內容</span><br/>' + '@Model.FourthLife');
+                $('#FourthSuggestResult').html(ReplaceSuggestFormat('@Model.FourthLifeSuggest'));
+
+                $('#ThirdResult').before($('#ThirdDescription').clone());
+                $('#ThirdResult').html('<span class="resultTitle">測算內容</span><br/>' + '@Model.ThirdLife');
+                $('#ThirdSuggestResult').html(ReplaceSuggestFormat('@Model.ThirdSuggest'));
+
+                $('#SecondResult').before($('#SecondDescription').clone());
+                $('#SecondResult').html('<span class="resultTitle">測算內容</span><br/>' + '@Model.SecondLife');
+                $('#SecondSuggestResult').html(ReplaceSuggestFormat('@Model.SecondLifeSuggest'));
+
+                $('#FirstResult').before($('#FirstDescription').clone());
+                $('#FirstResult').html('<span class="resultTitle">測算內容</span><br/>' + '@Model.FirstLife');
+                $('#FirstSuggestResult').html(ReplaceSuggestFormat('@Model.FirstLifeSuggest'));
+                $('#AllResult').show();
+
+                $('#PayBtn').hide();
+                $('#popupInvoice').modal('hide');
+
+                $('#ReTest').show();
+                </text>
+            }
+
             var isTWIP = null;
             $('#InvoiceForm').hide();
             $.ajax({
@@ -441,13 +496,23 @@
                 success: function (result) {
                     $('#modelTitle').html('進一步了解您的前三世');
                     $('#CheckIpAddressLoad').hide();
-                    $('#InvoiceForm').show();
+                    //$('#InvoiceForm').show();
                     //--- 若不是台灣IP，則直接輸入Email進入付費流程
-                    if (!result.Success) {
-                        $('#InvoiceForm > div:not(#EmailForm)').hide();
-                    }
+                    //if (!result.Success) {
+                    $('#InvoiceForm > div:not(#EmailForm)').hide();
+                    //}
 
                     isTWIP = result.Success;
+                }
+            });
+
+            $("#CountryNumber").change(function () {
+                if ($("#CountryNumber").find(":selected").val() === 'other') {
+                    $("#Country").show();
+                }
+                else {
+                    $("#Country").hide();
+                    $("#Country").val('');
                 }
             });
 
@@ -489,16 +554,34 @@
             });
 
             $('#SendBtn').click(function () {
-                var validateStr = SendValidate();
-                if (validateStr) {
-                    $('#ValidateMessage').html(validateStr);
-                    return;
-                }
-
+                //var validateStr = SendValidate();
+                //if (validateStr) {
+                //    $('#ValidateMessage').html(validateStr);
+                //    return;
+                //}
                 $('.blackBlock').show();
 
-                var postData = { BirthDay: $('#BirthDay').val(), BirthHour: $('#BirthHour').val(), Gender: $('input[name=Gender]:checked').val(), InvoiceHandle: $('input[name=InvoiceHandle]:checked').val(), Name: $('#Name').val(), ContactAddress: $('#ContactAddress').val(), ContactPhone: $('#ContactPhone').val(), VATNumber: $('#VATNumber').val(), VATTitle: $('#VATTitle').val(), CaringCode: ($('input[name=InvoiceHandle]:checked').val() == "DO" ? $('#CaringCode').val() : ''), Email: $('#Email').val(), DateType: $('input[name=DateType]:checked').val() };
-               
+                $("#CountryNumber").change(function () {
+                    if ($("#CountryNumber").find(":selected").val() === 'other') {
+                        $("#Country").show();
+                    }
+                    else {
+                        $("#Country").hide();
+                        $("#Country").val('');
+                    }
+                });
+
+                var phone = $("#Country").val() + ' ' + $("#Phone").val();
+                if ($("#CountryNumber").find(":selected").val() !== 'other') {
+                    phone = $("#CountryNumber").find(":selected").val() + ' ' + $("#Phone").val();
+                }
+
+                var postData = { BirthDay: $('#BirthDay').val(), BirthHour: $('#BirthHour').val(), Gender: $('input[name=Gender]:checked').val(), InvoiceHandle: $('input[name=InvoiceHandle]:checked').val(), Name: $('#Name').val(), ContactAddress: $('#ContactAddress').val(), ContactPhone: $('#ContactPhone').val(), VATNumber: $('#VATNumber').val(), VATTitle: $('#VATTitle').val(), CaringCode: ($('input[name=InvoiceHandle]:checked').val() == "DO" ? $('#CaringCode').val() : ''), Email: $('#Email').val(), DateType: $('input[name=DateType]:checked').val(), ContactPhone: phone };
+
+                if ($.url.param("orderid")) {
+                    postData.OrderId = $.url.param("orderid");
+                }
+
                 $.ajax({
                     type: "POST",
                     async: true,
@@ -511,6 +594,13 @@
                             alert(result.Message);
                             $('.blackBlock').hide();
                             return;
+                        }
+
+                        if (result.txId) {
+                            $("#paymentForm").attr("action", result.paymentUrl);
+                            $("#paymentData").val(result.paymentData);
+                            $("#paymentTxId").val(result.txId);
+                            $("#paymentForm").submit();
                         }
 
                         $('#FourthResult').html('<span class="resultTitle">測算內容</span><br/>' + result.FourthLife);
@@ -589,19 +679,19 @@
                 errorMessage += '＊Email 格式錯誤 <br/>';
             }
 
-            if ($('#VATNumberBlock').css('display') != 'none' && !$('#VATTitle').val()) {
-                errorMessage += '＊抬頭為必填 <br/>';
-            }
+            //if ($('#VATNumberBlock').css('display') != 'none' && !$('#VATTitle').val()) {
+            //    errorMessage += '＊抬頭為必填 <br/>';
+            //}
 
-            if ($('#VATNumberBlock').css('display') != 'none' && !$('#VATNumber').val()) {
-                errorMessage += '＊統編為必填 <br/>';
-            }
-            else {
-                var chknumStr = chknum();
-                if (chknumStr && $('#VATNumberBlock').css('display') != 'none') {
-                    errorMessage += '＊' + chknumStr;
-                }
-            }
+            //if ($('#VATNumberBlock').css('display') != 'none' && !$('#VATNumber').val()) {
+            //    errorMessage += '＊統編為必填 <br/>';
+            //}
+            //else {
+            //    var chknumStr = chknum();
+            //    if (chknumStr && $('#VATNumberBlock').css('display') != 'none') {
+            //        errorMessage += '＊' + chknumStr;
+            //    }
+            //}
             //else if ($('#VATNumber').val().length != 8 && $('#VATNumberBlock').css('display') != 'none') {
             //    errorMessage += '＊統編必須為8碼 <br/>';
             //}

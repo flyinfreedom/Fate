@@ -42,6 +42,14 @@
             margin: 10% auto;
         }
 
+        #popupInvoice .form-control {
+            width: 100%;
+        }
+
+        #popupInvoice .form-check {
+            padding-left: 0px;
+        }
+
         @@keyframes spin {
             0% {
                 transform: rotate(0deg);
@@ -103,6 +111,13 @@
         </div>
     </div>
 
+
+
+    <form id="paymentForm" method="post">
+        <input type="hidden" name="data" id="paymentData" />
+        <input type="hidden" name="txId" id="paymentTxId" />
+    </form>
+
     <!-- Modal -->
     <div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="popup-for-purchaseLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -118,6 +133,36 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="AddNewWordBtn" class="btn btn-primary">送出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="popupInvoice" tabindex="-1" role="dialog" aria-labelledby="popup-for-purchaseLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="font-size: 1.0em;">
+                <div class="modal-body">
+                    <div class="form-check receipt" id="EmailForm">
+                        <label style="color:red;">＊E-Mail</label>
+                        <input type="text" class="form-control" name="Email" id="Email" maxlength="50" placeholder="請輸入Email" />
+                    </div>
+                    <div class="form-check receipt" id="PhoneForm">
+                        <label style="color:red;">＊手機號碼</label>
+                        <select id="CountryNumber" class="form-control" style="margin-bottom: 5px;">
+                            <option value="+886" selected>台灣 +886</option>
+                            <option value="+86">中國 +86</option>
+                            <option value="+852">香港 +852</option>
+                            <option value="+853">澳門 +853</option>
+                            <option value="+65">新加玻 +65</option>
+                            <option value="+60">馬來西亞 +60</option>
+                            <option value="other">其他</option>
+                        </select>
+                        <input type="text" class="form-control" style="display:none; margin-bottom: 5px;" id="Country" maxlength="50" placeholder="請輸入國碼：ex +886" />
+                        <input type="text" class="form-control" id="Phone" maxlength="50" placeholder="請輸入手機號碼" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="SendBtn" class="btn btn-dark">送出</button>
                 </div>
             </div>
         </div>
@@ -139,7 +184,6 @@
                 <text>$("html, body").animate({ scrollTop: $("#Result").offset().top - 20 });</text>
             }
 
-
             $('#GoBtn').click(function () {
                     if (validate()) {
                         var wordlist = ($('#LastName').val() + $('#FirstName').val()).split('');
@@ -155,7 +199,9 @@
                             success: function (result) {
                                 console.log(result);
                                 if (result.length == 0) {
-                                    $('#NA01Form').submit();
+                                    $('.blackBlock').hide();
+                                    $('#popupInvoice').modal('show');
+                                    //$('#NA01Form').submit();
                                 }
                                 else {
                                     var wordingBlockElement = '<div><span>{{word}}</span><input class="form-control" data-word="{{word}}" name="newWord" type="text" placeholder="請輸入筆畫" /></div >';
@@ -170,7 +216,55 @@
                             }
                         });
                     }
+            });
+
+            $("#CountryNumber").change(function () {
+                if ($("#CountryNumber").find(":selected").val() === 'other') {
+                    $("#Country").show();
+                }
+                else {
+                    $("#Country").hide();
+                    $("#Country").val('');
+                }
+            });
+
+
+            $("#SendBtn").click(function () {
+                var phone = $("#Country").val() + ' ' + $("#Phone").val();
+                if ($("#CountryNumber").find(":selected").val() !== 'other') {
+                    phone = $("#CountryNumber").find(":selected").val() + ' ' + $("#Phone").val();
+                }
+                var condition = {
+                    LastName: $("#LastName").val(),
+                    FirstName: $("#FirstName").val(),
+                };
+
+                var postData = {
+                    condition: JSON.stringify(condition),
+                    name: $("#LastName").val() + $("#FirstName").val(),
+                    email: $("#Email").val(),
+                    productId: "NA01",
+                    uid: phone
+                }
+
+                $.ajax({
+                    type: "POST",
+                    async: true,
+                    dataType: "json",
+                    data: JSON.stringify(postData),
+                    url: '/Fate/NA01',
+                    contentType: 'application/json; charset=UTF-8',
+                    success: function (result) {
+                        if (result.txId) {
+                            $("#paymentForm").attr("action", result.paymentUrl);
+                            $("#paymentData").val(result.paymentData);
+                            $("#paymentTxId").val(result.txId);
+
+                            $("#paymentForm").submit();
+                        }
+                    }
                 });
+            });
 
             $('#AddNewWordBtn').click(function () {
                     var IntRegular = /^[0-9]*[1-9][0-9]*$/;
@@ -190,8 +284,8 @@
                     if (count) {
                         SaveNewWords(newWordList);
                     }
-                });
             });
+        });
 
         function validate() {
             var message = '';

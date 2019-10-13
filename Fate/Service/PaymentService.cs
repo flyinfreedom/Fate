@@ -17,7 +17,8 @@ namespace Fate.Service
         public QueryTxIdStatusResponse QueryTxIdStatus(string orderId, string txId)
         {
             string url = WebConfigVariable.QueryTxIdStatusUrl;
-            url = $"{url}?cid={WebConfigVariable.CID}&data{AESHelper.Encrypt(JsonConvert.SerializeObject(new { orderId, txId }))}";
+            url = $"{url}?cid={WebConfigVariable.CID}&data={HttpUtility.UrlEncode(AESHelper.Encrypt(JsonConvert.SerializeObject(new { orderId, txId })))}";
+
             HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(url);
             httpRequest.Method = "POST";
 

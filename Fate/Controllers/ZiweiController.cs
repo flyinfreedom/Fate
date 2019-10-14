@@ -56,7 +56,7 @@ namespace Fate.Controllers
 
                 //palaceList = Enum.GetValues(typeof(Palace)).Cast<Palace>().ToList();
 #if DEBUG
-                palaceList = Enum.GetValues(typeof(Palace)).Cast<Palace>().ToList();
+                //palaceList = Enum.GetValues(typeof(Palace)).Cast<Palace>().ToList();
 #endif 
                 var ziwei = new Ziwei(dateTimeHelper.Heavenly, dateTimeHelper.Branch, dateTimeHelper.CNMonth, dateTimeHelper.CNDay, dateTimeHelper.Birthtime);
 
@@ -117,7 +117,7 @@ namespace Fate.Controllers
 
                 result.Heavenly = language.GetHeavenlyString(dateTimeHelper.Heavenly.ToString());
                 result.Branch = language.GetBranchString(dateTimeHelper.Branch.ToString());
-                result.BirthTime = $"{GetZiPeriod(result.BirthTimeValue)}{language.GetBranchString(dateTimeHelper.Birthtime.ToString())}";
+                result.BirthTime = $"{GetZiPeriod(request.BirthTime)}{language.GetBranchString(dateTimeHelper.Birthtime.ToString())}";
                 result.BirthTimeValue = (int)dateTimeHelper.Birthtime;
                 result.Month = dateTimeHelper.RequestCNMonth.ToString();
                 result.Day = dateTimeHelper.RequestCNDay.ToString();

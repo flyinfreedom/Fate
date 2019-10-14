@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FortuneTellingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="FateAdmin">
+    <Key>
+      <PropertyRef Name="LoginId" />
+    </Key>
+    <Property Name="LoginId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Datetime" Type="datetime" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="InvoiceHandle" Type="nvarchar" MaxLength="2" />
+    <Property Name="ContactAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContactPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="VATNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
+    <Property Name="RecipientCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsPayed" Type="bit" Nullable="false" />
+    <Property Name="Gender" Type="bit" />
+    <Property Name="TxId" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="ProductId" />
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="ProductId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="OrderId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateType" Type="int" />
+    <Property Name="BirthDay" Type="nvarchar" MaxLength="50" />
+    <Property Name="BirthHour" Type="int" />
+    <Property Name="Gender" Type="bit" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsLeap" Type="bit" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="Amount" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Result">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Brief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FullDescription" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Taiwanlunisolar">
+    <Key>
+      <PropertyRef Name="YYYYMMDD" />
+    </Key>
+    <Property Name="YYYYMMDD" Type="nvarchar" MaxLength="8" Nullable="false" />
+    <Property Name="YYYY" Type="int" Nullable="false" />
+    <Property Name="MM" Type="int" Nullable="false" />
+    <Property Name="DD" Type="int" Nullable="false" />
+    <Property Name="CNYYYY" Type="int" Nullable="false" />
+    <Property Name="Heavenl" Type="int" Nullable="false" />
+    <Property Name="Branch" Type="int" Nullable="false" />
+    <Property Name="CNMM" Type="int" Nullable="false" />
+    <Property Name="CNDD" Type="int" Nullable="false" />
+    <Property Name="IsLeap" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'FortuneTelling.dbo.Video' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="Video">
+    <Key>
+      <PropertyRef Name="VideoId" />
+      <PropertyRef Name="VideoTypeId" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Enable" />
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="VideoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VideoTypeId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Enable" Type="bit" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VideoType">
+    <Key>
+      <PropertyRef Name="VideoTypeId" />
+    </Key>
+    <Property Name="VideoTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VideoType" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Enable" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WordLibrary">
+    <Key>
+      <PropertyRef Name="Word" />
+    </Key>
+    <Property Name="Word" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Stroke" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WordLibraryUserInput">
+    <Key>
+      <PropertyRef Name="Word" />
+    </Key>
+    <Property Name="Word" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Stroke" Type="int" Nullable="false" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_OrderDetail_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Video_VideoType">
+    <End Role="VideoType" Type="Self.VideoType" Multiplicity="1" />
+    <End Role="Video" Type="Self.Video" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VideoType">
+        <PropertyRef Name="VideoTypeId" />
+      </Principal>
+      <Dependent Role="Video">
+        <PropertyRef Name="VideoTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FortuneTellingModelStoreContainer">
+    <EntitySet Name="FateAdmin" EntityType="Self.FateAdmin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Result" EntityType="Self.Result" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Taiwanlunisolar" EntityType="Self.Taiwanlunisolar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VideoType" EntityType="Self.VideoType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WordLibrary" EntityType="Self.WordLibrary" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WordLibraryUserInput" EntityType="Self.WordLibraryUserInput" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Video" EntityType="Self.Video" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Video].[VideoId] AS [VideoId], 
+    [Video].[VideoTypeId] AS [VideoTypeId], 
+    [Video].[Name] AS [Name], 
+    [Video].[Enable] AS [Enable], 
+    [Video].[Code] AS [Code]
+    FROM [dbo].[Video] AS [Video]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_Product" Association="Self.FK_OrderDetail_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Video_VideoType" Association="Self.FK_Video_VideoType">
+      <End Role="VideoType" EntitySet="VideoType" />
+      <End Role="Video" EntitySet="Video" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

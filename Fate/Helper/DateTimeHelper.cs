@@ -172,11 +172,11 @@ namespace Fate.Helper
 
             if (taiwanlunisolar.IsLeap && taiwanlunisolar.CNDD > 15)
             {
-                CNMonth = taiwanlunisolar.CNMM++;
+                CNMonth = taiwanlunisolar.CNMM + 1;
                 CNMonth = CNMonth == 13 ? 1 : CNMonth;
             }
 
-            Birthtime = birthtime == 13 ? BirthTimePeriod.Zi : (BirthTimePeriod)birthtime;
+            Birthtime = BirthtimeValue == 13 ? BirthTimePeriod.Zi : (BirthTimePeriod)BirthtimeValue;
             CNDay = taiwanlunisolar.CNDD;
         }
     }

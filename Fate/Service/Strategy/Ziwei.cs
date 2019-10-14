@@ -539,7 +539,7 @@ namespace Fate.Service.Strategy
                         ? _starScoreMapping[s.Star][s.Status]
                         : _starScoreMapping[s.Star][StarStatus.Normal]
                     : 0);
-                item.Score = item.Score > 100 ? 100 : item.Score;
+                item.Score = item.Score > 95 ? 95 : item.Score;
             }
         }
         #endregion

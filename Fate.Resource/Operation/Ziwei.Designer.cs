@@ -313,7 +313,7 @@ namespace Fate.Resource.Operation {
         }
         
         /// <summary>
-        ///   查詢類似 命馬 的當地語系化字串。
+        ///   查詢類似 天馬 的當地語系化字串。
         /// </summary>
         public static string MingMa {
             get {
@@ -691,7 +691,7 @@ namespace Fate.Resource.Operation {
         }
         
         /// <summary>
-        ///   查詢類似 天馬 的當地語系化字串。
+        ///   查詢類似 月馬 的當地語系化字串。
         /// </summary>
         public static string YueMa {
             get {

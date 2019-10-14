@@ -202,7 +202,7 @@
     <value>金四局</value>
   </data>
   <data name="MingMa" xml:space="preserve">
-    <value>命馬</value>
+    <value>天馬</value>
   </data>
   <data name="Normal" xml:space="preserve">
     <value />
@@ -328,7 +328,7 @@
     <value>右弼</value>
   </data>
   <data name="YueMa" xml:space="preserve">
-    <value>天馬</value>
+    <value>月馬</value>
   </data>
   <data name="ZiWei" xml:space="preserve">
     <value>紫微</value>

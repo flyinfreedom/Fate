@@ -57,10 +57,39 @@
     <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Brief" Type="nvarchar(max)" Nullable="false" />
     <Property Name="FullDescription" Type="nvarchar(max)" />
+    <Property Name="Product" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Taiwanlunisolar">
     <Key>
+      <PropertyRef Name="YYYY" />
+      <PropertyRef Name="MM" />
+      <PropertyRef Name="DD" />
+    </Key>
+    <Property Name="YYYYMMDD" Type="nvarchar" MaxLength="8" Nullable="false" />
+    <Property Name="YYYY" Type="int" Nullable="false" />
+    <Property Name="MM" Type="int" Nullable="false" />
+    <Property Name="DD" Type="int" Nullable="false" />
+    <Property Name="CNYYYY" Type="int" Nullable="false" />
+    <Property Name="Heavenl" Type="int" Nullable="false" />
+    <Property Name="Branch" Type="int" Nullable="false" />
+    <Property Name="CNMM" Type="int" Nullable="false" />
+    <Property Name="CNDD" Type="int" Nullable="false" />
+    <Property Name="IsLeap" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'FortuneTelling.dbo.Taiwanlunisolar_bak' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="Taiwanlunisolar_bak">
+    <Key>
       <PropertyRef Name="YYYYMMDD" />
+      <PropertyRef Name="YYYY" />
+      <PropertyRef Name="MM" />
+      <PropertyRef Name="DD" />
+      <PropertyRef Name="CNYYYY" />
+      <PropertyRef Name="Heavenl" />
+      <PropertyRef Name="Branch" />
+      <PropertyRef Name="CNMM" />
+      <PropertyRef Name="CNDD" />
+      <PropertyRef Name="IsLeap" />
     </Key>
     <Property Name="YYYYMMDD" Type="nvarchar" MaxLength="8" Nullable="false" />
     <Property Name="YYYY" Type="int" Nullable="false" />
@@ -158,6 +187,20 @@
     <EntitySet Name="VideoType" EntityType="Self.VideoType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WordLibrary" EntityType="Self.WordLibrary" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WordLibraryUserInput" EntityType="Self.WordLibraryUserInput" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Taiwanlunisolar_bak" EntityType="Self.Taiwanlunisolar_bak" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Taiwanlunisolar_bak].[YYYYMMDD] AS [YYYYMMDD], 
+    [Taiwanlunisolar_bak].[YYYY] AS [YYYY], 
+    [Taiwanlunisolar_bak].[MM] AS [MM], 
+    [Taiwanlunisolar_bak].[DD] AS [DD], 
+    [Taiwanlunisolar_bak].[CNYYYY] AS [CNYYYY], 
+    [Taiwanlunisolar_bak].[Heavenl] AS [Heavenl], 
+    [Taiwanlunisolar_bak].[Branch] AS [Branch], 
+    [Taiwanlunisolar_bak].[CNMM] AS [CNMM], 
+    [Taiwanlunisolar_bak].[CNDD] AS [CNDD], 
+    [Taiwanlunisolar_bak].[IsLeap] AS [IsLeap]
+    FROM [dbo].[Taiwanlunisolar_bak] AS [Taiwanlunisolar_bak]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="Video" EntityType="Self.Video" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [Video].[VideoId] AS [VideoId], 

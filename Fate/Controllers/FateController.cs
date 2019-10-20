@@ -41,6 +41,7 @@ namespace Fate.Controllers
                     instance.BirthHour = orderDetail.BirthHour.Value;
                     instance.BirthDay = orderDetail.BirthDay;
                     instance.DateType = orderDetail.DateType == 1 ? "CN" : "CE";
+                    instance.Gender = orderDetail.Gender.Value;
 
                     string tempUserInputBirthDay = instance.BirthDay;
 
@@ -87,30 +88,31 @@ namespace Fate.Controllers
         [HttpPost]
         public JsonResult ST01(VMST01 instance)
         {
-            string fateType = "ST01";
-            bool isPayed = CheckIsPayed(instance.OrderId);  //---- 確認是否已付費
+            //string fateType = "ST01";
+            //bool isPayed = CheckIsPayed(instance.OrderId);  //---- 確認是否已付費
 
-            if (isPayed)
-            {
-                var orderDetail = db.Order.FirstOrDefault(o => o.OrderId == instance.OrderId).OrderDetail.FirstOrDefault(x => x.ProductId == "ST01");
-                instance.BirthHour = orderDetail.BirthHour.Value;
-                instance.BirthDay = orderDetail.BirthDay;
-                instance.DateType = orderDetail.DateType == 1 ? "CN" : "CE";
-            }
+            //if (isPayed)
+            //{
+            //    var orderDetail = db.Order.FirstOrDefault(o => o.OrderId == instance.OrderId).OrderDetail.FirstOrDefault(x => x.ProductId == "ST01");
+            //    instance.BirthHour = orderDetail.BirthHour.Value;
+            //    instance.BirthDay = orderDetail.BirthDay;
+            //    instance.DateType = orderDetail.DateType == 1 ? "CN" : "CE";
+            //    instance.Gender = orderDetail.Gender.Value;
+            //}
 
-            //---- 如果使用者輸入的是農曆年，從資料庫比對出國曆年
-            string tempUserInputBirthDay = instance.BirthDay;
+            ////---- 如果使用者輸入的是農曆年，從資料庫比對出國曆年
+            //string tempUserInputBirthDay = instance.BirthDay;
 
-            if (instance.DateType == "CN")
-            {
-                instance.BirthDay = GetCEDateFormCNDate(instance.BirthDay);
-                if (instance.BirthDay.Contains("1899"))
-                {
-                    return Json(new { Success = false, Message = "您輸入的農曆日期不存在" });
-                }
-            }
+            //if (instance.DateType == "CN")
+            //{
+            //    instance.BirthDay = GetCEDateFormCNDate(instance.BirthDay);
+            //    if (instance.BirthDay.Contains("1899"))
+            //    {
+            //        return Json(new { Success = false, Message = "您輸入的農曆日期不存在" });
+            //    }
+            //}
 
-            IResult result = this._fateService.GetFateResultCode(fateType, isPayed, instance);
+            IResult result = this._fateService.GetFateResultCode("ST01", false, instance);
 
             if (result.Success)
             {
@@ -118,26 +120,12 @@ namespace Fate.Controllers
                 instance.FourthLife = db.Result.FirstOrDefault(x => x.Code == fourth).Brief;
                 instance.FourthLifeSuggest = db.Result.FirstOrDefault(x => x.Code == fourth).FullDescription;
 
-                if (isPayed)
-                {
-                    string third = ("" + result.FateResult[1]);
-                    string second = ("" + result.FateResult[2]);
-                    string first = ("" + result.FateResult[3]);
-                    instance.ThirdLife = string.IsNullOrEmpty(third) ? string.Empty : db.Result.FirstOrDefault(x => x.Code == third).Brief;
-                    instance.ThirdSuggest = string.IsNullOrEmpty(third) ? string.Empty : db.Result.FirstOrDefault(x => x.Code == third).FullDescription;
-                    instance.SecondLife = string.IsNullOrEmpty(second) ? string.Empty : db.Result.FirstOrDefault(x => x.Code == second).Brief;
-                    instance.SecondLifeSuggest = string.IsNullOrEmpty(second) ? string.Empty : db.Result.FirstOrDefault(x => x.Code == second).FullDescription;
-                    instance.FirstLife = string.IsNullOrEmpty(first) ? string.Empty : db.Result.FirstOrDefault(x => x.Code == first).Brief;
-                    instance.FirstLifeSuggest = string.IsNullOrEmpty(first) ? string.Empty : db.Result.FirstOrDefault(x => x.Code == first).FullDescription;
-                    instance.BirthDay = tempUserInputBirthDay;
-                    SendEmail(instance.Email, "測是您的前世今生", ViewToString("ST01", "Mail", null, instance));
-                }
-                else if (!string.IsNullOrEmpty(instance.Email))
+                if (!string.IsNullOrEmpty(instance.ContactPhone))
                 {
                     var amount = db.Product.FirstOrDefault(x => x.ProductId == "ST01").Amount;
                     var getTxIdObj = GetTxId(new GetTxIdRequest
                     {
-                        condition = JsonConvert.SerializeObject(new { instance.BirthHour, instance.BirthDay }),
+                        condition = JsonConvert.SerializeObject(new { instance.BirthHour, instance.BirthDay, instance.Gender }),
                         name = instance.Name,
                         productId = "ST01",
                         uid = instance.Email
@@ -308,6 +296,8 @@ namespace Fate.Controllers
             requestModel.userIp = GetClientIp();
             requestModel.orderId = orderId;
             requestModel.gameUrl = GetGameUrl(request.productId, orderId);
+            requestModel.countryPrefix = phone.Split(' ')[0];
+            requestModel.msisdn = phone.Split(' ')[1];
 
             HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(requestModel.GetFullUrl());
             httpRequest.Method = "POST";
@@ -326,6 +316,11 @@ namespace Fate.Controllers
 
             string paymentDataStr = JsonConvert.SerializeObject(new { requestModel.amount, responseObj.orderId });
             string paymentData = AESHelper.Encrypt(paymentDataStr);
+
+            if (string.IsNullOrEmpty(email))
+            {
+                email = string.Empty;
+            }
 
             using (var db = new FortuneTellingEntities())
             {

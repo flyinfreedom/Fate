@@ -1,0 +1,167 @@
+﻿@model IEnumerable<Fate.Backoffice.Models.Result>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">編輯結果</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#myModal" id="createBtn"><i class="fas fa-download fa-sm text-white-50"></i> 新增</a>
+    </div>
+
+    <div class="row">
+        <div class="col-12 mb-3">
+            <select id="productSelect" class="form-control" style="max-width: 250px;">
+                <option value="" selected>所有</option>
+                @foreach (var item in ViewBag.Product as List<Fate.Backoffice.Models.Product>)
+                {
+                    <option id="pro-@item.ProductId" value="@item.ProductId">@item.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="table-responsive col-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>代碼</th>
+                        <th style="width: 60%;">內容1</th>
+                        <th>內容2</th>
+                        <th style="min-width: 130px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Code</td>
+                            <td id="brief-@item.Code">@item.Brief</td>
+                            <td id="full-@item.Code">@item.FullDescription</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm editBtn" data-code="@item.Code" data-product="@item.Product" data-toggle="modal" data-target="#myModal">
+                                    編輯
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="Title"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                @using (Html.BeginForm("CreateOrUpdate", "Result", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label for="Code">代碼:</label>
+                        @Html.TextBox("Code", null, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="Brief">內容1:</label>
+                        @Html.TextArea("Brief", null, new { @class = "form-control", style = "min-height: 100px;" })
+                    </div>
+                    <div class="form-group">
+                        <label for="FullDescription">內容2:</label>
+                        @Html.TextArea("FullDescription", null, new { @class = "form-control", style = "min-height: 100px;" })
+                    </div>
+                    <div class="form-group">
+                        <label for="Amount">商品代碼:</label>
+                        <select class="form-control" id="productSelect" name="Product">
+                            @foreach (var item in ViewBag.Product as List<Fate.Backoffice.Models.Product>)
+                            {
+                                <option value="@item.ProductId" id="option-@item.ProductId">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="Submit">更新</button>
+                }
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="DeleteBtn">刪除</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Delete", "Result", FormMethod.Post, new { id = "DeleteForm" }))
+{
+    @Html.Hidden("DeleteId")
+}
+
+<!-- /.container-fluid -->
+
+@section Scripts
+{
+    <script>
+        $(function () {
+            var productId = '@Request.QueryString["id"]';
+
+            if (productId) {
+                $("#pro-" + productId).prop('selected', true);
+            }
+
+            $("#productSelect").change(function () {
+                var id = $("#productSelect option:selected").val();
+                if (!id) {
+                    location.href = '@Url.Action("Index", "Result")';
+                    return;
+                }
+
+                var url = '@Url.Action("Index", "Result")?id=' + id;
+                location.href = url;
+            });
+
+            $("#createBtn").click(function () {
+                $("#Code").val('');
+                $("#ProductId").val('');
+                $("#Brief").val('');
+                $("#FullDescription").val('');
+                $("#productSelect option:first").prop('selected', true);
+                $("#Submit").html('新增');
+                $("#Title").html("新增測算結果");
+            });
+
+            $(".editBtn").click(function () {
+                var code = $(this).data('code');
+                var product = $(this).data('product');
+                var brief = $("#brief-" + code).html();
+                var full = $("#full-" + code).html();
+
+                $("#Code").val(code);
+                $("#Brief").val(brief);
+                $("#FullDescription").val(full);
+                $("#option-" + product).prop('selected', true);
+                $("#Submit").html('更新');
+                $("#Title").html("編輯測算結果");
+                $("#DeleteId").val(code);
+            });
+
+            $("#DeleteBtn").click(function () {
+                if (confirm('確定要刪除嗎?')) {
+                    $("#DeleteForm").submit();
+                }
+            });
+        });
+    </script>
+}

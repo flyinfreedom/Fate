@@ -62,10 +62,39 @@
           <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Brief" Type="nvarchar(max)" Nullable="false" />
           <Property Name="FullDescription" Type="nvarchar(max)" />
+          <Property Name="Product" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Taiwanlunisolar">
           <Key>
+            <PropertyRef Name="YYYY" />
+            <PropertyRef Name="MM" />
+            <PropertyRef Name="DD" />
+          </Key>
+          <Property Name="YYYYMMDD" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="YYYY" Type="int" Nullable="false" />
+          <Property Name="MM" Type="int" Nullable="false" />
+          <Property Name="DD" Type="int" Nullable="false" />
+          <Property Name="CNYYYY" Type="int" Nullable="false" />
+          <Property Name="Heavenl" Type="int" Nullable="false" />
+          <Property Name="Branch" Type="int" Nullable="false" />
+          <Property Name="CNMM" Type="int" Nullable="false" />
+          <Property Name="CNDD" Type="int" Nullable="false" />
+          <Property Name="IsLeap" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'FortuneTelling.dbo.Taiwanlunisolar_bak' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="Taiwanlunisolar_bak">
+          <Key>
             <PropertyRef Name="YYYYMMDD" />
+            <PropertyRef Name="YYYY" />
+            <PropertyRef Name="MM" />
+            <PropertyRef Name="DD" />
+            <PropertyRef Name="CNYYYY" />
+            <PropertyRef Name="Heavenl" />
+            <PropertyRef Name="Branch" />
+            <PropertyRef Name="CNMM" />
+            <PropertyRef Name="CNDD" />
+            <PropertyRef Name="IsLeap" />
           </Key>
           <Property Name="YYYYMMDD" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="YYYY" Type="int" Nullable="false" />
@@ -163,6 +192,20 @@
           <EntitySet Name="VideoType" EntityType="Self.VideoType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WordLibrary" EntityType="Self.WordLibrary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WordLibraryUserInput" EntityType="Self.WordLibraryUserInput" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Taiwanlunisolar_bak" EntityType="Self.Taiwanlunisolar_bak" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Taiwanlunisolar_bak].[YYYYMMDD] AS [YYYYMMDD], 
+    [Taiwanlunisolar_bak].[YYYY] AS [YYYY], 
+    [Taiwanlunisolar_bak].[MM] AS [MM], 
+    [Taiwanlunisolar_bak].[DD] AS [DD], 
+    [Taiwanlunisolar_bak].[CNYYYY] AS [CNYYYY], 
+    [Taiwanlunisolar_bak].[Heavenl] AS [Heavenl], 
+    [Taiwanlunisolar_bak].[Branch] AS [Branch], 
+    [Taiwanlunisolar_bak].[CNMM] AS [CNMM], 
+    [Taiwanlunisolar_bak].[CNDD] AS [CNDD], 
+    [Taiwanlunisolar_bak].[IsLeap] AS [IsLeap]
+    FROM [dbo].[Taiwanlunisolar_bak] AS [Taiwanlunisolar_bak]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Video" EntityType="Self.Video" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Video].[VideoId] AS [VideoId], 
@@ -199,6 +242,7 @@
           <EntitySet Name="VideoType" EntityType="FortuneTellingModel.VideoType" />
           <EntitySet Name="WordLibrary" EntityType="FortuneTellingModel.WordLibrary" />
           <EntitySet Name="WordLibraryUserInput" EntityType="FortuneTellingModel.WordLibraryUserInput" />
+          <EntitySet Name="Taiwanlunisolar_bak" EntityType="FortuneTellingModel.Taiwanlunisolar_bak" />
           <EntitySet Name="Video" EntityType="FortuneTellingModel.Video" />
           <AssociationSet Name="FK_OrderDetail_Order" Association="FortuneTellingModel.FK_OrderDetail_Order">
             <End Role="Order" EntitySet="Order" />
@@ -274,10 +318,13 @@
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Brief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FullDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Product" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Taiwanlunisolar">
           <Key>
-            <PropertyRef Name="YYYYMMDD" />
+            <PropertyRef Name="YYYY" />
+            <PropertyRef Name="MM" />
+            <PropertyRef Name="DD" />
           </Key>
           <Property Name="YYYYMMDD" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="YYYY" Type="Int32" Nullable="false" />
@@ -313,6 +360,30 @@
           <Property Name="Word" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Stroke" Type="Int32" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Taiwanlunisolar_bak">
+          <Key>
+            <PropertyRef Name="YYYYMMDD" />
+            <PropertyRef Name="YYYY" />
+            <PropertyRef Name="MM" />
+            <PropertyRef Name="DD" />
+            <PropertyRef Name="CNYYYY" />
+            <PropertyRef Name="Heavenl" />
+            <PropertyRef Name="Branch" />
+            <PropertyRef Name="CNMM" />
+            <PropertyRef Name="CNDD" />
+            <PropertyRef Name="IsLeap" />
+          </Key>
+          <Property Name="YYYYMMDD" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="YYYY" Type="Int32" Nullable="false" />
+          <Property Name="MM" Type="Int32" Nullable="false" />
+          <Property Name="DD" Type="Int32" Nullable="false" />
+          <Property Name="CNYYYY" Type="Int32" Nullable="false" />
+          <Property Name="Heavenl" Type="Int32" Nullable="false" />
+          <Property Name="Branch" Type="Int32" Nullable="false" />
+          <Property Name="CNMM" Type="Int32" Nullable="false" />
+          <Property Name="CNDD" Type="Int32" Nullable="false" />
+          <Property Name="IsLeap" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Video">
           <Key>
@@ -365,7 +436,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -427,6 +498,7 @@
           <EntitySetMapping Name="Result">
             <EntityTypeMapping TypeName="FortuneTellingModel.Result">
               <MappingFragment StoreEntitySet="Result">
+                <ScalarProperty Name="Product" ColumnName="Product" />
                 <ScalarProperty Name="FullDescription" ColumnName="FullDescription" />
                 <ScalarProperty Name="Brief" ColumnName="Brief" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -472,6 +544,22 @@
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="Stroke" ColumnName="Stroke" />
                 <ScalarProperty Name="Word" ColumnName="Word" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Taiwanlunisolar_bak">
+            <EntityTypeMapping TypeName="FortuneTellingModel.Taiwanlunisolar_bak">
+              <MappingFragment StoreEntitySet="Taiwanlunisolar_bak">
+                <ScalarProperty Name="IsLeap" ColumnName="IsLeap" />
+                <ScalarProperty Name="CNDD" ColumnName="CNDD" />
+                <ScalarProperty Name="CNMM" ColumnName="CNMM" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="Heavenl" ColumnName="Heavenl" />
+                <ScalarProperty Name="CNYYYY" ColumnName="CNYYYY" />
+                <ScalarProperty Name="DD" ColumnName="DD" />
+                <ScalarProperty Name="MM" ColumnName="MM" />
+                <ScalarProperty Name="YYYY" ColumnName="YYYY" />
+                <ScalarProperty Name="YYYYMMDD" ColumnName="YYYYMMDD" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

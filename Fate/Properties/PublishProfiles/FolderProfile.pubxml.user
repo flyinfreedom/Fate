@@ -91,10 +91,10 @@
       <publishTime>06/07/2018 11:03:48</publishTime>
     </File>
     <File Include="bin/Fate.dll">
-      <publishTime>10/14/2019 22:20:45</publishTime>
+      <publishTime>10/19/2019 21:07:59</publishTime>
     </File>
     <File Include="bin/Fate.pdb">
-      <publishTime>10/14/2019 22:20:45</publishTime>
+      <publishTime>10/19/2019 21:07:59</publishTime>
     </File>
     <File Include="bin/Fate.Resource.dll">
       <publishTime>10/14/2019 22:20:43</publishTime>
@@ -880,10 +880,10 @@
       <publishTime>08/24/2017 02:52:52</publishTime>
     </File>
     <File Include="Views/Fate/NA01.cshtml">
-      <publishTime>10/13/2019 15:23:17</publishTime>
+      <publishTime>10/19/2019 11:36:42</publishTime>
     </File>
     <File Include="Views/Fate/ST01.cshtml">
-      <publishTime>10/12/2019 12:54:32</publishTime>
+      <publishTime>10/19/2019 20:43:54</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>02/28/2019 14:55:20</publishTime>

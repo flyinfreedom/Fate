@@ -10,6 +10,7 @@
     <EntitySet Name="VideoType" EntityType="FortuneTellingModel.VideoType" />
     <EntitySet Name="WordLibrary" EntityType="FortuneTellingModel.WordLibrary" />
     <EntitySet Name="WordLibraryUserInput" EntityType="FortuneTellingModel.WordLibraryUserInput" />
+    <EntitySet Name="Taiwanlunisolar_bak" EntityType="FortuneTellingModel.Taiwanlunisolar_bak" />
     <EntitySet Name="Video" EntityType="FortuneTellingModel.Video" />
     <AssociationSet Name="FK_OrderDetail_Order" Association="FortuneTellingModel.FK_OrderDetail_Order">
       <End Role="Order" EntitySet="Order" />
@@ -85,10 +86,13 @@
     <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Brief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="FullDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Product" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Taiwanlunisolar">
     <Key>
-      <PropertyRef Name="YYYYMMDD" />
+      <PropertyRef Name="YYYY" />
+      <PropertyRef Name="MM" />
+      <PropertyRef Name="DD" />
     </Key>
     <Property Name="YYYYMMDD" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
     <Property Name="YYYY" Type="Int32" Nullable="false" />
@@ -124,6 +128,30 @@
     <Property Name="Word" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="Stroke" Type="Int32" Nullable="false" />
     <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Taiwanlunisolar_bak">
+    <Key>
+      <PropertyRef Name="YYYYMMDD" />
+      <PropertyRef Name="YYYY" />
+      <PropertyRef Name="MM" />
+      <PropertyRef Name="DD" />
+      <PropertyRef Name="CNYYYY" />
+      <PropertyRef Name="Heavenl" />
+      <PropertyRef Name="Branch" />
+      <PropertyRef Name="CNMM" />
+      <PropertyRef Name="CNDD" />
+      <PropertyRef Name="IsLeap" />
+    </Key>
+    <Property Name="YYYYMMDD" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="YYYY" Type="Int32" Nullable="false" />
+    <Property Name="MM" Type="Int32" Nullable="false" />
+    <Property Name="DD" Type="Int32" Nullable="false" />
+    <Property Name="CNYYYY" Type="Int32" Nullable="false" />
+    <Property Name="Heavenl" Type="Int32" Nullable="false" />
+    <Property Name="Branch" Type="Int32" Nullable="false" />
+    <Property Name="CNMM" Type="Int32" Nullable="false" />
+    <Property Name="CNDD" Type="Int32" Nullable="false" />
+    <Property Name="IsLeap" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Video">
     <Key>

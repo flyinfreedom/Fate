@@ -40,6 +40,7 @@
         @Html.TextBoxFor(model => model.LoginId, new { @class = "form-control", placeholder = "login id" })
         <label for="inputPassword" class="sr-only">密碼</label>
         @Html.Password("Password", null, new { @class = "form-control", placeholder = "password" })
+        @Html.HiddenFor(model => model.ReturnUrl)
         <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
         if (!string.IsNullOrEmpty(Model.Message))
         {

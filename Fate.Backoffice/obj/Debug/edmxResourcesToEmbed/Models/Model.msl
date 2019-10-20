@@ -57,6 +57,7 @@
     <EntitySetMapping Name="Result">
       <EntityTypeMapping TypeName="FortuneTellingModel.Result">
         <MappingFragment StoreEntitySet="Result">
+          <ScalarProperty Name="Product" ColumnName="Product" />
           <ScalarProperty Name="FullDescription" ColumnName="FullDescription" />
           <ScalarProperty Name="Brief" ColumnName="Brief" />
           <ScalarProperty Name="Code" ColumnName="Code" />
@@ -102,6 +103,22 @@
           <ScalarProperty Name="Created" ColumnName="Created" />
           <ScalarProperty Name="Stroke" ColumnName="Stroke" />
           <ScalarProperty Name="Word" ColumnName="Word" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Taiwanlunisolar_bak">
+      <EntityTypeMapping TypeName="FortuneTellingModel.Taiwanlunisolar_bak">
+        <MappingFragment StoreEntitySet="Taiwanlunisolar_bak">
+          <ScalarProperty Name="IsLeap" ColumnName="IsLeap" />
+          <ScalarProperty Name="CNDD" ColumnName="CNDD" />
+          <ScalarProperty Name="CNMM" ColumnName="CNMM" />
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
+          <ScalarProperty Name="Heavenl" ColumnName="Heavenl" />
+          <ScalarProperty Name="CNYYYY" ColumnName="CNYYYY" />
+          <ScalarProperty Name="DD" ColumnName="DD" />
+          <ScalarProperty Name="MM" ColumnName="MM" />
+          <ScalarProperty Name="YYYY" ColumnName="YYYY" />
+          <ScalarProperty Name="YYYYMMDD" ColumnName="YYYYMMDD" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

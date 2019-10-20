@@ -12,11 +12,17 @@ namespace Fate.Backoffice.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Result
+    public partial class Taiwanlunisolar_bak
     {
-        public string Code { get; set; }
-        public string Brief { get; set; }
-        public string FullDescription { get; set; }
-        public string Product { get; set; }
+        public string YYYYMMDD { get; set; }
+        public int YYYY { get; set; }
+        public int MM { get; set; }
+        public int DD { get; set; }
+        public int CNYYYY { get; set; }
+        public int Heavenl { get; set; }
+        public int Branch { get; set; }
+        public int CNMM { get; set; }
+        public int CNDD { get; set; }
+        public bool IsLeap { get; set; }
     }
 }

@@ -303,7 +303,7 @@
                         </div>
                     </div>
                     <div class="form-check receipt" id="EmailForm">
-                        <label style="color:red;">＊E-Mail</label><small class="float-right" style="position:absolute; top:5px; right: 5px; color:red;">留下您的Email，我們會將測試結果寄給您</small>
+                        <label style="color:red;">＊E-Mail</label><small class="float-right" style="position:absolute; top:5px; right: 5px; color:red;">請填入你的 E-mail , 我們會將測算結果多寄一份到你的郵箱</small>
                         <input type="text" class="form-control" name="Email" id="Email" maxlength="50" placeholder="請輸入Email" />
                     </div>
                     <div class="form-check receipt" id="PhoneForm">
@@ -448,13 +448,35 @@
             initDatetimeSelector();
 
             $('#ReTest').click(function () {
-                location.reload();
+                location.href = "@Url.Action("ST01", "Fate")";
             });
 
             @if (!string.IsNullOrEmpty(Model.OrderId))
             {
                 <text>
-            
+
+            var defaultGender = @(Model.Gender ? "true" : "false"); 
+            var defaultBirthday = "@Model.BirthDay";
+            var defaultBirthTime = "@Model.BirthHour";
+            var defaultDateType = "@Model.DateType";
+
+            if (defaultDateType === "CN") {
+                $("#DateTypeCN").prop("checked", true);
+            }
+            else {
+                $("#DateTypeCE").prop("checked", true);
+            }
+
+            var birthDayArray = defaultBirthday.split('/');
+    
+            $("#Year option[value=" + birthDayArray[0] + "]").prop("selected", true);
+            $("#select2-Year-container").attr("title", birthDayArray[0] + ' 年').html(birthDayArray[0] + ' 年');
+            $("#Month option[value=" + birthDayArray[1] + "]").prop("selected", true);
+            $("#Day option[value=" + birthDayArray[2] + "]").prop("selected", true);
+            $("#BirthHour option[value=" + defaultBirthTime + "]").prop("selected", true);
+            var birthHourStr = $("#BirthHour option[value=" + defaultBirthTime + "]").html();
+            $("#select2-BirthHour-container").attr("title", birthHourStr).html(birthHourStr);
+
                 $('#FourthResult').before($('#FourthDescription').clone());
                 $('#ResultDiv').show();
 
@@ -561,22 +583,18 @@
                 //}
                 $('.blackBlock').show();
 
-                $("#CountryNumber").change(function () {
-                    if ($("#CountryNumber").find(":selected").val() === 'other') {
-                        $("#Country").show();
-                    }
-                    else {
-                        $("#Country").hide();
-                        $("#Country").val('');
-                    }
-                });
+                if (!$("#Phone").val()) {
+                    alert('電話號碼為必填');
+                    return;
+                }
 
                 var phone = $("#Country").val() + ' ' + $("#Phone").val();
                 if ($("#CountryNumber").find(":selected").val() !== 'other') {
                     phone = $("#CountryNumber").find(":selected").val() + ' ' + $("#Phone").val();
                 }
 
-                var postData = { BirthDay: $('#BirthDay').val(), BirthHour: $('#BirthHour').val(), Gender: $('input[name=Gender]:checked').val(), InvoiceHandle: $('input[name=InvoiceHandle]:checked').val(), Name: $('#Name').val(), ContactAddress: $('#ContactAddress').val(), ContactPhone: $('#ContactPhone').val(), VATNumber: $('#VATNumber').val(), VATTitle: $('#VATTitle').val(), CaringCode: ($('input[name=InvoiceHandle]:checked').val() == "DO" ? $('#CaringCode').val() : ''), Email: $('#Email').val(), DateType: $('input[name=DateType]:checked').val(), ContactPhone: phone };
+                var emailData = validateEmail($('#Email').val()) ? $('#Email').val() : '';
+                var postData = { BirthDay: $('#BirthDay').val(), BirthHour: $('#BirthHour').val(), Gender: $('input[name=Gender]:checked').val(), InvoiceHandle: $('input[name=InvoiceHandle]:checked').val(), Name: $('#Name').val(), ContactAddress: $('#ContactAddress').val(), ContactPhone: $('#ContactPhone').val(), VATNumber: $('#VATNumber').val(), VATTitle: $('#VATTitle').val(), CaringCode: ($('input[name=InvoiceHandle]:checked').val() == "DO" ? $('#CaringCode').val() : ''), Email: emailData, DateType: $('input[name=DateType]:checked').val(), ContactPhone: phone };
 
                 if ($.url.param("orderid")) {
                     postData.OrderId = $.url.param("orderid");
@@ -751,8 +769,7 @@
             }
             return n;
         }
-
-
+        
         function initDatetimeSelector() {
             $('#Month').html('');
             $('#Day').html('');
@@ -780,12 +797,13 @@
         }
 
         function ReplaceSuggestFormat(str) {
+            if (!str) {
+                return '';
+            }
             var strSplit = str.split(':');
             var strTitle = '<span class="resultTitle">' + strSplit[0] + '：</span><br/>';
             return strTitle + strSplit[1];
         }
-
-
     </script>
 </body>
 </html>

@@ -16,10 +16,12 @@ namespace Fate.ViewModels
         public string userIp { get; set; }
         public int snType { get { return 0; } }
         public string gameUrl { get; set; }
+        public string countryPrefix { get; set; }
+        public string msisdn { get; set; }
 
         public string GetFullUrl()
         {
-            var obj = new { orderId, uid, amount, callBackUrl, userIp, snType, gameUrl };
+            var obj = new { orderId, uid, amount, callBackUrl, userIp, snType, gameUrl, countryPrefix, msisdn };
             string json = JsonConvert.SerializeObject(obj);
             string encrypt = AESHelper.Encrypt(json);
             string urlEncode = HttpUtility.UrlEncode(encrypt);

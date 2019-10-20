@@ -30,7 +30,9 @@ namespace Fate.Controllers
             requestModel.uid = request.uid;
             requestModel.userIp = GetClientIp(Request);
             requestModel.orderId = orderId;
-            requestModel.gameUrl = GetGameUrl("", orderId); 
+            requestModel.gameUrl = GetGameUrl("", orderId);
+            requestModel.countryPrefix = request.uid.Split(' ')[0];
+            requestModel.msisdn = request.uid.Split(' ')[1];
 
             HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(requestModel.GetFullUrl());
             httpRequest.Method = "POST";

@@ -142,10 +142,10 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="font-size: 1.0em;">
                 <div class="modal-body">
-                    <div class="form-check receipt" id="EmailForm">
+                    @*<div class="form-check receipt" id="EmailForm">
                         <label style="color:red;">＊E-Mail</label><small class="float-right" style="position:absolute; top:5px; right: 5px; color:red;">請填入你的 E-mail , 我們會將測算結果多寄一份到你的郵箱</small>
                         <input type="text" class="form-control" name="Email" id="Email" maxlength="50" placeholder="請輸入Email" />
-                    </div>
+                    </div>*@
                     <div class="form-check receipt" id="PhoneForm">
                         <label style="color:red;">＊手機號碼</label>
                         <select id="CountryNumber" class="form-control" style="margin-bottom: 5px;">
@@ -238,6 +238,12 @@
                     LastName: $("#LastName").val(),
                     FirstName: $("#FirstName").val(),
                 };
+                                
+                if (!$("#Phone").val()) {
+                    alert('電話號碼為必填');
+                    $('.blackBlock').hide();
+                    return;
+                }
 
                 var postData = {
                     condition: JSON.stringify(condition),

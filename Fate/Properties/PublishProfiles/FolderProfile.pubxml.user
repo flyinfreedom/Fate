@@ -91,16 +91,16 @@
       <publishTime>06/07/2018 11:03:48</publishTime>
     </File>
     <File Include="bin/Fate.dll">
-      <publishTime>10/19/2019 21:07:59</publishTime>
+      <publishTime>10/23/2019 23:06:06</publishTime>
     </File>
     <File Include="bin/Fate.pdb">
-      <publishTime>10/19/2019 21:07:59</publishTime>
+      <publishTime>10/23/2019 23:06:06</publishTime>
     </File>
     <File Include="bin/Fate.Resource.dll">
-      <publishTime>10/14/2019 22:20:43</publishTime>
+      <publishTime>10/23/2019 23:06:03</publishTime>
     </File>
     <File Include="bin/Fate.Resource.pdb">
-      <publishTime>10/14/2019 22:20:43</publishTime>
+      <publishTime>10/23/2019 23:06:03</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>06/27/2017 12:59:34</publishTime>
@@ -880,10 +880,10 @@
       <publishTime>08/24/2017 02:52:52</publishTime>
     </File>
     <File Include="Views/Fate/NA01.cshtml">
-      <publishTime>10/19/2019 11:36:42</publishTime>
+      <publishTime>10/23/2019 07:06:41</publishTime>
     </File>
     <File Include="Views/Fate/ST01.cshtml">
-      <publishTime>10/19/2019 20:43:54</publishTime>
+      <publishTime>10/23/2019 07:05:16</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>02/28/2019 14:55:20</publishTime>

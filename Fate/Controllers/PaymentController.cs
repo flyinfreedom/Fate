@@ -91,6 +91,51 @@ namespace Fate.Controllers
             };
         }
 
+        [Route("order/{data}")]
+        [HttpPost]
+        public CreateOrderResponse GetOrder(string data)
+        {
+            CreateOrderResponse result = new CreateOrderResponse();
+            try
+            {
+                string urlDeconde = HttpUtility.HtmlDecode(data);
+                string json = AESHelper.Decrypt(urlDeconde);
+                CreateOrderRequest order = JsonConvert.DeserializeObject<CreateOrderRequest>(json);
+                string orderId = CreateOrderId();
+                using (var db = new FortuneTellingEntities())
+                {
+                    db.Order.Add(new Order
+                    {
+                        OrderId = orderId,
+                        Datetime = DateTime.Now,
+                        Name = order.Name,
+                        Email = order.Email,
+                        ContactPhone = order.ContactPhone,
+                        OrderDetail = new List<OrderDetail>() { new OrderDetail { 
+                            ProductId = order.ProductId,
+                            OrderId = orderId,
+                            DateType = order.DateType,
+                            BirthDay = order.BirthDay,
+                            BirthHour = order.BirthHour,
+                            Gender = order.Gender ?? false,
+                            IsLeap = order.IsLeap ?? false
+                        }}
+                    });
+
+                    db.SaveChanges();
+                }
+                result.Success = true;
+                result.OrderId = orderId;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                result.Success = false;
+                result.Message = e.Message;
+            }
+
+            return result;
+        }
         private string GetGameUrl(string productId, string orderId)
         {
             string baseUrl = WebConfigVariable.BaseUrl;

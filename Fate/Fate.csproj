@@ -271,6 +271,7 @@
     <Compile Include="Service\Strategy\STBase.cs" />
     <Compile Include="ViewModels\CNMonthResponse.cs" />
     <Compile Include="ViewModels\ConditionModel.cs" />
+    <Compile Include="ViewModels\CreateOrder.cs" />
     <Compile Include="ViewModels\Payment\GetTxIdModel.cs" />
     <Compile Include="ViewModels\Payment\GetTxIdRequest.cs" />
     <Compile Include="ViewModels\Payment\GetTxIdResponse.cs" />

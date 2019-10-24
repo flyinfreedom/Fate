@@ -86,3 +86,4 @@ C:\Eden\Projects\Fate\Fate.Backoffice\bin\EntityFramework.xml
 C:\Eden\Projects\Fate\Fate.Backoffice\bin\EntityFramework.SqlServer.xml
 C:\Eden\Projects\Fate\Fate.Backoffice\bin\zh-Hant\EntityFramework.resources.dll
 C:\Eden\Projects\Fate\Fate.Backoffice\bin\zh-Hant\EntityFramework.SqlServer.resources.dll
+C:\Eden\Projects\Fate\Fate.Backoffice\bin\MvcPaging.dll

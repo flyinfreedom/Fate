@@ -303,7 +303,8 @@
                         </div>
                     </div>
                     <div class="form-check receipt" id="EmailForm">
-                        <label style="color:red;">＊E-Mail</label><small class="float-right" style="position:absolute; top:5px; right: 5px; color:red;">請填入你的 E-mail , 我們會將測算結果多寄一份到你的郵箱</small>
+                        <label style="color:red; margin-bottom: 0px;">＊E-Mail</label>
+                        <small style="color:red; padding-left:5px; margin-bottom: 8px;">請填入你的 E-mail , 我們會將測算結果多寄一份到你的郵箱</small>
                         <input type="text" class="form-control" name="Email" id="Email" maxlength="50" placeholder="請輸入Email" />
                     </div>
                     <div class="form-check receipt" id="PhoneForm">
@@ -585,6 +586,7 @@
 
                 if (!$("#Phone").val()) {
                     alert('電話號碼為必填');
+                    $('.blackBlock').hide();
                     return;
                 }
 

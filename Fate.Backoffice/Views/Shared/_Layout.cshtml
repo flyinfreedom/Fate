@@ -1,6 +1,11 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 
+
+@{
+    var isAdmin = User.IsInRole("Admin");
+}
+
 <head>
 
     <meta charset="utf-8">
@@ -9,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>SB Admin 2</title>
 
     <!-- Custom fonts for this template-->
     <link href="@Url.Content("~/Content/fontawesome-free/css/all.min.css")" rel="stylesheet" type="text/css">
@@ -53,12 +58,15 @@
                 </a>
             </li>
 
-            <li class="nav-item active">
-                <a class="nav-link" href="@Url.Action("Index", "Result")">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>測算結果</span>
-                </a>
-            </li>
+            @if (isAdmin)
+            {
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Index", "Result")">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>測算結果</span>
+                    </a>
+                </li>
+            }
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -75,6 +83,31 @@
                 </a>
             </li>
 
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                帳號相關
+            </div>
+            
+            <li class="nav-item active">
+                <a class="nav-link" href="@Url.Action("ChangePassword", "Home")">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>變更密碼</span>
+                </a>
+            </li>
+
+            @if (isAdmin)
+            {
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Index", "Manager")">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>帳號管理</span>
+                    </a>
+                </li>
+            }
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -145,7 +178,7 @@
             </div>
         </div>
     </div>
-    
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/sbadmin")

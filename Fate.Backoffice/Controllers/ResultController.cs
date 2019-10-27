@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Fate.Backoffice.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ResultController : Controller
     {
         // GET: Result

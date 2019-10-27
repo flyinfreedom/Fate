@@ -91,10 +91,10 @@
       <publishTime>06/07/2018 11:03:48</publishTime>
     </File>
     <File Include="bin/Fate.dll">
-      <publishTime>10/23/2019 23:06:06</publishTime>
+      <publishTime>10/25/2019 06:41:49</publishTime>
     </File>
     <File Include="bin/Fate.pdb">
-      <publishTime>10/23/2019 23:06:06</publishTime>
+      <publishTime>10/25/2019 06:41:49</publishTime>
     </File>
     <File Include="bin/Fate.Resource.dll">
       <publishTime>10/23/2019 23:06:03</publishTime>

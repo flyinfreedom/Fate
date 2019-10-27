@@ -17,8 +17,9 @@ namespace Fate.Controllers
         {
             using (var db = new FortuneTellingEntities())
             {
+
                 return db.Taiwanlunisolar
-                    .Where(x => x.YYYY == year)
+                    .Where(x => x.CNYYYY == year)
                     .GroupBy(x => new { x.CNMM, x.IsLeap })
                     .Select(d => new CNMonthResponse
                     {

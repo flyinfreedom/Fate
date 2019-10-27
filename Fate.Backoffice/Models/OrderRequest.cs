@@ -9,6 +9,7 @@ namespace Fate.Backoffice.Models
     public class OrderRequest
     {
         public int page { get; set; }
+        public string OrderId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string ContactPhone { get; set; }

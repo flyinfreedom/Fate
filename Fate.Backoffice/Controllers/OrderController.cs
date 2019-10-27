@@ -8,6 +8,7 @@ using MvcPaging;
 
 namespace Fate.Backoffice.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private int _pageSize = 20;
@@ -24,17 +25,24 @@ namespace Fate.Backoffice.Controllers
         {
             var db = new FortuneTellingEntities();
             var query = db.Order.AsQueryable();
-            if (!string.IsNullOrWhiteSpace(instance.Name))
+            if (!string.IsNullOrEmpty(instance.OrderId))
             {
-                query = query.Where(x => x.Name.Contains(instance.Name));
+                query = query.Where(x => x.OrderId == instance.OrderId);
             }
-            if (!string.IsNullOrWhiteSpace(instance.Email))
+            else
             {
-                query = query.Where(x => x.Email.Contains(instance.Email));
-            }
-            if (!string.IsNullOrWhiteSpace(instance.ContactPhone))
-            {
-                query = query.Where(x => x.ContactPhone.Contains(instance.ContactPhone));
+                if (!string.IsNullOrWhiteSpace(instance.Name))
+                {
+                    query = query.Where(x => x.Name.Contains(instance.Name));
+                }
+                if (!string.IsNullOrWhiteSpace(instance.Email))
+                {
+                    query = query.Where(x => x.Email.Contains(instance.Email));
+                }
+                if (!string.IsNullOrWhiteSpace(instance.ContactPhone))
+                {
+                    query = query.Where(x => x.ContactPhone.Contains(instance.ContactPhone));
+                }
             }
 
             instance.Orders = query.OrderByDescending(x => x.Datetime).ToPagedList(instance.page > 0 ? instance.page - 1 : 0, _pageSize);
@@ -46,7 +54,10 @@ namespace Fate.Backoffice.Controllers
             using (var db = new FortuneTellingEntities())
             {
                 var detail = db.OrderDetail.FirstOrDefault(d => d.OrderId == id);
-                ViewBag.Product = db.Product.FirstOrDefault(p => p.ProductId == detail.ProductId).Name;
+                if (detail != null)
+                {
+                    ViewBag.Product = db.Product.FirstOrDefault(p => p.ProductId == detail.ProductId).Name;
+                }
                 return View(detail);
             }
         }

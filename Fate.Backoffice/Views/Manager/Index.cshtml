@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Fate.Backoffice.Models.FateAdmin>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">管理帳號</h1>
+    </div>
+    <p>
+        @Html.ActionLink("建立新帳號", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+
+    <div class="row">
+        <div class="table-responsive col-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LoginId)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Admin</td>
+                        <td></td>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LoginId)
+                            </td>
+                            <td>
+                                @Html.ActionLink("刪除", "Delete", new { id = item.LoginId })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

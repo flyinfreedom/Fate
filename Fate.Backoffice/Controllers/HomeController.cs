@@ -1,4 +1,5 @@
-﻿using Fate.Backoffice.Models;
+﻿using Fate.Backoffice.Helper;
+using Fate.Backoffice.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,23 @@ namespace Fate.Backoffice.Controllers
             return View();
         }
 
+        public ActionResult ChangePassword()
+        {
+            var db = new FortuneTellingEntities();
+            var user = db.FateAdmin.FirstOrDefault(x => x.LoginId == User.Identity.Name);
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(FateAdmin instance)
+        {
+            var db = new FortuneTellingEntities();
+            var user = db.FateAdmin.FirstOrDefault(x => x.LoginId == User.Identity.Name);
+            user.Password = SHA256Helper.Encoding(instance.Password);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         [AllowAnonymous]
         public ActionResult Login(string ReturnUrl)
         {
@@ -31,7 +49,8 @@ namespace Fate.Backoffice.Controllers
         {
             using (var db = new FortuneTellingEntities())
             {
-                var user = db.FateAdmin.FirstOrDefault(u => u.LoginId == request.LoginId && u.Password == request.Password);
+                var hashPassword = SHA256Helper.Encoding(request.Password);
+                var user = db.FateAdmin.FirstOrDefault(u => u.LoginId == request.LoginId && u.Password == hashPassword);
                 var role = "Normal";
 
                 if (request.LoginId.Equals("Admin", StringComparison.InvariantCultureIgnoreCase) && request.Password == "1qaz@WSX")

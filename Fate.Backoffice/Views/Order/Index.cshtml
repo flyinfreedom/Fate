@@ -26,6 +26,8 @@
         <div class="col-12">
             @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-inline" }))
             {
+                <label for="Name">訂單編號:</label>
+                @Html.TextBoxFor(x => x.OrderId, new { @class = "form-control" })
                 <label for="Name">姓名:</label>
                 @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
                 <label for="Email">Email:</label>

@@ -17,6 +17,7 @@ namespace Fate.Backoffice.Controllers
             var db = new FortuneTellingEntities();
             var result = new OrderRequest();
             result.Orders = db.Order.OrderByDescending(x => x.Datetime).ToPagedList(0, _pageSize);
+            result.Amount = db.Order.Sum(x => x.Amount) ?? 0;
             return View(result);
         }
 
@@ -31,6 +32,17 @@ namespace Fate.Backoffice.Controllers
             }
             else
             {
+                if (instance.IsPay.HasValue)
+                {
+                    query = query.Where(x => x.IsPayed == instance.IsPay.Value);
+                }
+
+                if (instance.SDatetime != DateTime.MinValue && instance.EDatetime != DateTime.MinValue &&
+                    instance.SDatetime != null && instance.EDatetime != null)
+                {
+                    query = query.Where(x => x.Datetime > instance.SDatetime && x.Datetime <= instance.EDatetime);
+                }
+
                 if (!string.IsNullOrWhiteSpace(instance.Name))
                 {
                     query = query.Where(x => x.Name.Contains(instance.Name));
@@ -46,6 +58,7 @@ namespace Fate.Backoffice.Controllers
             }
 
             instance.Orders = query.OrderByDescending(x => x.Datetime).ToPagedList(instance.page > 0 ? instance.page - 1 : 0, _pageSize);
+            instance.Amount = instance.Orders.Sum(x => x.Amount) ?? 0;
             return View(instance);
         }
 

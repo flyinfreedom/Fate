@@ -31,7 +31,7 @@ namespace Fate.Backoffice.Controllers
                 return View(instance);
             }
 
-            instance.Password = SHA256Helper.Encoding("0000");
+            instance.Password = SHA256Helper.GetHashSha256("0000");
             var db = new FortuneTellingEntities();
             db.FateAdmin.Add(instance);
             db.SaveChanges();

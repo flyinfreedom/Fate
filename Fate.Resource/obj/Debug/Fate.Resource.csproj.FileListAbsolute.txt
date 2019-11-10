@@ -7,3 +7,11 @@ C:\Eden\Projects\Fate\Fate.Resource\obj\Debug\Fate.Resource.Operation.Ziwei.reso
 C:\Eden\Projects\Fate\Fate.Resource\obj\Debug\Fate.Resource.Share.Branch.resources
 C:\Eden\Projects\Fate\Fate.Resource\obj\Debug\Fate.Resource.Share.Heavenly.resources
 C:\Eden\Projects\Fate\Fate.Resource\obj\Debug\Fate.Resource.csproj.GenerateResource.cache
+C:\Eden\Fate\SourceCode\Fate\Fate.Resource\bin\Debug\Fate.Resource.dll
+C:\Eden\Fate\SourceCode\Fate\Fate.Resource\bin\Debug\Fate.Resource.pdb
+C:\Eden\Fate\SourceCode\Fate\Fate.Resource\obj\Debug\Fate.Resource.Operation.Ziwei.resources
+C:\Eden\Fate\SourceCode\Fate\Fate.Resource\obj\Debug\Fate.Resource.Share.Branch.resources
+C:\Eden\Fate\SourceCode\Fate\Fate.Resource\obj\Debug\Fate.Resource.Share.Heavenly.resources
+C:\Eden\Fate\SourceCode\Fate\Fate.Resource\obj\Debug\Fate.Resource.csproj.GenerateResource.cache
+C:\Eden\Fate\SourceCode\Fate\Fate.Resource\obj\Debug\Fate.Resource.dll
+C:\Eden\Fate\SourceCode\Fate\Fate.Resource\obj\Debug\Fate.Resource.pdb

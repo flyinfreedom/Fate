@@ -10,7 +10,7 @@
             <PropertyRef Name="LoginId" />
           </Key>
           <Property Name="LoginId" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -26,9 +26,17 @@
           <Property Name="ContactPhone" Type="nvarchar" MaxLength="50" />
           <Property Name="VATNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
-          <Property Name="RecipientCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cooperation" Type="nvarchar" MaxLength="50" />
+          <Property Name="CooperationID" Type="nvarchar" MaxLength="50" />
+          <Property Name="PayMethod" Type="nchar" MaxLength="10" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Refund" Type="datetime" />
+          <Property Name="PayStatus" Type="nchar" MaxLength="10" />
+          <Property Name="InvoiceStatus" Type="nchar" MaxLength="10" />
+          <Property Name="PayTime" Type="datetime" />
           <Property Name="IsPayed" Type="bit" Nullable="false" />
           <Property Name="Gender" Type="bit" />
+          <Property Name="RecipientCode" Type="nvarchar" MaxLength="50" />
           <Property Name="TxId" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="OrderDetail">
@@ -69,32 +77,6 @@
             <PropertyRef Name="YYYY" />
             <PropertyRef Name="MM" />
             <PropertyRef Name="DD" />
-          </Key>
-          <Property Name="YYYYMMDD" Type="nvarchar" MaxLength="8" Nullable="false" />
-          <Property Name="YYYY" Type="int" Nullable="false" />
-          <Property Name="MM" Type="int" Nullable="false" />
-          <Property Name="DD" Type="int" Nullable="false" />
-          <Property Name="CNYYYY" Type="int" Nullable="false" />
-          <Property Name="Heavenl" Type="int" Nullable="false" />
-          <Property Name="Branch" Type="int" Nullable="false" />
-          <Property Name="CNMM" Type="int" Nullable="false" />
-          <Property Name="CNDD" Type="int" Nullable="false" />
-          <Property Name="IsLeap" Type="bit" Nullable="false" />
-        </EntityType>
-        <!--產生期間發現錯誤:
-警告 6002: 資料表/檢視 'FortuneTelling.dbo.Taiwanlunisolar_bak' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
-        <EntityType Name="Taiwanlunisolar_bak">
-          <Key>
-            <PropertyRef Name="YYYYMMDD" />
-            <PropertyRef Name="YYYY" />
-            <PropertyRef Name="MM" />
-            <PropertyRef Name="DD" />
-            <PropertyRef Name="CNYYYY" />
-            <PropertyRef Name="Heavenl" />
-            <PropertyRef Name="Branch" />
-            <PropertyRef Name="CNMM" />
-            <PropertyRef Name="CNDD" />
-            <PropertyRef Name="IsLeap" />
           </Key>
           <Property Name="YYYYMMDD" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="YYYY" Type="int" Nullable="false" />
@@ -170,18 +152,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Video_VideoType">
-          <End Role="VideoType" Type="Self.VideoType" Multiplicity="1" />
-          <End Role="Video" Type="Self.Video" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VideoType">
-              <PropertyRef Name="VideoTypeId" />
-            </Principal>
-            <Dependent Role="Video">
-              <PropertyRef Name="VideoTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="FortuneTellingModelStoreContainer">
           <EntitySet Name="FateAdmin" EntityType="Self.FateAdmin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
@@ -192,20 +162,6 @@
           <EntitySet Name="VideoType" EntityType="Self.VideoType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WordLibrary" EntityType="Self.WordLibrary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WordLibraryUserInput" EntityType="Self.WordLibraryUserInput" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Taiwanlunisolar_bak" EntityType="Self.Taiwanlunisolar_bak" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Taiwanlunisolar_bak].[YYYYMMDD] AS [YYYYMMDD], 
-    [Taiwanlunisolar_bak].[YYYY] AS [YYYY], 
-    [Taiwanlunisolar_bak].[MM] AS [MM], 
-    [Taiwanlunisolar_bak].[DD] AS [DD], 
-    [Taiwanlunisolar_bak].[CNYYYY] AS [CNYYYY], 
-    [Taiwanlunisolar_bak].[Heavenl] AS [Heavenl], 
-    [Taiwanlunisolar_bak].[Branch] AS [Branch], 
-    [Taiwanlunisolar_bak].[CNMM] AS [CNMM], 
-    [Taiwanlunisolar_bak].[CNDD] AS [CNDD], 
-    [Taiwanlunisolar_bak].[IsLeap] AS [IsLeap]
-    FROM [dbo].[Taiwanlunisolar_bak] AS [Taiwanlunisolar_bak]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="Video" EntityType="Self.Video" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Video].[VideoId] AS [VideoId], 
@@ -223,10 +179,6 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="OrderDetail" EntitySet="OrderDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK_Video_VideoType" Association="Self.FK_Video_VideoType">
-            <End Role="VideoType" EntitySet="VideoType" />
-            <End Role="Video" EntitySet="Video" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -242,7 +194,6 @@
           <EntitySet Name="VideoType" EntityType="FortuneTellingModel.VideoType" />
           <EntitySet Name="WordLibrary" EntityType="FortuneTellingModel.WordLibrary" />
           <EntitySet Name="WordLibraryUserInput" EntityType="FortuneTellingModel.WordLibraryUserInput" />
-          <EntitySet Name="Taiwanlunisolar_bak" EntityType="FortuneTellingModel.Taiwanlunisolar_bak" />
           <EntitySet Name="Video" EntityType="FortuneTellingModel.Video" />
           <AssociationSet Name="FK_OrderDetail_Order" Association="FortuneTellingModel.FK_OrderDetail_Order">
             <End Role="Order" EntitySet="Order" />
@@ -252,17 +203,13 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="OrderDetail" EntitySet="OrderDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK_Video_VideoType" Association="FortuneTellingModel.FK_Video_VideoType">
-            <End Role="VideoType" EntitySet="VideoType" />
-            <End Role="Video" EntitySet="Video" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="FateAdmin">
           <Key>
             <PropertyRef Name="LoginId" />
           </Key>
           <Property Name="LoginId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -278,9 +225,17 @@
           <Property Name="ContactPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="VATNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RecipientCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cooperation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CooperationID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PayMethod" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Refund" Type="DateTime" Precision="3" />
+          <Property Name="PayStatus" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="InvoiceStatus" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PayTime" Type="DateTime" Precision="3" />
           <Property Name="IsPayed" Type="Boolean" Nullable="false" />
           <Property Name="Gender" Type="Boolean" />
+          <Property Name="RecipientCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TxId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="OrderDetail" Relationship="FortuneTellingModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
         </EntityType>
@@ -344,7 +299,6 @@
           <Property Name="VideoTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VideoType1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Enable" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Video" Relationship="FortuneTellingModel.FK_Video_VideoType" FromRole="VideoType" ToRole="Video" />
         </EntityType>
         <EntityType Name="WordLibrary">
           <Key>
@@ -361,30 +315,6 @@
           <Property Name="Stroke" Type="Int32" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityType Name="Taiwanlunisolar_bak">
-          <Key>
-            <PropertyRef Name="YYYYMMDD" />
-            <PropertyRef Name="YYYY" />
-            <PropertyRef Name="MM" />
-            <PropertyRef Name="DD" />
-            <PropertyRef Name="CNYYYY" />
-            <PropertyRef Name="Heavenl" />
-            <PropertyRef Name="Branch" />
-            <PropertyRef Name="CNMM" />
-            <PropertyRef Name="CNDD" />
-            <PropertyRef Name="IsLeap" />
-          </Key>
-          <Property Name="YYYYMMDD" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="YYYY" Type="Int32" Nullable="false" />
-          <Property Name="MM" Type="Int32" Nullable="false" />
-          <Property Name="DD" Type="Int32" Nullable="false" />
-          <Property Name="CNYYYY" Type="Int32" Nullable="false" />
-          <Property Name="Heavenl" Type="Int32" Nullable="false" />
-          <Property Name="Branch" Type="Int32" Nullable="false" />
-          <Property Name="CNMM" Type="Int32" Nullable="false" />
-          <Property Name="CNDD" Type="Int32" Nullable="false" />
-          <Property Name="IsLeap" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="Video">
           <Key>
             <PropertyRef Name="VideoId" />
@@ -398,7 +328,6 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Enable" Type="Boolean" Nullable="false" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="VideoType" Relationship="FortuneTellingModel.FK_Video_VideoType" FromRole="Video" ToRole="VideoType" />
         </EntityType>
         <Association Name="FK_OrderDetail_Order">
           <End Type="FortuneTellingModel.Order" Role="Order" Multiplicity="1" />
@@ -424,18 +353,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Video_VideoType">
-          <End Type="FortuneTellingModel.VideoType" Role="VideoType" Multiplicity="1" />
-          <End Type="FortuneTellingModel.Video" Role="Video" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VideoType">
-              <PropertyRef Name="VideoTypeId" />
-            </Principal>
-            <Dependent Role="Video">
-              <PropertyRef Name="VideoTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -454,9 +371,17 @@
             <EntityTypeMapping TypeName="FortuneTellingModel.Order">
               <MappingFragment StoreEntitySet="Order">
                 <ScalarProperty Name="TxId" ColumnName="TxId" />
+                <ScalarProperty Name="RecipientCode" ColumnName="RecipientCode" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="IsPayed" ColumnName="IsPayed" />
-                <ScalarProperty Name="RecipientCode" ColumnName="RecipientCode" />
+                <ScalarProperty Name="PayTime" ColumnName="PayTime" />
+                <ScalarProperty Name="InvoiceStatus" ColumnName="InvoiceStatus" />
+                <ScalarProperty Name="PayStatus" ColumnName="PayStatus" />
+                <ScalarProperty Name="Refund" ColumnName="Refund" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PayMethod" ColumnName="PayMethod" />
+                <ScalarProperty Name="CooperationID" ColumnName="CooperationID" />
+                <ScalarProperty Name="Cooperation" ColumnName="Cooperation" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="VATNumber" ColumnName="VATNumber" />
                 <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
@@ -544,22 +469,6 @@
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="Stroke" ColumnName="Stroke" />
                 <ScalarProperty Name="Word" ColumnName="Word" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Taiwanlunisolar_bak">
-            <EntityTypeMapping TypeName="FortuneTellingModel.Taiwanlunisolar_bak">
-              <MappingFragment StoreEntitySet="Taiwanlunisolar_bak">
-                <ScalarProperty Name="IsLeap" ColumnName="IsLeap" />
-                <ScalarProperty Name="CNDD" ColumnName="CNDD" />
-                <ScalarProperty Name="CNMM" ColumnName="CNMM" />
-                <ScalarProperty Name="Branch" ColumnName="Branch" />
-                <ScalarProperty Name="Heavenl" ColumnName="Heavenl" />
-                <ScalarProperty Name="CNYYYY" ColumnName="CNYYYY" />
-                <ScalarProperty Name="DD" ColumnName="DD" />
-                <ScalarProperty Name="MM" ColumnName="MM" />
-                <ScalarProperty Name="YYYY" ColumnName="YYYY" />
-                <ScalarProperty Name="YYYYMMDD" ColumnName="YYYYMMDD" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

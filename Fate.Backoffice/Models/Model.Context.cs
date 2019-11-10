@@ -34,7 +34,6 @@ namespace Fate.Backoffice.Models
         public virtual DbSet<VideoType> VideoType { get; set; }
         public virtual DbSet<WordLibrary> WordLibrary { get; set; }
         public virtual DbSet<WordLibraryUserInput> WordLibraryUserInput { get; set; }
-        public virtual DbSet<Taiwanlunisolar_bak> Taiwanlunisolar_bak { get; set; }
         public virtual DbSet<Video> Video { get; set; }
     }
 }

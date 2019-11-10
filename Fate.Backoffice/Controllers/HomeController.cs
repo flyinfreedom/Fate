@@ -29,7 +29,7 @@ namespace Fate.Backoffice.Controllers
         {
             var db = new FortuneTellingEntities();
             var user = db.FateAdmin.FirstOrDefault(x => x.LoginId == User.Identity.Name);
-            user.Password = SHA256Helper.Encoding(instance.Password);
+            user.Password = SHA256Helper.GetHashSha256(instance.Password);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -49,25 +49,15 @@ namespace Fate.Backoffice.Controllers
         {
             using (var db = new FortuneTellingEntities())
             {
-                var hashPassword = SHA256Helper.Encoding(request.Password);
-                var user = db.FateAdmin.FirstOrDefault(u => u.LoginId == request.LoginId && u.Password == hashPassword);
-                var role = "Normal";
-
-                if (request.LoginId.Equals("Admin", StringComparison.InvariantCultureIgnoreCase) && request.Password == "1qaz@WSX")
-                {
-                    user = new FateAdmin
-                    {
-                        LoginId = "Admin"
-                    };
-                    role = "Admin";
-                }
+                var hashPassword = SHA256Helper.GetHashSha256(request.Password);
+                var user = db.FateAdmin.FirstOrDefault(u => u.LoginId == request.LoginId && u.Password == hashPassword);             
 
                 if (user == null)
                 {
                     request.Message = "無效的帳號或密碼";
                     return View(request);
                 }
-
+                var role = (user.LoginId.ToUpper() == "ADMIN" || user.LoginId.ToUpper() == "EDEN") ? "Admin" : "Normal";
                 var ticket = new FormsAuthenticationTicket(
                             version: 1,
                             name: user.LoginId, //可以放使用者Id

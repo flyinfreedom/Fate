@@ -1,0 +1,104 @@
+﻿@model Fate.Backoffice.Models.OrderDetail
+
+@{
+    Layout = null;
+}
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>產品編號</h3>
+            <p>@ViewBag.Product</p>
+        </div>
+        @if (Model.DateType.HasValue)
+        {
+            <div class="col-sm-12">
+                <h3>日期型別</h3>
+                <p>@(Model.DateType.Value == 1 ? "農曆" : "國曆")</p>
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.BirthDay))
+        {
+            <div class="col-sm-12">
+                <h3>日期</h3>
+                <p>@Model.BirthDay</p>
+            </div>
+        }
+
+        @if (Model.IsLeap.HasValue)
+        {
+            <div class="col-sm-12">
+                <h3>是否為閏月</h3>
+                <p>@(Model.IsLeap.Value ? "是" : "否")</p>
+            </div>
+        }
+
+        @if (Model.BirthHour.HasValue)
+        {
+            <div class="col-sm-12">
+                <h3>生辰</h3>
+                <p>@GetBirthHourString(Model.BirthHour)</p>
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.LastName))
+        {
+            <div class="col-sm-12">
+                <h3>姓</h3>
+                <p>@Model.LastName</p>
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.FirstName))
+        {
+            <div class="col-sm-12">
+                <h3>名</h3>
+                <p>@Model.FirstName</p>
+            </div>
+        }
+    </div>
+
+@{ 
+    string GetBirthHourString(int? birthHour)
+    {
+        if (!birthHour.HasValue)
+        {
+            return string.Empty;
+        }
+
+        switch (birthHour.Value)
+        {
+            case -1:
+                return "時辰未知";
+            case 0:
+                return "時辰未知";
+            case 1:
+                return "早子";
+            case 2:
+                return "丑";
+            case 3:
+                return "寅";
+            case 4:
+                return "卯";
+            case 5:
+                return "辰";
+            case 6:
+                return "巳";
+            case 7:
+                return "午";
+            case 8:
+                return "未";
+            case 9:
+                return "申";
+            case 10:
+                return "酉";
+            case 11:
+                return "戌";
+            case 12:
+                return "亥";
+            case 13:
+                return "晚子";
+        }
+        return string.Empty;
+    }
+}

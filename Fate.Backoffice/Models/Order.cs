@@ -30,9 +30,17 @@ namespace Fate.Backoffice.Models
         public string ContactPhone { get; set; }
         public string VATNumber { get; set; }
         public string CompanyName { get; set; }
-        public string RecipientCode { get; set; }
+        public string Cooperation { get; set; }
+        public string CooperationID { get; set; }
+        public string PayMethod { get; set; }
+        public Nullable<int> Amount { get; set; }
+        public Nullable<System.DateTime> Refund { get; set; }
+        public string PayStatus { get; set; }
+        public string InvoiceStatus { get; set; }
+        public Nullable<System.DateTime> PayTime { get; set; }
         public bool IsPayed { get; set; }
         public Nullable<bool> Gender { get; set; }
+        public string RecipientCode { get; set; }
         public string TxId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

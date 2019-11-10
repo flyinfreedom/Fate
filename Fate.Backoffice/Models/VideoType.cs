@@ -14,17 +14,8 @@ namespace Fate.Backoffice.Models
     
     public partial class VideoType
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public VideoType()
-        {
-            this.Video = new HashSet<Video>();
-        }
-    
         public int VideoTypeId { get; set; }
         public string VideoType1 { get; set; }
         public bool Enable { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Video> Video { get; set; }
     }
 }

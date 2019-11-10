@@ -2,17 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 
 namespace Fate.Backoffice.Helper
 {
     public static class SHA256Helper
     {
-        public static string Encoding(string inputString)
+        public static string GetHashSha256(string rawData)
         {
-            byte[] data = System.Text.Encoding.UTF8.GetBytes(inputString);
-            data = new SHA256Managed().ComputeHash(data);
-            return System.Text.Encoding.UTF8.GetString(data);
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // ComputeHash - returns byte array  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convert byte array to a string   
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
         }
     }
 }

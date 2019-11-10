@@ -13,6 +13,10 @@ namespace Fate.Backoffice.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string ContactPhone { get; set; }
+        public bool? IsPay { get; set; }
+        public int Amount { get; set; }
+        public DateTime? SDatetime { get; set; }
+        public DateTime? EDatetime { get; set; }
         public IPagedList<Order> Orders { get; set; }
 
         public OrderRequest()

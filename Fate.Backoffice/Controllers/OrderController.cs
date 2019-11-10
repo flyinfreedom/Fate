@@ -74,5 +74,40 @@ namespace Fate.Backoffice.Controllers
                 return View(detail);
             }
         }
+
+        public ActionResult Edit(OrderDetail orderDetail)
+        {
+            using (var db = new FortuneTellingEntities())
+            {
+                var detail = db.OrderDetail.FirstOrDefault(d => d.OrderId == orderDetail.OrderId && d.ProductId == orderDetail.ProductId);
+                detail.DateType = orderDetail.DateType;
+                detail.BirthDay = orderDetail.BirthDay;
+                detail.BirthHour = orderDetail.BirthHour;
+                detail.FirstName = orderDetail.FirstName;
+                detail.LastName = orderDetail.LastName;
+                detail.IsLeap = orderDetail.IsLeap;
+                detail.Gender = orderDetail.Gender;
+
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Delete()
+        {
+            using (var db = new FortuneTellingEntities())
+            {
+                var datetime = DateTime.Now.AddDays(-7);
+                var details = db.OrderDetail.Where(x => x.Order.Datetime < datetime);
+                var orders = db.Order.Where(x => x.Datetime < datetime);
+
+                db.OrderDetail.RemoveRange(details);
+                db.Order.RemoveRange(orders);
+
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+        }
     }
 }

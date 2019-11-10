@@ -4,78 +4,128 @@
     Layout = null;
 }
 
-@using (Html.BeginForm("Edit", "Order", FormMethod.Post))
-{ 
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-        <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-}
-    <div class="row">
-        <div class="col-sm-12">
-            <h3>產品編號</h3>
-            <p>@ViewBag.Product</p>
-        </div>
-        @if (Model.DateType.HasValue)
-        {
-            <div class="col-sm-12">
-                <h3>日期型別</h3>
-                <p>@(Model.DateType.Value == 1 ? "農曆" : "國曆")</p>
-            </div>
-        }
+<form id="EditForm">
+    <input type="hidden" value="@Model.OrderId" name="OrderId" />
+    <input type="hidden" value="@Model.ProductId" name="ProductId" />
 
-        @if (!string.IsNullOrEmpty(Model.BirthDay))
-        {
-            <div class="col-sm-12">
-                <h3>日期</h3>
-                <p>@Model.BirthDay</p>
-            </div>
-        }
-
+    <div class="form-group">
+        <label for="exampleInputPassword1">商品名稱</label>
+        <h4>@Model.Product.Name</h4>
+    </div>
+    <div class="form-group">
+        <label>日期型別</label>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" id="DateType-0" name="DateType" value="0">國曆
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" id="DateType-1" name="DateType" value="1">農曆
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">生日</label>
+        <input type="text" class="form-control" id="BirthDay" name="BirthDay" placeholder="yyyy-MM-dd" value="@Model.BirthDay">
+    </div>
+    <div class="form-group form-check">
         @if (Model.IsLeap.HasValue)
         {
-            <div class="col-sm-12">
-                <h3>是否為閏月</h3>
-                <p>@(Model.IsLeap.Value ? "是" : "否")</p>
-            </div>
+            if (Model.IsLeap.Value)
+            {
+                <input type="checkbox" class="form-check-input" name="IsLeap" id="IsLeap" value="True" checked="checked" />
+            }
+            else
+            {
+                <input type="checkbox" class="form-check-input" name="IsLeap" id="IsLeap" value="True" />
+            }
+            <input type="hidden" name="IsLeap" value="False" />
         }
-
-        @if (Model.BirthHour.HasValue)
+        else
         {
-            <div class="col-sm-12">
-                <h3>生辰</h3>
-                <p>@GetBirthHourString(Model.BirthHour)</p>
-            </div>
+            <input type="checkbox" class="form-check-input" name="IsLeap" id="IsLeap" />
         }
-
-        @if (!string.IsNullOrEmpty(Model.LastName))
-        {
-            <div class="col-sm-12">
-                <h3>姓</h3>
-                <p>@Model.LastName</p>
-            </div>
-        }
-
-        @if (!string.IsNullOrEmpty(Model.FirstName))
-        {
-            <div class="col-sm-12">
-                <h3>名</h3>
-                <p>@Model.FirstName</p>
-            </div>
-        }
+        <label class="form-check-label" for="IsLeap">是否為閏月</label>
     </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">生辰</label>
+        <select class="form-control" name="BirthHour" id="BirthHour">
+            @for (int i = 1; i < 14; i++)
+            {
+                <option value="@i">@GetBirthHourString(i)</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">姓</label>
+        <input type="text" class="form-control" id="LastName" name="LastName" placeholder="yyyy-MM-dd" value="@Model.LastName">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">名</label>
+        <input type="text" class="form-control" id="FirstName" name="FirstName" placeholder="yyyy-MM-dd" value="@Model.FirstName">
+    </div>
+    <div class="form-group">
+        <label>性別</label>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" id="Gender-male" name="Gender" value="True">男
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" id="Gender-female" name="Gender" value="False">女
+            </label>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary" id="EditBtn">更新</button>
+</form>
+<script>
+    $(function() {
+        @if(Model.DateType.HasValue)
+        {
+            string datetype = Model.DateType.Value.ToString();
+            <text>
+        var dateType = '@datetype';
+        $("#DateType-@datetype").prop('checked', true);
+            </text>
+        }
 
-@{ 
+        @if(Model.Gender.HasValue)
+        {
+            string gender = Model.Gender.Value ? "Gender-male" : "Gender-female";
+            <text>
+        var gender = '@gender';
+        $("#@gender").prop('checked', true);
+            </text>
+        }
+
+        @if (Model.BirthHour.HasValue && Model.BirthHour.Value > 0)
+        {
+            var birthHour = Model.BirthHour.Value;
+            <text>
+        var birthHour = '@birthHour';
+        $('#BirthHour option[value=@birthHour]').prop('selected', true);
+            </text>
+        }
+
+        $('#EditBtn').click(function () {
+            $.ajax({
+            type: "POST",
+                async: false,
+                data : $("#EditForm").serialize(), 
+                url: '@Url.Action("Edit", "Order")',
+                success: function (result) {
+                    alert('更新成功');
+                },
+                error: function () {
+                    alert('更新失敗');
+                }
+            });
+        });
+    });
+</script>
+@{
     string GetBirthHourString(int? birthHour)
     {
         if (!birthHour.HasValue)

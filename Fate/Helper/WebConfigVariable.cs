@@ -61,7 +61,9 @@ namespace Fate.Helper
         public static string PaymentUrl { get { return WebConfigurationManager.AppSettings["PaymentUrl"]; } }
         public static string QueryTxIdStatusUrl { get { return WebConfigurationManager.AppSettings["QueryTxIdStatusUrl"]; } }
         public static string PaymentCallBackUrl { get { return WebConfigurationManager.AppSettings["PaymentCallBackUrl"]; } }
-        public static string CID { get { return WebConfigurationManager.AppSettings["CID"]; } }
+        public static string ZiweiCID { get { return WebConfigurationManager.AppSettings["ZiweiCID"]; } }
+        public static string ST01CID { get { return WebConfigurationManager.AppSettings["ST01CID"]; } }
+        public static string NA01CID { get { return WebConfigurationManager.AppSettings["NA01CID"]; } }
         public static string BaseUrl { get { return WebConfigurationManager.AppSettings["BaseUrl"]; } }        
         #endregion
     }

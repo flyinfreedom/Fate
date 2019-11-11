@@ -202,6 +202,7 @@
     <Compile Include="Controllers\MailController.cs" />
     <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Controllers\ZiweiController.cs" />
     <Compile Include="Filters\CookieAttribute.cs" />
@@ -526,6 +527,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Mobile\" />
+    <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

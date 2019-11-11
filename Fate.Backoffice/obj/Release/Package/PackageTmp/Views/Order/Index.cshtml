@@ -23,6 +23,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">訂單列表</h1>
+        <button type="button" class="btn btn-danger" id="DeleteBtn">刪除一週前的未付款訂單</button>
     </div>
     <div class="row">
         <div class="form-inline col-12" id="dateSelect">
@@ -92,7 +93,7 @@
 
     <div class="row">
         <div class="table-responsive col-12">
-            <table class="table table-bordered" style="min-width: 1630px;">
+            <table class="table table-bordered" style="min-width: 1230px;">
                 <thead>
                     <tr>
                         <th>訂單編號</th>
@@ -192,6 +193,23 @@
                 </text>
             }
 
+            $('#DeleteBtn').click(function () {
+                if (confirm('確定刪除嗎?')) {
+                    $.ajax({
+                        type: "POST",
+                        async: false,
+                        url: '@Url.Action("DELETE", "Order")',
+                        success: function (result) {
+                            alert('刪除成功');
+                            location.reload();
+                        },
+                        error: function () {
+                            alert('刪除失敗');
+                        }
+                    });
+                }
+            });
+
             $('#SubmitBtn').click(function () {
                 if ($('#SDate').val() && $('#SH option:selected').val() && $('#SM option:selected').val()) {
                     $("#SDatetime").val($('#SDate').val() + ' ' + $('#SH option:selected').val() + ':' + $('#SM option:selected').val());
@@ -216,12 +234,10 @@
             }
 
             function postPage(page) {
-                if ($("form")[0].size() > 0) {
-                    $('<input>')
-                        .attr({ type: 'hidden', id: 'page', name: 'page', value: page })
-                        .appendTo($(targetFormID));
-                    $("form")[0].submit();
-                }
+                $('<input>')
+                    .attr({ type: 'hidden', id: 'page', name: 'page', value: page })
+                    .appendTo($("#SearchForm"));
+                $("#SearchForm").submit();
             };
 
             $(".detailBtn").click(function () {

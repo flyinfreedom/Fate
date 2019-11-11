@@ -11,11 +11,35 @@ namespace Fate.Helper
     {
         private const string _key = "8E02183B322FFAEAE692AC9D754B7FD1";
         private const string _iv = "19F502BD7134CBBB";
-        public static string Encrypt(string toEncrypt)
+
+        private const string ZiweiKey = "914DWEWUBXAZCUS0GO5F73WLZCS7G7KX";
+        private const string ZiweiIv = "IBGYAQ9O1XNUVUTN";
+        private const string ST01Key = "6UY3YIQUVNYEO1H5TV7EXXAJL2V6T81S";
+        private const string ST01Iv = "1OI82GUKI39K2631";
+        private const string NA01Key = "7AM5TWMWD0B53S62P9N6872M9CABCQ7E";
+        private const string NA01Iv = "O649NX0FSRSHV3BH";
+
+        public static string Encrypt(string toEncrypt, string productId)
         {
             byte[] keyArray = UTF8Encoding.UTF8.GetBytes(_key);
             byte[] ivArray = UTF8Encoding.UTF8.GetBytes(_iv);
             byte[] toEncryptArray = UTF8Encoding.UTF8.GetBytes(toEncrypt);
+
+            switch (productId.ToUpper())
+            {
+                case "ZIWEI":
+                    keyArray = UTF8Encoding.UTF8.GetBytes(ZiweiKey);
+                    ivArray = UTF8Encoding.UTF8.GetBytes(ZiweiIv);
+                    break;
+                case "ST01":
+                    keyArray = UTF8Encoding.UTF8.GetBytes(ST01Key);
+                    ivArray = UTF8Encoding.UTF8.GetBytes(ST01Iv);
+                    break;
+                case "NA01":
+                    keyArray = UTF8Encoding.UTF8.GetBytes(NA01Key);
+                    ivArray = UTF8Encoding.UTF8.GetBytes(NA01Iv);
+                    break;
+            }
  
             RijndaelManaged rDel = new RijndaelManaged();
             rDel.Key = keyArray;

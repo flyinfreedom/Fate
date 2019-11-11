@@ -128,8 +128,8 @@ namespace Fate.Controllers
                         condition = JsonConvert.SerializeObject(new { instance.BirthHour, instance.BirthDay, instance.Gender }),
                         name = instance.Name,
                         productId = "ST01",
-                        uid = instance.Email
-                    }, amount, instance.Email, instance.ContactPhone);
+                        uid = instance.Email,
+                    }, amount, instance.Email, instance.ContactPhone, "ST01");
 
                     return Json(getTxIdObj);
                 }
@@ -165,7 +165,7 @@ namespace Fate.Controllers
         public JsonResult NA01(GetTxIdRequest request)
         {
             var amount = db.Product.FirstOrDefault(x => x.ProductId == "NA01").Amount;
-            var getTxIdObj = GetTxId(request, amount, request.email, request.uid);
+            var getTxIdObj = GetTxId(request, amount, request.email, request.uid, "NA01");
             return Json(getTxIdObj);
         }
 
@@ -233,7 +233,7 @@ namespace Fate.Controllers
                     else
                     {
                         var paymentService = new PaymentService();
-                        var paymentResult = paymentService.QueryTxIdStatus(order.OrderId, order.TxId);
+                        var paymentResult = paymentService.QueryTxIdStatus(order.OrderId, order.TxId, order.OrderDetail.FirstOrDefault().ProductId);
 
                         if (paymentResult.resultCode == "0000")
                         {
@@ -286,20 +286,20 @@ namespace Fate.Controllers
             return string.Format("{0:x}", i - DateTime.Now.Ticks);
         }
 
-        private GetTxIdResponse GetTxId(GetTxIdRequest request, int amount, string email, string phone)
+        private GetTxIdResponse GetTxId(GetTxIdRequest request, int amount, string email, string phone, string productId)
         {
             string orderId = CreateOrderId();
 
             var requestModel = new GetTxIdRequestModel();
             requestModel.amount = amount;
-            requestModel.uid = phone;
+            requestModel.uid = phone.Replace(" ", string.Empty);
             requestModel.userIp = GetClientIp();
             requestModel.orderId = orderId;
             requestModel.gameUrl = GetGameUrl(request.productId, orderId);
             requestModel.countryPrefix = phone.Split(' ')[0];
             requestModel.msisdn = phone.Split(' ')[1];
 
-            HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(requestModel.GetFullUrl());
+            HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(requestModel.GetFullUrl(productId));
             httpRequest.Method = "POST";
 
             string responseStr = string.Empty;
@@ -315,7 +315,7 @@ namespace Fate.Controllers
             }
 
             string paymentDataStr = JsonConvert.SerializeObject(new { requestModel.amount, responseObj.orderId });
-            string paymentData = AESHelper.Encrypt(paymentDataStr);
+            string paymentData = AESHelper.Encrypt(paymentDataStr, request.productId);
 
             if (string.IsNullOrEmpty(email))
             {
@@ -377,6 +377,10 @@ namespace Fate.Controllers
 
         private string GetClientIp()
         {
+            if (!string.IsNullOrEmpty(Request.ServerVariables.Get("HTTP_X_FORWARDED_FOR")))
+            { 
+                return Request.ServerVariables.Get("HTTP_X_FORWARDED_FOR");
+            }
             return Request.UserHostAddress;
         }
     }

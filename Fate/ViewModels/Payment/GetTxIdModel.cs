@@ -19,13 +19,26 @@ namespace Fate.ViewModels
         public string countryPrefix { get; set; }
         public string msisdn { get; set; }
 
-        public string GetFullUrl()
+        public string GetFullUrl(string productId)
         {
             var obj = new { orderId, uid, amount, callBackUrl, userIp, snType, gameUrl, countryPrefix, msisdn };
             string json = JsonConvert.SerializeObject(obj);
-            string encrypt = AESHelper.Encrypt(json);
+            string encrypt = AESHelper.Encrypt(json, productId);
             string urlEncode = HttpUtility.UrlEncode(encrypt);
-            return $"{WebConfigVariable.GetTxIdUrl}?cid={WebConfigVariable.CID}&data={urlEncode}";
+            string cid = string.Empty; 
+            switch (productId.ToUpper())
+            {
+                case "ZIWEI":
+                    cid = WebConfigVariable.ZiweiCID;
+                    break;
+                case "ST01":
+                    cid = WebConfigVariable.ST01CID;
+                    break;
+                case "NA01":
+                    cid = WebConfigVariable.NA01CID;
+                    break;
+            }
+            return $"{WebConfigVariable.GetTxIdUrl}?cid={cid}&data={urlEncode}";
         }
     }
 

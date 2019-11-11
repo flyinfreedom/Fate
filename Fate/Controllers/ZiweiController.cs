@@ -31,7 +31,7 @@ namespace Fate.Controllers
 
                 if (order != null && !order.IsPayed) {
                     PaymentService payment = new PaymentService();
-                    var query = payment.QueryTxIdStatus(order.OrderId, order.TxId);
+                    var query = payment.QueryTxIdStatus(order.OrderId, order.TxId, "Ziwei");
                     if (query.resultCode == "0000") {
                         order.IsPayed = true;
                         isPayed = true;

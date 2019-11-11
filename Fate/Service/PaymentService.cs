@@ -14,10 +14,23 @@ namespace Fate.Service
 {
     public class PaymentService
     {
-        public QueryTxIdStatusResponse QueryTxIdStatus(string orderId, string txId)
+        public QueryTxIdStatusResponse QueryTxIdStatus(string orderId, string txId, string productId)
         {
             string url = WebConfigVariable.QueryTxIdStatusUrl;
-            url = $"{url}?cid={WebConfigVariable.CID}&data={HttpUtility.UrlEncode(AESHelper.Encrypt(JsonConvert.SerializeObject(new { orderId, txId })))}";
+            string cid = string.Empty;
+            switch (productId.ToUpper())
+            {
+                case "ZIWEI":
+                    cid = WebConfigVariable.ZiweiCID;
+                    break;
+                case "ST01":
+                    cid = WebConfigVariable.ST01CID;
+                    break;
+                case "NA01":
+                    cid = WebConfigVariable.NA01CID;
+                    break;
+            }
+            url = $"{url}?cid={cid}&data={HttpUtility.UrlEncode(AESHelper.Encrypt(JsonConvert.SerializeObject(new { orderId, txId }), "ZIWEI"))}";
 
             HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(url);
             httpRequest.Method = "POST";

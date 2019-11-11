@@ -27,14 +27,14 @@ namespace Fate.Controllers
 
             var requestModel = new GetTxIdRequestModel();
             requestModel.amount = 1;
-            requestModel.uid = request.uid;
+            requestModel.uid = request.uid.Replace(" ", string.Empty); ;
             requestModel.userIp = GetClientIp(Request);
             requestModel.orderId = orderId;
             requestModel.gameUrl = GetGameUrl("", orderId);
             requestModel.countryPrefix = request.uid.Split(' ')[0];
             requestModel.msisdn = request.uid.Split(' ')[1];
 
-            HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(requestModel.GetFullUrl());
+            HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(requestModel.GetFullUrl(request.productId));
             httpRequest.Method = "POST";
 
             string responseStr = string.Empty;
@@ -50,7 +50,7 @@ namespace Fate.Controllers
             }
 
             string paymentDataStr = JsonConvert.SerializeObject(new { requestModel.amount, responseObj.orderId });
-            string paymentData = AESHelper.Encrypt(paymentDataStr);
+            string paymentData = AESHelper.Encrypt(paymentDataStr, request.productId);
 
 
             using (var db = new FortuneTellingEntities())

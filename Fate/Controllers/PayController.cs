@@ -33,9 +33,11 @@ namespace Fate.Controllers
         {
             request = request ?? Request;
 
+
+            
             if (request.Properties.ContainsKey("MS_HttpContext"))
             {
-                return ((HttpContextWrapper)request.Properties["MS_HttpContext"]).Request.UserHostAddress;
+                return ((HttpContextWrapper)request.Properties["HTTP_X_FORWARDED_FOR"]).Request.UserHostAddress;
             }
             else if (request.Properties.ContainsKey(RemoteEndpointMessageProperty.Name))
             {

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a3fc2478cbbe4a3eb61d42db785476b6" Name="Diagram1" ZoomLevel="81">
+      <Diagram DiagramId="a3fc2478cbbe4a3eb61d42db785476b6" Name="Diagram1" ZoomLevel="106">
         <EntityTypeShape EntityType="FortuneTellingModel.FateAdmin" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="FortuneTellingModel.Order" Width="1.5" PointX="0.75" PointY="8.5" />
         <EntityTypeShape EntityType="FortuneTellingModel.OrderDetail" Width="1.5" PointX="3" PointY="1" />
@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="FortuneTellingModel.Taiwanlunisolar" Width="1.5" PointX="2.75" PointY="5.75" />
         <EntityTypeShape EntityType="FortuneTellingModel.VideoType" Width="1.5" PointX="5.75" PointY="3.75" />
         <EntityTypeShape EntityType="FortuneTellingModel.WordLibrary" Width="1.5" PointX="4.75" PointY="6.75" />
-        <EntityTypeShape EntityType="FortuneTellingModel.WordLibraryUserInput" Width="1.5" PointX="6.75" PointY="6.75" />
+        <EntityTypeShape EntityType="FortuneTellingModel.WordLibraryUserInput" Width="2.75" PointX="6.75" PointY="6.75" />
         <EntityTypeShape EntityType="FortuneTellingModel.Video" Width="1.5" PointX="7.75" PointY="0.75" />
         <AssociationConnector Association="FortuneTellingModel.FK_OrderDetail_Order" />
         <AssociationConnector Association="FortuneTellingModel.FK_OrderDetail_Product" />

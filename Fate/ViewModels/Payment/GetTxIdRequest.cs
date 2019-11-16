@@ -12,5 +12,6 @@ namespace Fate.ViewModels
         public string productId { get; set; }
         public string uid { get; set; }
         public string email { get; set; }
+        public string channel { get; set; }
     }
 }

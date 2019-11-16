@@ -26,7 +26,7 @@ namespace Fate.Controllers
             _mailHelper = new MailHelper();
         }
 
-        public ActionResult ST01(string orderid)
+        public ActionResult ST01(string orderid, string channel)
         {
             VMST01 instance = new VMST01();
 
@@ -80,7 +80,7 @@ namespace Fate.Controllers
                     instance.OrderId = orderid;
                 }
             }
-
+            ViewBag.Channel = channel;
             SetFadeCode(instance);
             return View(instance);
         }
@@ -129,6 +129,7 @@ namespace Fate.Controllers
                         name = instance.Name,
                         productId = "ST01",
                         uid = instance.Email,
+                        channel = instance.channel,
                     }, amount, instance.Email, instance.ContactPhone, "ST01");
 
                     return Json(getTxIdObj);
@@ -139,7 +140,7 @@ namespace Fate.Controllers
             return Json(instance);
         }
 
-        public ActionResult NA01(string orderid)
+        public ActionResult NA01(string orderid, string channel)
         {
             VMNA01 viewModel = new VMNA01();
             if (!string.IsNullOrEmpty(orderid))
@@ -157,7 +158,8 @@ namespace Fate.Controllers
                     viewModel.Result = db.Result.FirstOrDefault(x => x.Code == resultCode).Brief;
                 }
             }
-            SetFadeCode(viewModel); 
+            SetFadeCode(viewModel);
+            ViewBag.Channel = channel;
             return View(viewModel);
         }
 
@@ -298,6 +300,7 @@ namespace Fate.Controllers
             requestModel.gameUrl = GetGameUrl(request.productId, orderId);
             requestModel.countryPrefix = phone.Split(' ')[0];
             requestModel.msisdn = phone.Split(' ')[1];
+            requestModel.channel = request.channel;
 
             HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(requestModel.GetFullUrl(productId));
             httpRequest.Method = "POST";

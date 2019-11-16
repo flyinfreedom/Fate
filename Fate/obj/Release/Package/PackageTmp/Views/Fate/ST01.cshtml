@@ -285,13 +285,7 @@
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header" id="modelTitle">
-                    確認IP位址...
-                </div>
                 <div class="modal-body">
-                    <div id="CheckIpAddressLoad">
-                        <div class="loader"></div>
-                    </div>
                     <div id="ValidateMessage" style="color:red; margin-bottom: 1rem;">
 
                     </div>
@@ -509,25 +503,25 @@
                 </text>
             }
 
-            var isTWIP = null;
+            var isTWIP = true;
             $('#InvoiceForm').hide();
-            $.ajax({
-                type: "GET",
-                async: true,
-                url: '/api/Pay',
-                contentType: 'application/json; charset=UTF-8',
-                success: function (result) {
-                    $('#modelTitle').html('進一步了解您的前三世');
-                    $('#CheckIpAddressLoad').hide();
-                    //$('#InvoiceForm').show();
-                    //--- 若不是台灣IP，則直接輸入Email進入付費流程
-                    //if (!result.Success) {
-                    $('#InvoiceForm > div:not(#EmailForm)').hide();
-                    //}
+            //$.ajax({
+            //    type: "GET",
+            //    async: true,
+            //    url: '/api/Pay',
+            //    contentType: 'application/json; charset=UTF-8',
+            //    success: function (result) {
+            //        $('#modelTitle').html('進一步了解您的前三世');
+            //        $('#CheckIpAddressLoad').hide();
+            //        //$('#InvoiceForm').show();
+            //        //--- 若不是台灣IP，則直接輸入Email進入付費流程
+            //        //if (!result.Success) {
+            //        $('#InvoiceForm > div:not(#EmailForm)').hide();
+            //        //}
 
-                    isTWIP = result.Success;
-                }
-            });
+            //        isTWIP = result.Success;
+            //    }
+            //});
 
             $("#CountryNumber").change(function () {
                 if ($("#CountryNumber").find(":selected").val() === 'other') {
@@ -595,8 +589,9 @@
                     phone = $("#CountryNumber").find(":selected").val() + ' ' + $("#Phone").val();
                 }
 
+                var channel = '@ViewBag.Channel';
                 var emailData = validateEmail($('#Email').val()) ? $('#Email').val() : '';
-                var postData = { BirthDay: $('#BirthDay').val(), BirthHour: $('#BirthHour').val(), Gender: $('input[name=Gender]:checked').val(), InvoiceHandle: $('input[name=InvoiceHandle]:checked').val(), Name: $('#Name').val(), ContactAddress: $('#ContactAddress').val(), ContactPhone: $('#ContactPhone').val(), VATNumber: $('#VATNumber').val(), VATTitle: $('#VATTitle').val(), CaringCode: ($('input[name=InvoiceHandle]:checked').val() == "DO" ? $('#CaringCode').val() : ''), Email: emailData, DateType: $('input[name=DateType]:checked').val(), ContactPhone: phone };
+                var postData = { BirthDay: $('#BirthDay').val(), BirthHour: $('#BirthHour').val(), Gender: $('input[name=Gender]:checked').val(), InvoiceHandle: $('input[name=InvoiceHandle]:checked').val(), Name: $('#Name').val(), ContactAddress: $('#ContactAddress').val(), ContactPhone: $('#ContactPhone').val(), VATNumber: $('#VATNumber').val(), VATTitle: $('#VATTitle').val(), CaringCode: ($('input[name=InvoiceHandle]:checked').val() == "DO" ? $('#CaringCode').val() : ''), Email: emailData, DateType: $('input[name=DateType]:checked').val(), ContactPhone: phone,  channel: channel};
 
                 if ($.url.param("orderid")) {
                     postData.OrderId = $.url.param("orderid");

@@ -28,20 +28,26 @@ namespace Fate.Controllers
             using (var db = new FortuneTellingEntities())
             {
                 var order = db.Order.FirstOrDefault(x => x.OrderId == request.OrderId && x.OrderDetail.Any(d => d.ProductId == "Ziwei"));
+                if (order != null)
+                {
+                    isPayed = order.IsPayed;
 
-                if (order != null && !order.IsPayed) {
-                    PaymentService payment = new PaymentService();
-                    var query = payment.QueryTxIdStatus(order.OrderId, order.TxId, "Ziwei");
-                    if (query.resultCode == "0000") {
-                        order.IsPayed = true;
-                        isPayed = true;
+                    if (!order.IsPayed)
+                    {
+                        PaymentService payment = new PaymentService();
+                        var query = payment.QueryTxIdStatus(order.OrderId, order.TxId, "Ziwei");
+                        if (query.resultCode == "0000")
+                        {
+                            order.IsPayed = true;
+                            isPayed = true;
+                        }
                     }
                 }
+                
 
                 DateTimeHelper dateTimeHelper;
 
                 var palaceList = (new Palace[] { Palace.Siblings, Palace.Parents, Palace.Travel }).ToList();
-
                 if (isPayed)
                 {
                     var ziweiDetail = order.OrderDetail.FirstOrDefault(x => x.ProductId == "Ziwei");
@@ -180,6 +186,89 @@ namespace Fate.Controllers
                         ? source.FirstOrDefault(x => x.Code == GetStarCode(starResult.Star, palace)).Brief
                         : string.Empty;
             }
+        }
+
+
+        [Route("mobile")]
+        [HttpPost]
+        public ZiweiResponse GetResultByCultureMobile(ZiweiRequest request)
+        {
+            var result = new ZiweiResponse();
+            var language = new LanguageData();
+
+            using (var db = new FortuneTellingEntities())
+            {
+                DateTimeHelper dateTimeHelper;
+
+                var palaceList = Enum.GetValues(typeof(Palace)).Cast<Palace>().ToList();
+
+                dateTimeHelper = new DateTimeHelper(db, request.DateType, request.Year, request.Month, request.Day, request.BirthTime, request.IsLeap);
+                
+                var ziwei = new Ziwei(dateTimeHelper.Heavenly, dateTimeHelper.Branch, dateTimeHelper.CNMonth, dateTimeHelper.CNDay, dateTimeHelper.Birthtime);
+
+                var allStarCode = ziwei.AstrologyChart
+                    .Where(x => palaceList.Contains(x.palace))
+                    .Select(x => (x.palace, x.GetStars()
+                        .Select(s => GetStarCode(s.Star, x.palace))))
+                    .ToList();
+
+                var allStarCodeString = allStarCode.SelectMany(s => s.Item2);
+
+                var allStarResult = db.Result.Where(x => allStarCodeString.Any(s => x.Code.Contains(s))).ToList();
+
+                result.AstrologyChart = ziwei.AstrologyChart
+                    .Where(x => palaceList.Contains(x.palace))
+                    .Select(s => new AstrologyChartCulture
+                    {
+                        palace = language.GetZiweiString(s.palace.ToString()),
+                        branch = language.GetBranchString(s.branch.ToString()),
+                        heavenly = language.GetHeavenlyString(s.heavenly.ToString()),
+                        isBodyPalace = s.isBodyPalace,
+                        major = s.MajorStars.Select(m => new StarResultCulture
+                        {
+                            Star = language.GetZiweiString(m.Star.ToString()),
+                            Status = language.GetZiweiString(m.Status.ToString())
+                        }).ToList(),
+                        minor = s.MinorStars.Select(m => new StarResultCulture
+                        {
+                            Star = language.GetZiweiString(m.Star.ToString()),
+                            Status = language.GetZiweiString(m.Status.ToString())
+                        }).ToList(),
+                        righteous = s.RighteousStars.Select(m => new StarResultCulture
+                        {
+                            Star = language.GetZiweiString(m.Star.ToString()),
+                            Status = language.GetZiweiString(m.Status.ToString())
+                        }).ToList(),
+                        secondary = s.SecondaryStars.Select(m => new StarResultCulture
+                        {
+                            Star = language.GetZiweiString(m.Star.ToString()),
+                            Status = language.GetZiweiString(m.Status.ToString())
+                        }).ToList(),
+                        score = s.Score,
+                        majorDescription = string.Empty,
+                        minorDescription = string.Empty,
+                        righteousDescription = string.Empty,
+                        secondaryDescription = string.Empty,
+                    }).ToList();
+
+                result.Heavenly = language.GetHeavenlyString(dateTimeHelper.Heavenly.ToString());
+                result.Branch = language.GetBranchString(dateTimeHelper.Branch.ToString());
+                result.BirthTime = $"{GetZiPeriod(request.BirthTime)}{language.GetBranchString(dateTimeHelper.Birthtime.ToString())}";
+                result.BirthTimeValue = (int)dateTimeHelper.Birthtime;
+                result.Month = dateTimeHelper.RequestCNMonth.ToString();
+                result.Day = dateTimeHelper.RequestCNDay.ToString();
+                result.IsLeap = dateTimeHelper.IsLeap;
+                result.FiveElements = language.GetZiweiString(ziwei.FiveElements.ToString());
+                result.LifeMajorStar = language.GetZiweiString(ziwei.LifeMajorStar.ToString());
+                result.BodyMajorStar = language.GetZiweiString(ziwei.BodyMajorStar.ToString());
+                result.HuaLu = language.GetZiweiString(ziwei.HuaLu.ToString());
+                result.HuaChiuan = language.GetZiweiString(ziwei.HuaChiuan.ToString());
+                result.HuaKe = language.GetZiweiString(ziwei.HuaKe.ToString());
+                result.HuaJi = language.GetZiweiString(ziwei.HuaJi.ToString());
+                result.BirthDay = dateTimeHelper.DateTime.ToString("yyyy-MM-dd");
+            }
+
+            return result;
         }
 
         private object GetZiPeriod(int birthTimeValue)

@@ -18,6 +18,7 @@ namespace Fate.ViewModels
         public string gameUrl { get; set; }
         public string countryPrefix { get; set; }
         public string msisdn { get; set; }
+        public string channel { get; set; }
 
         public string GetFullUrl(string productId)
         {

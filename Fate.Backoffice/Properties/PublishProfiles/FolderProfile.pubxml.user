@@ -22,10 +22,10 @@
       <publishTime>11/10/2019 16:42:47</publishTime>
     </File>
     <File Include="bin/Fate.Backoffice.dll">
-      <publishTime>11/11/2019 07:22:13</publishTime>
+      <publishTime>11/13/2019 20:52:30</publishTime>
     </File>
     <File Include="bin/Fate.Backoffice.pdb">
-      <publishTime>11/11/2019 07:22:13</publishTime>
+      <publishTime>11/13/2019 20:52:30</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>11/10/2019 16:42:48</publishTime>
@@ -5326,7 +5326,7 @@
       <publishTime>11/10/2019 16:42:45</publishTime>
     </File>
     <File Include="Models/Model.edmx.diagram">
-      <publishTime>11/10/2019 16:49:03</publishTime>
+      <publishTime>11/11/2019 23:20:41</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.js">
       <publishTime>11/10/2019 16:42:45</publishTime>
@@ -5494,7 +5494,7 @@
       <publishTime>11/11/2019 07:20:06</publishTime>
     </File>
     <File Include="Views/Product/Index.cshtml">
-      <publishTime>11/10/2019 16:42:45</publishTime>
+      <publishTime>11/12/2019 15:59:22</publishTime>
     </File>
     <File Include="Views/Result/Index.cshtml">
       <publishTime>11/10/2019 16:42:45</publishTime>

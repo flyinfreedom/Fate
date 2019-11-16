@@ -22,73 +22,76 @@ namespace Fate.Controllers
         [HttpPost]
         public GetTxIdResponse GetTxId(GetTxIdRequest request)
         {
-            string email = request.uid.Contains("@") ? request.uid : string.Empty;
-            string orderId = CreateOrderId();
-
-            var requestModel = new GetTxIdRequestModel();
-            requestModel.amount = 1;
-            requestModel.uid = request.uid.Replace(" ", string.Empty); ;
-            requestModel.userIp = GetClientIp(Request);
-            requestModel.orderId = orderId;
-            requestModel.gameUrl = GetGameUrl("", orderId);
-            requestModel.countryPrefix = request.uid.Split(' ')[0];
-            requestModel.msisdn = request.uid.Split(' ')[1];
-
-            HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(requestModel.GetFullUrl(request.productId));
-            httpRequest.Method = "POST";
-
-            string responseStr = string.Empty;
-            var responseObj = new GetTxIdResponseModel();
-
-            using (WebResponse response = httpRequest.GetResponse())
-            {
-                using (StreamReader sr = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
-                {
-                    responseStr = sr.ReadToEnd();
-                    responseObj = JsonConvert.DeserializeObject<GetTxIdResponseModel>(responseStr);
-                }//end using  
-            }
-
-            string paymentDataStr = JsonConvert.SerializeObject(new { requestModel.amount, responseObj.orderId });
-            string paymentData = AESHelper.Encrypt(paymentDataStr, request.productId);
-
 
             using (var db = new FortuneTellingEntities())
             {
-                var condition = JsonConvert.DeserializeObject<ConditionModel>(request.condition);
-                var order = new Order
+                string email = request.uid.Contains("@") ? request.uid : string.Empty;
+                string orderId = CreateOrderId();
+
+                var requestModel = new GetTxIdRequestModel();
+                requestModel.amount = db.Product.FirstOrDefault(x => x.ProductId == "Ziwei").Amount;
+                requestModel.uid = request.uid.Replace(" ", string.Empty); ;
+                requestModel.userIp = GetClientIp(Request);
+                requestModel.orderId = orderId;
+                requestModel.gameUrl = GetGameUrl("", orderId);
+                requestModel.countryPrefix = request.uid.Split(' ')[0];
+                requestModel.msisdn = request.uid.Split(' ')[1];
+
+                HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(requestModel.GetFullUrl(request.productId));
+                httpRequest.Method = "POST";
+
+                string responseStr = string.Empty;
+                var responseObj = new GetTxIdResponseModel();
+
+                using (WebResponse response = httpRequest.GetResponse())
                 {
-                    OrderId = orderId,
-                    Datetime = DateTime.Now,
-                    Email = email,
-                    ContactPhone = string.IsNullOrEmpty(email) ? request.uid : string.Empty,
-                    Name = request.name,
-                    Gender = condition.Gender,
-                    IPAddress = GetClientIp(Request),
-                    TxId = responseObj.txId
+                    using (StreamReader sr = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+                    {
+                        responseStr = sr.ReadToEnd();
+                        responseObj = JsonConvert.DeserializeObject<GetTxIdResponseModel>(responseStr);
+                    }//end using  
+                }
+
+                string paymentDataStr = JsonConvert.SerializeObject(new { requestModel.amount, responseObj.orderId });
+                string paymentData = AESHelper.Encrypt(paymentDataStr, request.productId);
+
+
+              
+                    var condition = JsonConvert.DeserializeObject<ConditionModel>(request.condition);
+                    var order = new Order
+                    {
+                        OrderId = orderId,
+                        Datetime = DateTime.Now,
+                        Email = email,
+                        ContactPhone = string.IsNullOrEmpty(email) ? request.uid : string.Empty,
+                        Name = request.name,
+                        Gender = condition.Gender,
+                        IPAddress = GetClientIp(Request),
+                        TxId = responseObj.txId
+                    };
+
+                    order.OrderDetail.Add(new OrderDetail
+                    {
+                        BirthDay = condition.BirthDay,
+                        BirthHour = condition.BirthHour,
+                        DateType = (int)condition.DateType,
+                        FirstName = condition.FirstName,
+                        LastName = condition.LastName,
+                        Gender = condition.Gender,
+                        IsLeap = condition.IsLeap,
+                        ProductId = request.productId
+                    });
+
+                    db.Order.Add(order);
+                    db.SaveChanges();
+
+                return new GetTxIdResponse
+                {
+                    paymentData = paymentData,
+                    paymentUrl = WebConfigVariable.PaymentUrl,
+                    txId = responseObj.txId
                 };
-
-                order.OrderDetail.Add(new OrderDetail
-                {
-                    BirthDay = condition.BirthDay,
-                    BirthHour = condition.BirthHour,
-                    DateType = (int)condition.DateType,
-                    FirstName = condition.FirstName,
-                    LastName = condition.LastName,
-                    Gender = condition.Gender,
-                    IsLeap = condition.IsLeap,
-                    ProductId = request.productId
-                });
-
-                db.Order.Add(order);
-                db.SaveChanges();
             }
-
-            return new GetTxIdResponse { 
-                paymentData = paymentData,
-                paymentUrl = WebConfigVariable.PaymentUrl,
-                txId = responseObj.txId
-            };
         }
 
         [Route("order/{data}")]

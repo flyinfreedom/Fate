@@ -245,12 +245,14 @@
                     return;
                 }
 
+                var channel = '@ViewBag.Channel';
                 var postData = {
                     condition: JSON.stringify(condition),
                     name: $("#LastName").val() + $("#FirstName").val(),
                     email: $("#Email").val(),
                     productId: "NA01",
-                    uid: phone
+                    uid: phone,
+                    channel: channel
                 }
 
                 $.ajax({

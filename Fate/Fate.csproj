@@ -318,6 +318,7 @@
     <Content Include="Images\dharma.png" />
     <Content Include="Images\icons\favicon-na01.ico" />
     <Content Include="Images\icons\favicon.ico" />
+    <Content Include="Images\logo.png" />
     <Content Include="Images\logo_160.png" />
     <Content Include="Images\navbar-bg.png" />
     <Content Include="Images\result-detail.png" />

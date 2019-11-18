@@ -190,6 +190,19 @@
         .goDetail {
             cursor: pointer;
         }
+
+        @@media (max-width:340px), print {
+            .wrap-footer-content div span img {
+                width: 16px;
+                margin-right: 1rem;
+                margin-left: 1rem;
+                vertical-align: middle;
+            }
+            
+            .wrap-footer-content div h4 {
+                font-size: 0.6rem;
+            }
+        }
     </style>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151818705-5"></script>

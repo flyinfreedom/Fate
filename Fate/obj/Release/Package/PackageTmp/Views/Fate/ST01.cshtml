@@ -11,7 +11,7 @@
     <title>我的前世今生</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/png" href="@Url.Content("~/images/icons/favicon.ico")" />
+    <link rel="icon" type="image/png" href="@Url.Content("~/Images/logo.png")" />
     <link rel="stylesheet"
           ype="text/css"
           href="@Url.Content("~/vendor/bootstrap/css/bootstrap.min.css")" />
@@ -71,16 +71,167 @@
             font-weight: bold;
             color: #1a6226;
         }
+
+        .wrap-header {
+            position: fixed;
+            top: 0;
+            height: 60px;
+            background-color: #fff;
+            width: 100%;
+            text-align: center;
+            line-height: 60px;
+            color: #8E1617;
+            font-size: 20px;
+            font-weight: 600;
+            z-index: 9999;
+            border-bottom: 2px solid #8E1617;
+        }
+
+            .wrap-header div {
+                max-width: 500px;
+                margin: 0 auto;
+                position: relative;
+            }
+
+                .wrap-header div img {
+                    height: 100%;
+                    padding: 5px;
+                    position: absolute;
+                    left: 0px;
+                }
+
+        .wrap-footer {
+            background-position: top center;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            width: 100%;
+            display: inline-block;
+            padding: 6px 0 10px;
+            background-color: #B03233;
+        }
+
+            .wrap-footer h4 {
+                font-size: 16px;
+            }
+
+        .wrap-footer-content {
+            width: 80%;
+            margin: 0 auto;
+            color: #fff;
+            text-align: center;
+        }
+
+            .wrap-footer-content div {
+                font-size: 0.8rem;
+                height: 1rem;
+                line-height: 1rem;
+                margin-bottom: 15px;
+                margin-top: 10px;
+            }
+
+                .wrap-footer-content div .line {
+                    width: 1px;
+                    background-color: #fff;
+                    height: 50%;
+                    vertical-align: top;
+                    margin: 11px 0px 0px 12px;
+                }
+
+                .wrap-footer-content div span {
+                    display: inline-block;
+                    position: relative;
+                }
+
+                    .wrap-footer-content div span img {
+                        width: 26px;
+                        margin-right: 1rem;
+                        margin-left: 1rem;
+                        vertical-align: middle;
+                    }
+
+                    .wrap-footer-content div span h4 {
+                        display: inline-block;
+                        position: relative;
+                    }
+
+                        .wrap-footer-content div span h4 span {
+                            position: absolute;
+                            top: 22px;
+                            left: 50%;
+                            font-size: 0.5rem;
+                            transform: translateX(-50%);
+                        }
+
+            .wrap-footer-content .copyright, .wrap-footer-content .mail {
+                font-size: 0.7rem;
+                height: 1.6rem;
+                line-height: 1.6rem;
+                margin-top: 25px;
+            }
+
+            .wrap-footer-content .footer-star {
+                position: absolute;
+                width: 16px;
+                margin-left: -17px;
+            }
+
+                .wrap-footer-content .footer-star + .footer-star {
+                    margin-left: 0px;
+                }
+
+        input[type="checkbox"] {
+            width: 1.4rem; /*Desired width*/
+            height: 1.4rem; /*Desired height*/
+            position: absolute;
+            left: 0.6rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .goLine,
+        .serviceIntro,
+        .goMail,
+        .goIndex,
+        .goDivination,
+        .click-divination,
+        .goResult,
+        .goDetail {
+            cursor: pointer;
+        }
+
+        @@media (max-width:375px), print {
+            .wrap-footer-content div span img {
+                width: 16px;
+                margin-right: 1rem;
+                margin-left: 1rem;
+                vertical-align: middle;
+            }
+
+            .wrap-footer-content div h4 {
+                font-size: 0.6rem;
+            }
+        }
     </style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151818705-4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-151818705-4');
+    </script>
+
 </head>
 <body>
-    <div class="container-contact100">
-        <div class="wrap-contact100">
-            <nav class="navbar navbar-top navbar-expand-lg bg-primary text-white">
-                <span class="navbar-brand mx-auto">
-                    <span>&nbsp;</span>
-                </span>
-            </nav>
+    <div class="wrap-header">
+        <div>
+            <img src="~/Images/logo_160.png" />
+            我的前世今生
+        </div>
+    </div>
+    <div class="container-contact100" style="margin-top: 0px; padding: 15px 0px;">
+        <div class="wrap-contact100">           
             <img src="@Url.Content("~/Images/dharma.png")" class="img-fluid dharma" />
             <form class="contact100-form validate-form">
                 <img src="@Url.Content("~/Images/ad.png")" class="img-fluid" />
@@ -274,6 +425,23 @@
                     </form>
                 </div>
             </div>
+
+            <div class="wrap-footer">
+                <div class="wrap-footer-content">
+                    <div>
+                        <span><img style="margin-left: 0;" src="~/Images/Footer/icon_service.png"><h4>會員專區</h4></span>
+                        <span class="line"></span>
+                        <span class="serviceIntro" onclick="window.location.href='https://fate.opoint.com.tw/home/serviceIntro.html'"><img src="~/Images/Footer/icon_terms.png"><h4>服務條款</h4></span>
+                    </div>
+                    <div>
+                        <span><img style="margin-left: 0;" src="~/Images/Footer/icon_fb.png"><h4>開運算算<span>@@luckyopft</span></h4></span>
+                        <span class="line"></span>
+                        <span class="goLine" onclick="window.location.href='https://line.me/R/ti/p/%40law3351s'"><img src="~/Images/Footer/icon_line.png"><h4><img class="footer-star" src="~/Images/Footer/footer_star.png">開運算算<img class="footer-star" src="~/Images/Footer/footer_star.png"><span>@@law3351s</span></h4></span>
+                    </div>
+                    <div class="goMail mail">客服信箱：<span style="text-decoration: underline;">opftservice@gmail.com</span></div>
+                    <div class="goCoyright copyright">Copyright©2019 開運算算版權所有</div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Modal -->
@@ -282,7 +450,8 @@
          tabindex="-1"
          role="dialog"
          aria-labelledby="popup-for-purchaseLabel"
-         aria-hidden="true">
+         aria-hidden="true"
+         style="margin-top: 70px;">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -314,70 +483,10 @@
                         </select>
                         <input type="text" class="form-control" style="display:none; margin-bottom: 5px;" id="Country" maxlength="50" placeholder="請輸入國碼：ex +886" />
                         <input type="text" class="form-control" id="Phone" maxlength="50" placeholder="請輸入手機號碼" />
+                        <div style="text-align:center; color:red;">
+                            輸入之手機號碼僅為開立電子發票使用
+                        </div>
                     </div>
-                    @*<div id="InvoiceForm">
-                            <hr />
-                            <div class="form-check receipt">
-                                <label class="receipt-title">發票類型</label>
-                                <div style="width: 100%;">
-                                    <label class="form-check-label" style=" padding-left: 0px;">
-                                        <input type="radio"
-                                               class="form-check-input"
-                                               name="InvoiceHandle"
-                                               id="options1"
-                                               value="DU" checked />
-                                        二聯式
-                                    </label>
-                                    <label class="form-check-label">
-                                        <input type="radio"
-                                               class="form-check-input"
-                                               name="InvoiceHandle"
-                                               id="options2"
-                                               value="TU" />
-                                        三聯式
-                                    </label>
-                                    <label class="form-check-label">
-                                        <input type="radio"
-                                               class="form-check-input"
-                                               name="InvoiceHandle"
-                                               id="options3"
-                                               value="DO" />
-                                        捐贈
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-check receipt">
-                                <div id="VATNumberBlock">
-                                    <label class="mt-3" style="color:red;">抬頭</label>
-                                    <input type="text" class="form-control" name="VATTitle" id="VATTitle" />
-
-                                    <label class="mt-3" style="color:red;">統編</label>
-                                    <input type="text" class="form-control" name="VATNumber" id="VATNumber" maxlength="8" />
-                                </div>
-
-                                <div id="AddressBlock">
-                                    <label class="mt-3">地址</label>
-                                    <input type="text" class="form-control" name="ContactAddress" id="ContactAddress" placeholder="建議填寫，利於電子發票中獎時直接寄送實體發票" />
-                                    <label class="mt-3">電話</label>
-                                    <input type="text" class="form-control" name="ContactPhone" id="ContactPhone" placeholder="建議填寫，利於電子發票中獎時方便聯繫" />
-                                </div>
-
-                                <div id="CaringBlock" style="">
-                                    <label class="mt-3">捐贈單位</label>
-                                    <select class="form-control" name="CaringCode" id="CaringCode">
-                                        <option value="25885">伊甸基金會</option>
-                                        <option value="8595">婦援會</option>
-                                        <option value="1234">慈善會</option>
-                                        <option value="2595">幼安教養會</option>
-                                        <option value="000">世界和平會</option>
-                                        <option value="2885">慈愛教養院</option>
-                                        <option value="8330522">老人協會</option>
-                                        <option value="1979322">心生活協會</option>
-                                        <option value="235757">婦幼協會</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>*@
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="SendBtn" class="btn btn-warning">送出</button>
@@ -450,7 +559,7 @@
             {
                 <text>
 
-            var defaultGender = @(Model.Gender ? "true" : "false"); 
+            var defaultGender = @(Model.Gender ? "true" : "false");
             var defaultBirthday = "@Model.BirthDay";
             var defaultBirthTime = "@Model.BirthHour";
             var defaultDateType = "@Model.DateType";
@@ -463,7 +572,7 @@
             }
 
             var birthDayArray = defaultBirthday.split('/');
-    
+
             $("#Year option[value=" + birthDayArray[0] + "]").prop("selected", true);
             $("#select2-Year-container").attr("title", birthDayArray[0] + ' 年').html(birthDayArray[0] + ' 年');
             $("#Month option[value=" + birthDayArray[1] + "]").prop("selected", true);
@@ -475,7 +584,7 @@
                 $('#FourthResult').before($('#FourthDescription').clone());
                 $('#ResultDiv').show();
 
-                $("html, body").animate({ scrollTop: $("#ResultDiv").offset().top }, 1000);
+                $("html, body").animate({ scrollTop: $("#ResultDiv").offset().top - 120 }, 1000);
 
                 $('.blackBlock').hide();
                 $('#GoBtn').hide();
@@ -571,11 +680,11 @@
             });
 
             $('#SendBtn').click(function () {
-                //var validateStr = SendValidate();
-                //if (validateStr) {
-                //    $('#ValidateMessage').html(validateStr);
-                //    return;
-                //}
+                var validateStr = SendValidate();
+                if (validateStr) {
+                    $('#ValidateMessage').html(validateStr);
+                    return;
+                }
                 $('.blackBlock').show();
 
                 if (!$("#Phone").val()) {
@@ -685,13 +794,14 @@
                 if ($('#Name').val().length > 21) {
                     errorMessage += '＊姓名長度最多為20個字<br/>';
                 }
+            } else {
+                    errorMessage += '＊姓名欄位為必填<br/>';
             }
 
-            if (!$('#Email').val()) {
-                errorMessage += '＊Email 欄位為必填 <br/>';
-            }
-            else if (!validateEmail($('#Email').val())) {
-                errorMessage += '＊Email 格式錯誤 <br/>';
+            if ($('#Email').val()) {
+                if (!validateEmail($('#Email').val())) {
+                    errorMessage += '＊Email 格式錯誤 <br/>';
+                }
             }
 
             //if ($('#VATNumberBlock').css('display') != 'none' && !$('#VATTitle').val()) {
@@ -766,7 +876,7 @@
             }
             return n;
         }
-        
+
         function initDatetimeSelector() {
             $('#Month').html('');
             $('#Day').html('');

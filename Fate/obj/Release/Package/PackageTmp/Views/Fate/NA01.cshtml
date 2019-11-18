@@ -10,7 +10,7 @@
     <title>測試你潛意識的理想情人</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/png" href="@Url.Content("~/images/icons/favicon-na01.ico")" />
+    <link rel="icon" type="image/png" href="@Url.Content("~/Images/logo.png")" />
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/bootstrap/css/bootstrap.min.css")" />
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/fonts/font-awesome-4.7.0/css/font-awesome.min.css")" />
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/animate/animate.css")" />
@@ -59,11 +59,171 @@
                 transform: rotate(360deg);
             }
         }
+
+        .wrap-header {
+            position: fixed;
+            top: 0;
+            height: 60px;
+            background-color: #fff;
+            width: 100%;
+            text-align: center;
+            line-height: 60px;
+            color: #8E1617;
+            font-size: 20px;
+            font-weight: 600;
+            z-index: 9999;
+            border-bottom: 2px solid #8E1617;
+        }
+
+            .wrap-header div {
+                max-width: 500px;
+                margin: 0 auto;
+                position: relative;
+            }
+
+                .wrap-header div img {
+                    height: 100%;
+                    padding: 5px;
+                    position: absolute;
+                    left: 0px;
+                }
+
+
+
+
+        .wrap-footer {
+            background-image: url("./../img/footer_bg.png");
+            background-position: top center;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            width: 100%;
+            display: inline-block;
+            padding: 6px 0 10px;
+            background-color: #B03233;
+        }
+
+            .wrap-footer h4 {
+                font-size: 16px;
+            }
+
+        .wrap-footer-content {
+            width: 80%;
+            margin: 0 auto;
+            color: #fff;
+            text-align: center;
+        }
+
+            .wrap-footer-content div {
+                font-size: 0.8rem;
+                height: 1rem;
+                line-height: 1rem;
+                margin-bottom: 15px;
+                margin-top: 10px;
+            }
+
+                .wrap-footer-content div .line {
+                    width: 1px;
+                    background-color: #fff;
+                    height: 50%;
+                    vertical-align: top;
+                    margin: 11px 0px 0px 12px;
+                }
+
+                .wrap-footer-content div span {
+                    display: inline-block;
+                    position: relative;
+                }
+
+                    .wrap-footer-content div span img {
+                        width: 26px;
+                        margin-right: 1rem;
+                        margin-left: 1rem;
+                        vertical-align: middle;
+                    }
+
+                    .wrap-footer-content div span h4 {
+                        display: inline-block;
+                        position: relative;
+                    }
+
+                        .wrap-footer-content div span h4 span {
+                            position: absolute;
+                            top: 22px;
+                            left: 50%;
+                            font-size: 0.5rem;
+                            transform: translateX(-50%);
+                        }
+
+            .wrap-footer-content .copyright, .wrap-footer-content .mail {
+                font-size: 0.7rem;
+                height: 1.6rem;
+                line-height: 1.6rem;
+                margin-top: 25px;
+            }
+
+            .wrap-footer-content .footer-star {
+                position: absolute;
+                width: 16px;
+                margin-left: -17px;
+            }
+
+                .wrap-footer-content .footer-star + .footer-star {
+                    margin-left: 0px;
+                }
+
+        input[type="checkbox"] {
+            width: 1.4rem; /*Desired width*/
+            height: 1.4rem; /*Desired height*/
+            position: absolute;
+            left: 0.6rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .goLine,
+        .serviceIntro,
+        .goMail,
+        .goIndex,
+        .goDivination,
+        .click-divination,
+        .goResult,
+        .goDetail {
+            cursor: pointer;
+        }
+
+        @@media (max-width:340px), print {
+            .wrap-footer-content div span img {
+                width: 16px;
+                margin-right: 1rem;
+                margin-left: 1rem;
+                vertical-align: middle;
+            }
+            
+            .wrap-footer-content div h4 {
+                font-size: 0.6rem;
+            }
+        }
     </style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151818705-5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-151818705-5');
+    </script>
+
 </head>
 <body>
+    <div class="wrap-header">
+        <div>
+            <img src="~/Images/logo_160.png" />
+            理想情人
+        </div>
+    </div>
     <div class="container-contact100">
-        <div class="wrap-contact100">
+        <div class="wrap-contact100" style="margin-top: 60px;">
             <nav class="navbar navbar-top navbar-expand-lg bg-pink text-white">
                 <span class="navbar-brand mx-auto">
                     <span></span>
@@ -108,7 +268,25 @@
                     <img src="@Url.Content("~/images/cherry2.png")" alt="" class="cherry2">
                 </div>
             }
+
+            <div class="wrap-footer">
+                <div class="wrap-footer-content">
+                    <div>
+                        <span><img style="margin-left: 0;" src="~/Images/Footer/icon_service.png"><h4>會員專區</h4></span>
+                        <span class="line"></span>
+                        <span class="serviceIntro" onclick="window.location.href='https://fate.opoint.com.tw/home/serviceIntro.html'"><img src="~/Images/Footer/icon_terms.png"><h4>服務條款</h4></span>
+                    </div>
+                    <div>
+                        <span><img style="margin-left: 0;" src="~/Images/Footer/icon_fb.png"><h4>開運算算<span>@@luckyopft</span></h4></span>
+                        <span class="line"></span>
+                        <span class="goLine" onclick="window.location.href='https://line.me/R/ti/p/%40law3351s'"><img src="~/Images/Footer/icon_line.png"><h4><img class="footer-star" src="~/Images/Footer/footer_star.png">開運算算<img class="footer-star" src="~/Images/Footer/footer_star.png"><span>@@law3351s</span></h4></span>
+                    </div>
+                    <div class="goMail mail">客服信箱：<span style="text-decoration: underline;">opftservice@gmail.com</span></div>
+                    <div class="goCoyright copyright">Copyright©2019 開運算算版權所有</div>
+                </div>
+            </div>
         </div>
+
     </div>
 
 
@@ -138,14 +316,14 @@
         </div>
     </div>
 
-    <div class="modal fade" id="popupInvoice" tabindex="-1" role="dialog" aria-labelledby="popup-for-purchaseLabel" aria-hidden="true">
+    <div class="modal fade" id="popupInvoice" tabindex="-1" role="dialog" aria-labelledby="popup-for-purchaseLabel" aria-hidden="true" style="margin-top: 120px;">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="font-size: 1.0em;">
                 <div class="modal-body">
                     @*<div class="form-check receipt" id="EmailForm">
-                        <label style="color:red;">＊E-Mail</label><small class="float-right" style="position:absolute; top:5px; right: 5px; color:red;">請填入你的 E-mail , 我們會將測算結果多寄一份到你的郵箱</small>
-                        <input type="text" class="form-control" name="Email" id="Email" maxlength="50" placeholder="請輸入Email" />
-                    </div>*@
+                            <label style="color:red;">＊E-Mail</label><small class="float-right" style="position:absolute; top:5px; right: 5px; color:red;">請填入你的 E-mail , 我們會將測算結果多寄一份到你的郵箱</small>
+                            <input type="text" class="form-control" name="Email" id="Email" maxlength="50" placeholder="請輸入Email" />
+                        </div>*@
                     <div class="form-check receipt" id="PhoneForm">
                         <label style="color:red;">＊手機號碼</label>
                         <select id="CountryNumber" class="form-control" style="margin-bottom: 5px;">
@@ -159,6 +337,9 @@
                         </select>
                         <input type="text" class="form-control" style="display:none; margin-bottom: 5px;" id="Country" maxlength="50" placeholder="請輸入國碼：ex +886" />
                         <input type="text" class="form-control" id="Phone" maxlength="50" placeholder="請輸入手機號碼" />
+                        <div style="text-align:center; color:red;">
+                            輸入之手機號碼僅為開立電子發票使用
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -238,7 +419,7 @@
                     LastName: $("#LastName").val(),
                     FirstName: $("#FirstName").val(),
                 };
-                                
+
                 if (!$("#Phone").val()) {
                     alert('電話號碼為必填');
                     $('.blackBlock').hide();

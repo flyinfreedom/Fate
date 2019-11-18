@@ -12,7 +12,7 @@ namespace Fate.ViewModels
         public string orderId { get; set; }
         public string uid { get; set; }
         public int amount { get; set; }
-        public string callBackUrl { get { return WebConfigVariable.PaymentCallBackUrl; } }
+        public string callBackUrl { get { return string.Empty; } }
         public string userIp { get; set; }
         public int snType { get { return 0; } }
         public string gameUrl { get; set; }

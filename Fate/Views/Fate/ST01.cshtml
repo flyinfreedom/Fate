@@ -101,7 +101,6 @@
                 }
 
         .wrap-footer {
-            background-image: url("./../img/footer_bg.png");
             background-position: top center;
             background-repeat: no-repeat;
             background-size: 100%;
@@ -199,6 +198,19 @@
         .goDetail {
             cursor: pointer;
         }
+
+        @@media (max-width:375px), print {
+            .wrap-footer-content div span img {
+                width: 16px;
+                margin-right: 1rem;
+                margin-left: 1rem;
+                vertical-align: middle;
+            }
+
+            .wrap-footer-content div h4 {
+                font-size: 0.6rem;
+            }
+        }
     </style>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151818705-4"></script>
@@ -215,16 +227,11 @@
     <div class="wrap-header">
         <div>
             <img src="~/Images/logo_160.png" />
-            前世今生
+            我的前世今生
         </div>
     </div>
-    <div class="container-contact100" style="margin-top: 60px;">
-        <div class="wrap-contact100">
-            <nav class="navbar navbar-top navbar-expand-lg bg-primary text-white">
-                <span class="navbar-brand mx-auto">
-                    <span>&nbsp;</span>
-                </span>
-            </nav>
+    <div class="container-contact100" style="margin-top: 0px; padding: 15px 0px;">
+        <div class="wrap-contact100">           
             <img src="@Url.Content("~/Images/dharma.png")" class="img-fluid dharma" />
             <form class="contact100-form validate-form">
                 <img src="@Url.Content("~/Images/ad.png")" class="img-fluid" />
@@ -419,7 +426,7 @@
                 </div>
             </div>
 
-            <div class="wrap-footer" style="width: 500px; margin-left: -55px; margin-top: 20px;">
+            <div class="wrap-footer">
                 <div class="wrap-footer-content">
                     <div>
                         <span><img style="margin-left: 0;" src="~/Images/Footer/icon_service.png"><h4>會員專區</h4></span>
@@ -443,7 +450,8 @@
          tabindex="-1"
          role="dialog"
          aria-labelledby="popup-for-purchaseLabel"
-         aria-hidden="true">
+         aria-hidden="true"
+         style="margin-top: 70px;">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -576,7 +584,7 @@
                 $('#FourthResult').before($('#FourthDescription').clone());
                 $('#ResultDiv').show();
 
-                $("html, body").animate({ scrollTop: $("#ResultDiv").offset().top }, 1000);
+                $("html, body").animate({ scrollTop: $("#ResultDiv").offset().top - 120 }, 1000);
 
                 $('.blackBlock').hide();
                 $('#GoBtn').hide();
@@ -672,11 +680,11 @@
             });
 
             $('#SendBtn').click(function () {
-                //var validateStr = SendValidate();
-                //if (validateStr) {
-                //    $('#ValidateMessage').html(validateStr);
-                //    return;
-                //}
+                var validateStr = SendValidate();
+                if (validateStr) {
+                    $('#ValidateMessage').html(validateStr);
+                    return;
+                }
                 $('.blackBlock').show();
 
                 if (!$("#Phone").val()) {
@@ -786,13 +794,14 @@
                 if ($('#Name').val().length > 21) {
                     errorMessage += '＊姓名長度最多為20個字<br/>';
                 }
+            } else {
+                    errorMessage += '＊姓名欄位為必填<br/>';
             }
 
-            if (!$('#Email').val()) {
-                errorMessage += '＊Email 欄位為必填 <br/>';
-            }
-            else if (!validateEmail($('#Email').val())) {
-                errorMessage += '＊Email 格式錯誤 <br/>';
+            if ($('#Email').val()) {
+                if (!validateEmail($('#Email').val())) {
+                    errorMessage += '＊Email 格式錯誤 <br/>';
+                }
             }
 
             //if ($('#VATNumberBlock').css('display') != 'none' && !$('#VATTitle').val()) {

@@ -75,6 +75,7 @@ namespace Fate.Controllers
                             instance.FirstLifeSuggest = string.IsNullOrEmpty(first) ? string.Empty : db.Result.FirstOrDefault(x => x.Code == first).FullDescription;
                             instance.BirthDay = tempUserInputBirthDay;
                         }
+
                     }
 
                     instance.OrderId = orderid;

@@ -139,11 +139,13 @@ namespace Fate.Controllers
 
             return result;
         }
+
         private string GetGameUrl(string productId, string orderId)
         {
             string baseUrl = WebConfigVariable.BaseUrl;
             return $"{baseUrl}/index.html#/results?orderid={orderId}";
         }
+
         private string GetClientIp(HttpRequestMessage request = null)
         {
             request = request ?? Request;
@@ -176,5 +178,11 @@ namespace Fate.Controllers
             }
             return string.Format("{0:x}", i - DateTime.Now.Ticks);
         }
+
+        //[HttpPost]
+        //public IHttpActionResult CallBack(string cid, string data)
+        //{
+            
+        //}
     }
 }

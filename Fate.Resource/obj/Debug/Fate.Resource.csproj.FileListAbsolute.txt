@@ -15,3 +15,4 @@ C:\Eden\Fate\SourceCode\Fate\Fate.Resource\obj\Debug\Fate.Resource.Share.Heavenl
 C:\Eden\Fate\SourceCode\Fate\Fate.Resource\obj\Debug\Fate.Resource.csproj.GenerateResource.cache
 C:\Eden\Fate\SourceCode\Fate\Fate.Resource\obj\Debug\Fate.Resource.dll
 C:\Eden\Fate\SourceCode\Fate\Fate.Resource\obj\Debug\Fate.Resource.pdb
+C:\Eden\Fate\SourceCode\Fate\Fate.Resource\obj\Debug\Fate.Resource.csprojAssemblyReference.cache

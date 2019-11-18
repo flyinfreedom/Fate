@@ -30,7 +30,7 @@ namespace Fate.Service
                     cid = WebConfigVariable.NA01CID;
                     break;
             }
-            url = $"{url}?cid={cid}&data={HttpUtility.UrlEncode(AESHelper.Encrypt(JsonConvert.SerializeObject(new { orderId, txId }), "ZIWEI"))}";
+            url = $"{url}?cid={cid}&data={HttpUtility.UrlEncode(AESHelper.Encrypt(JsonConvert.SerializeObject(new { orderId, txId }), productId))}";
 
             HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(url);
             httpRequest.Method = "POST";

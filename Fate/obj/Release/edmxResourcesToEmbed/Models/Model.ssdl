@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="FortuneTellingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="FateAdmin">
+    <Key>
+      <PropertyRef Name="LoginId" />
+    </Key>
+    <Property Name="LoginId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
   <EntityType Name="Order">
     <Key>
       <PropertyRef Name="OrderId" />
@@ -14,9 +21,17 @@
     <Property Name="ContactPhone" Type="nvarchar" MaxLength="50" />
     <Property Name="VATNumber" Type="nvarchar" MaxLength="50" />
     <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
-    <Property Name="RecipientCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Cooperation" Type="nvarchar" MaxLength="50" />
+    <Property Name="CooperationID" Type="nvarchar" MaxLength="50" />
+    <Property Name="PayMethod" Type="nchar" MaxLength="10" />
+    <Property Name="Amount" Type="int" />
+    <Property Name="Refund" Type="datetime" />
+    <Property Name="PayStatus" Type="nchar" MaxLength="10" />
+    <Property Name="InvoiceStatus" Type="nchar" MaxLength="10" />
+    <Property Name="PayTime" Type="datetime" />
     <Property Name="IsPayed" Type="bit" Nullable="false" />
     <Property Name="Gender" Type="bit" />
+    <Property Name="RecipientCode" Type="nvarchar" MaxLength="50" />
     <Property Name="TxId" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="OrderDetail">
@@ -50,10 +65,13 @@
     <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Brief" Type="nvarchar(max)" Nullable="false" />
     <Property Name="FullDescription" Type="nvarchar(max)" />
+    <Property Name="Product" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Taiwanlunisolar">
     <Key>
-      <PropertyRef Name="YYYYMMDD" />
+      <PropertyRef Name="YYYY" />
+      <PropertyRef Name="MM" />
+      <PropertyRef Name="DD" />
     </Key>
     <Property Name="YYYYMMDD" Type="nvarchar" MaxLength="8" Nullable="false" />
     <Property Name="YYYY" Type="int" Nullable="false" />
@@ -129,19 +147,8 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Video_VideoType">
-    <End Role="VideoType" Type="Self.VideoType" Multiplicity="1" />
-    <End Role="Video" Type="Self.Video" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="VideoType">
-        <PropertyRef Name="VideoTypeId" />
-      </Principal>
-      <Dependent Role="Video">
-        <PropertyRef Name="VideoTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="FortuneTellingModelStoreContainer">
+    <EntitySet Name="FateAdmin" EntityType="Self.FateAdmin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
@@ -166,10 +173,6 @@
     <AssociationSet Name="FK_OrderDetail_Product" Association="Self.FK_OrderDetail_Product">
       <End Role="Product" EntitySet="Product" />
       <End Role="OrderDetail" EntitySet="OrderDetail" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Video_VideoType" Association="Self.FK_Video_VideoType">
-      <End Role="VideoType" EntitySet="VideoType" />
-      <End Role="Video" EntitySet="Video" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

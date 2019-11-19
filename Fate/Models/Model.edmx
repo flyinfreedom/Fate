@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="FortuneTellingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FateAdmin">
+          <Key>
+            <PropertyRef Name="LoginId" />
+          </Key>
+          <Property Name="LoginId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="OrderId" />
@@ -19,9 +26,17 @@
           <Property Name="ContactPhone" Type="nvarchar" MaxLength="50" />
           <Property Name="VATNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
-          <Property Name="RecipientCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cooperation" Type="nvarchar" MaxLength="50" />
+          <Property Name="CooperationID" Type="nvarchar" MaxLength="50" />
+          <Property Name="PayMethod" Type="nchar" MaxLength="10" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Refund" Type="datetime" />
+          <Property Name="PayStatus" Type="nchar" MaxLength="10" />
+          <Property Name="InvoiceStatus" Type="nchar" MaxLength="10" />
+          <Property Name="PayTime" Type="datetime" />
           <Property Name="IsPayed" Type="bit" Nullable="false" />
           <Property Name="Gender" Type="bit" />
+          <Property Name="RecipientCode" Type="nvarchar" MaxLength="50" />
           <Property Name="TxId" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="OrderDetail">
@@ -55,10 +70,13 @@
           <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Brief" Type="nvarchar(max)" Nullable="false" />
           <Property Name="FullDescription" Type="nvarchar(max)" />
+          <Property Name="Product" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Taiwanlunisolar">
           <Key>
-            <PropertyRef Name="YYYYMMDD" />
+            <PropertyRef Name="YYYY" />
+            <PropertyRef Name="MM" />
+            <PropertyRef Name="DD" />
           </Key>
           <Property Name="YYYYMMDD" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="YYYY" Type="int" Nullable="false" />
@@ -134,19 +152,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Video_VideoType">
-          <End Role="VideoType" Type="Self.VideoType" Multiplicity="1" />
-          <End Role="Video" Type="Self.Video" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VideoType">
-              <PropertyRef Name="VideoTypeId" />
-            </Principal>
-            <Dependent Role="Video">
-              <PropertyRef Name="VideoTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="FortuneTellingModelStoreContainer">
+          <EntitySet Name="FateAdmin" EntityType="Self.FateAdmin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
@@ -172,16 +179,13 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="OrderDetail" EntitySet="OrderDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK_Video_VideoType" Association="Self.FK_Video_VideoType">
-            <End Role="VideoType" EntitySet="VideoType" />
-            <End Role="Video" EntitySet="Video" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FortuneTellingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="FortuneTellingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FateAdmin" EntityType="FortuneTellingModel.FateAdmin" />
           <EntitySet Name="Order" EntityType="FortuneTellingModel.Order" />
           <EntitySet Name="OrderDetail" EntityType="FortuneTellingModel.OrderDetail" />
           <EntitySet Name="Product" EntityType="FortuneTellingModel.Product" />
@@ -199,11 +203,14 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="OrderDetail" EntitySet="OrderDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK_Video_VideoType" Association="FortuneTellingModel.FK_Video_VideoType">
-            <End Role="VideoType" EntitySet="VideoType" />
-            <End Role="Video" EntitySet="Video" />
-          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="FateAdmin">
+          <Key>
+            <PropertyRef Name="LoginId" />
+          </Key>
+          <Property Name="LoginId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="OrderId" />
@@ -218,9 +225,17 @@
           <Property Name="ContactPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="VATNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RecipientCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cooperation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CooperationID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PayMethod" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Refund" Type="DateTime" Precision="3" />
+          <Property Name="PayStatus" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="InvoiceStatus" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PayTime" Type="DateTime" Precision="3" />
           <Property Name="IsPayed" Type="Boolean" Nullable="false" />
           <Property Name="Gender" Type="Boolean" />
+          <Property Name="RecipientCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TxId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="OrderDetail" Relationship="FortuneTellingModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
         </EntityType>
@@ -258,10 +273,13 @@
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Brief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FullDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Product" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Taiwanlunisolar">
           <Key>
-            <PropertyRef Name="YYYYMMDD" />
+            <PropertyRef Name="YYYY" />
+            <PropertyRef Name="MM" />
+            <PropertyRef Name="DD" />
           </Key>
           <Property Name="YYYYMMDD" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="YYYY" Type="Int32" Nullable="false" />
@@ -281,7 +299,6 @@
           <Property Name="VideoTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VideoType1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Enable" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Video" Relationship="FortuneTellingModel.FK_Video_VideoType" FromRole="VideoType" ToRole="Video" />
         </EntityType>
         <EntityType Name="WordLibrary">
           <Key>
@@ -311,7 +328,6 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Enable" Type="Boolean" Nullable="false" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="VideoType" Relationship="FortuneTellingModel.FK_Video_VideoType" FromRole="Video" ToRole="VideoType" />
         </EntityType>
         <Association Name="FK_OrderDetail_Order">
           <End Type="FortuneTellingModel.Order" Role="Order" Multiplicity="1" />
@@ -337,31 +353,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Video_VideoType">
-          <End Type="FortuneTellingModel.VideoType" Role="VideoType" Multiplicity="1" />
-          <End Type="FortuneTellingModel.Video" Role="Video" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VideoType">
-              <PropertyRef Name="VideoTypeId" />
-            </Principal>
-            <Dependent Role="Video">
-              <PropertyRef Name="VideoTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="FortuneTellingModelStoreContainer" CdmEntityContainer="FortuneTellingEntities">
+          <EntitySetMapping Name="FateAdmin">
+            <EntityTypeMapping TypeName="FortuneTellingModel.FateAdmin">
+              <MappingFragment StoreEntitySet="FateAdmin">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="FortuneTellingModel.Order">
               <MappingFragment StoreEntitySet="Order">
                 <ScalarProperty Name="TxId" ColumnName="TxId" />
+                <ScalarProperty Name="RecipientCode" ColumnName="RecipientCode" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="IsPayed" ColumnName="IsPayed" />
-                <ScalarProperty Name="RecipientCode" ColumnName="RecipientCode" />
+                <ScalarProperty Name="PayTime" ColumnName="PayTime" />
+                <ScalarProperty Name="InvoiceStatus" ColumnName="InvoiceStatus" />
+                <ScalarProperty Name="PayStatus" ColumnName="PayStatus" />
+                <ScalarProperty Name="Refund" ColumnName="Refund" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PayMethod" ColumnName="PayMethod" />
+                <ScalarProperty Name="CooperationID" ColumnName="CooperationID" />
+                <ScalarProperty Name="Cooperation" ColumnName="Cooperation" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="VATNumber" ColumnName="VATNumber" />
                 <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
@@ -403,6 +423,7 @@
           <EntitySetMapping Name="Result">
             <EntityTypeMapping TypeName="FortuneTellingModel.Result">
               <MappingFragment StoreEntitySet="Result">
+                <ScalarProperty Name="Product" ColumnName="Product" />
                 <ScalarProperty Name="FullDescription" ColumnName="FullDescription" />
                 <ScalarProperty Name="Brief" ColumnName="Brief" />
                 <ScalarProperty Name="Code" ColumnName="Code" />

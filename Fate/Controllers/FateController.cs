@@ -336,6 +336,7 @@ namespace Fate.Controllers
                     Email = email,
                     ContactPhone = phone,
                     Name = request.name,
+                    Amount = amount,
                     Gender = condition.Gender,
                     IPAddress = GetClientIp(),
                     TxId = responseObj.txId
@@ -371,9 +372,9 @@ namespace Fate.Controllers
             switch (productId)
             {
                 case "ST01":
-                    return $"{baseUrl}/Fate/ST01?orderid={orderId}";
+                    return $"{baseUrl}/ST01?orderid={orderId}";
                 case "NA01":
-                    return $"{baseUrl}/Fate/NA01?orderid={orderId}";
+                    return $"{baseUrl}/NA01?orderid={orderId}";
             }
 
             return $"{baseUrl}/index.html#/results?orderid={orderId}";

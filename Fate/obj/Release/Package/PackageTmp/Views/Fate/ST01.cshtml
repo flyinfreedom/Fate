@@ -271,7 +271,14 @@
                             <select id="Year" class="selection-2 changeDay changeDate">
                                 @for (int y = 1940; y <= 2040; y++)
                                 {
-                                    <option value="@y">@y.ToString() 年</option>
+                                    if (y == 1980)
+                                    {
+                                        <option value="@y" selected="selected">@y.ToString() 年</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@y">@y.ToString() 年</option>
+                                    }
                                 }
                             </select>
                         </div>
@@ -466,7 +473,7 @@
                         </div>
                     </div>
                     <div class="form-check receipt" id="EmailForm">
-                        <label style="color:red; margin-bottom: 0px;">＊E-Mail</label>
+                        <label style="color:red; margin-bottom: 0px;">E-Mail</label>
                         <small style="color:red; padding-left:5px; margin-bottom: 8px;">請填入你的 E-mail , 我們會將測算結果多寄一份到你的郵箱</small>
                         <input type="text" class="form-control" name="Email" id="Email" maxlength="50" placeholder="請輸入Email" />
                     </div>

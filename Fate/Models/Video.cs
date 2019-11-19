@@ -19,7 +19,5 @@ namespace Fate.Models
         public string Name { get; set; }
         public bool Enable { get; set; }
         public string Code { get; set; }
-    
-        public virtual VideoType VideoType { get; set; }
     }
 }

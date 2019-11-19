@@ -217,6 +217,9 @@
     <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="Helper\MailHelper.cs" />
     <Compile Include="Helper\WebConfigVariable.cs" />
+    <Compile Include="Models\FateAdmin.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

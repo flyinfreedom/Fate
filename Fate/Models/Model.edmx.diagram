@@ -5,18 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c34c9d47d6d4459bb4ad6362398ab127" Name="Diagram1">
-        <EntityTypeShape EntityType="FortuneTellingModel.Order" Width="1.5" PointX="0.75" PointY="1" />
-        <EntityTypeShape EntityType="FortuneTellingModel.OrderDetail" Width="1.5" PointX="3" PointY="1.375" />
-        <EntityTypeShape EntityType="FortuneTellingModel.Product" Width="1.5" PointX="0.75" PointY="5.875" />
-        <EntityTypeShape EntityType="FortuneTellingModel.Result" Width="1.5" PointX="2.75" PointY="5.75" />
-        <EntityTypeShape EntityType="FortuneTellingModel.Taiwanlunisolar" Width="1.5" PointX="5.75" PointY="4.75" />
-        <EntityTypeShape EntityType="FortuneTellingModel.VideoType" Width="1.5" PointX="5.75" PointY="1.125" />
-        <EntityTypeShape EntityType="FortuneTellingModel.WordLibrary" Width="1.5" PointX="7.75" PointY="4.75" />
-        <EntityTypeShape EntityType="FortuneTellingModel.WordLibraryUserInput" Width="1.5" PointX="7.75" PointY="7.75" />
-        <EntityTypeShape EntityType="FortuneTellingModel.Video" Width="1.5" PointX="8" PointY="0.875" />
+        <EntityTypeShape EntityType="FortuneTellingModel.FateAdmin" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FortuneTellingModel.Order" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="FortuneTellingModel.OrderDetail" Width="1.5" PointX="3" PointY="2.25" />
+        <EntityTypeShape EntityType="FortuneTellingModel.Product" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="FortuneTellingModel.Result" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="FortuneTellingModel.Taiwanlunisolar" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="FortuneTellingModel.VideoType" Width="1.5" PointX="4.75" PointY="6.75" />
+        <EntityTypeShape EntityType="FortuneTellingModel.WordLibrary" Width="1.5" PointX="6.75" PointY="6.75" />
+        <EntityTypeShape EntityType="FortuneTellingModel.WordLibraryUserInput" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FortuneTellingModel.Video" Width="1.5" PointX="7.75" PointY="3.75" />
         <AssociationConnector Association="FortuneTellingModel.FK_OrderDetail_Order" />
         <AssociationConnector Association="FortuneTellingModel.FK_OrderDetail_Product" />
-        <AssociationConnector Association="FortuneTellingModel.FK_Video_VideoType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

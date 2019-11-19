@@ -17,5 +17,6 @@ namespace Fate.Models
         public string Code { get; set; }
         public string Brief { get; set; }
         public string FullDescription { get; set; }
+        public string Product { get; set; }
     }
 }

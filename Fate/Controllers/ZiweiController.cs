@@ -148,25 +148,25 @@ namespace Fate.Controllers
                     var v1 = db.Video.FirstOrDefault(v => v.VideoTypeId == 1 && v.Code == dateTimeHelper.RequestCNMonth.ToString());
                     videoResult.Add(new VideoResult { 
                         url = videoBaseUrl + v1.Name,
-                        description = v1.VideoType.VideoType1
+                        description = db.VideoType.FirstOrDefault(v => v.VideoTypeId == v1.VideoTypeId).VideoType1
                     });
                     var v2 = db.Video.FirstOrDefault(v => v.VideoTypeId == 2 && v.Code == dateTimeHelper.DateTime.Year.ToString().Remove(0, 3));
                     videoResult.Add(new VideoResult
                     {
                         url = videoBaseUrl + v2.Name,
-                        description = v2.VideoType.VideoType1
+                        description = db.VideoType.FirstOrDefault(v => v.VideoTypeId == v2.VideoTypeId).VideoType1
                     });
                     var v3 = db.Video.FirstOrDefault(v => v.VideoTypeId == 3 && v.Code == dateTimeHelper.RequestCNMonth.ToString());
                     videoResult.Add(new VideoResult
                     {
                         url = videoBaseUrl + v3.Name,
-                        description = v3.VideoType.VideoType1
+                        description = db.VideoType.FirstOrDefault(v => v.VideoTypeId == v3.VideoTypeId).VideoType1
                     });
                     var v4 = db.Video.FirstOrDefault(v => v.VideoTypeId == 4 && v.Code == dateTimeHelper.RequestCNMonth.ToString());
                     videoResult.Add(new VideoResult
                     {
                         url = videoBaseUrl + v4.Name,
-                        description = v4.VideoType.VideoType1
+                        description = db.VideoType.FirstOrDefault(v => v.VideoTypeId == v4.VideoTypeId).VideoType1
                     });
 
                     result.Videos = videoResult;

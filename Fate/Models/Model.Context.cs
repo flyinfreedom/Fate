@@ -25,6 +25,7 @@ namespace Fate.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<FateAdmin> FateAdmin { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
         public virtual DbSet<Product> Product { get; set; }

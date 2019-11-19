@@ -1,13 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="FortuneTellingModelStoreContainer" CdmEntityContainer="FortuneTellingEntities">
+    <EntitySetMapping Name="FateAdmin">
+      <EntityTypeMapping TypeName="FortuneTellingModel.FateAdmin">
+        <MappingFragment StoreEntitySet="FateAdmin">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Order">
       <EntityTypeMapping TypeName="FortuneTellingModel.Order">
         <MappingFragment StoreEntitySet="Order">
           <ScalarProperty Name="TxId" ColumnName="TxId" />
+          <ScalarProperty Name="RecipientCode" ColumnName="RecipientCode" />
           <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="IsPayed" ColumnName="IsPayed" />
-          <ScalarProperty Name="RecipientCode" ColumnName="RecipientCode" />
+          <ScalarProperty Name="PayTime" ColumnName="PayTime" />
+          <ScalarProperty Name="InvoiceStatus" ColumnName="InvoiceStatus" />
+          <ScalarProperty Name="PayStatus" ColumnName="PayStatus" />
+          <ScalarProperty Name="Refund" ColumnName="Refund" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PayMethod" ColumnName="PayMethod" />
+          <ScalarProperty Name="CooperationID" ColumnName="CooperationID" />
+          <ScalarProperty Name="Cooperation" ColumnName="Cooperation" />
           <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
           <ScalarProperty Name="VATNumber" ColumnName="VATNumber" />
           <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
@@ -49,6 +65,7 @@
     <EntitySetMapping Name="Result">
       <EntityTypeMapping TypeName="FortuneTellingModel.Result">
         <MappingFragment StoreEntitySet="Result">
+          <ScalarProperty Name="Product" ColumnName="Product" />
           <ScalarProperty Name="FullDescription" ColumnName="FullDescription" />
           <ScalarProperty Name="Brief" ColumnName="Brief" />
           <ScalarProperty Name="Code" ColumnName="Code" />

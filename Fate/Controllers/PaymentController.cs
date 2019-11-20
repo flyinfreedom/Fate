@@ -143,7 +143,7 @@ namespace Fate.Controllers
         private string GetGameUrl(string productId, string orderId)
         {
             string baseUrl = WebConfigVariable.BaseUrl;
-            return $"{baseUrl}/index.html#/results?orderid={orderId}";
+            return $"{baseUrl}/Fate/index.html#/results?orderid={orderId}";
         }
 
         private string GetClientIp(HttpRequestMessage request = null)

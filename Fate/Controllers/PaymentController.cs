@@ -54,8 +54,7 @@ namespace Fate.Controllers
 
                 string paymentDataStr = JsonConvert.SerializeObject(new { requestModel.amount, responseObj.orderId });
                 string paymentData = AESHelper.Encrypt(paymentDataStr, request.productId);
-
-
+                var amuont = db.Product.FirstOrDefault(x => x.ProductId == request.productId).Amount;
               
                     var condition = JsonConvert.DeserializeObject<ConditionModel>(request.condition);
                     var order = new Order
@@ -65,6 +64,7 @@ namespace Fate.Controllers
                         Email = email,
                         ContactPhone = string.IsNullOrEmpty(email) ? request.uid : string.Empty,
                         Name = request.name,
+                        Amount = amuont,
                         Gender = condition.Gender,
                         IPAddress = GetClientIp(Request),
                         TxId = responseObj.txId

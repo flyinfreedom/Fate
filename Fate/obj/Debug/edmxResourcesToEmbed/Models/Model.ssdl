@@ -123,6 +123,17 @@
     <Property Name="Stroke" Type="int" Nullable="false" />
     <Property Name="Created" Type="datetime" Nullable="false" />
   </EntityType>
+  <EntityType Name="PopularFate">
+    <Key>
+      <PropertyRef Name="PopularId" />
+    </Key>
+    <Property Name="PopularId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Pic" Type="varbinary(max)" />
+    <Property Name="Url" Type="nvarchar(max)" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="PicType" Type="nchar" MaxLength="10" />
+  </EntityType>
   <Association Name="FK_OrderDetail_Order">
     <End Role="Order" Type="Self.Order" Multiplicity="1" />
     <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
@@ -157,6 +168,7 @@
     <EntitySet Name="VideoType" EntityType="Self.VideoType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WordLibrary" EntityType="Self.WordLibrary" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WordLibraryUserInput" EntityType="Self.WordLibraryUserInput" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PopularFate" EntityType="Self.PopularFate" Schema="FortuneTelling_User" store:Type="Tables" />
     <EntitySet Name="Video" EntityType="Self.Video" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [Video].[VideoId] AS [VideoId], 

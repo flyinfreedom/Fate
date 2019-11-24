@@ -202,6 +202,7 @@
     <Compile Include="Controllers\MailController.cs" />
     <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\PopularController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Controllers\ZiweiController.cs" />
@@ -239,6 +240,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderDetail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PopularFate.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">

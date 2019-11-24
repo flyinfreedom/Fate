@@ -137,6 +137,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\PopularController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Global.asax.cs">
@@ -170,6 +171,9 @@
     </Compile>
     <Compile Include="Models\OrderRequest.cs" />
     <Compile Include="Models\OrderResponse.cs" />
+    <Compile Include="Models\PopularFate.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Product.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -1980,6 +1984,9 @@
     <Content Include="Views\Manager\Delete.cshtml" />
     <Content Include="Views\Manager\Create.cshtml" />
     <Content Include="Views\Home\ChangePassword.cshtml" />
+    <Content Include="Views\Popular\Index.cshtml" />
+    <Content Include="Views\Popular\Create.cshtml" />
+    <Content Include="Views\Popular\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

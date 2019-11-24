@@ -35,5 +35,6 @@ namespace Fate.Backoffice.Models
         public virtual DbSet<WordLibrary> WordLibrary { get; set; }
         public virtual DbSet<WordLibraryUserInput> WordLibraryUserInput { get; set; }
         public virtual DbSet<Video> Video { get; set; }
+        public virtual DbSet<PopularFate> PopularFate { get; set; }
     }
 }

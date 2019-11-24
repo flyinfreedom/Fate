@@ -128,6 +128,17 @@
           <Property Name="Stroke" Type="int" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="PopularFate">
+          <Key>
+            <PropertyRef Name="PopularId" />
+          </Key>
+          <Property Name="PopularId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Pic" Type="varbinary(max)" />
+          <Property Name="Url" Type="nvarchar(max)" />
+          <Property Name="Sort" Type="int" Nullable="false" />
+          <Property Name="PicType" Type="nchar" MaxLength="10" />
+        </EntityType>
         <Association Name="FK_OrderDetail_Order">
           <End Role="Order" Type="Self.Order" Multiplicity="1" />
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
@@ -162,6 +173,7 @@
           <EntitySet Name="VideoType" EntityType="Self.VideoType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WordLibrary" EntityType="Self.WordLibrary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WordLibraryUserInput" EntityType="Self.WordLibraryUserInput" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PopularFate" EntityType="Self.PopularFate" Schema="FortuneTelling_User" store:Type="Tables" />
           <EntitySet Name="Video" EntityType="Self.Video" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Video].[VideoId] AS [VideoId], 
@@ -203,6 +215,7 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="OrderDetail" EntitySet="OrderDetail" />
           </AssociationSet>
+          <EntitySet Name="PopularFate" EntityType="FortuneTellingModel.PopularFate" />
         </EntityContainer>
         <EntityType Name="FateAdmin">
           <Key>
@@ -353,6 +366,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PopularFate">
+          <Key>
+            <PropertyRef Name="PopularId" />
+          </Key>
+          <Property Name="PopularId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Pic" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+          <Property Name="PicType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -480,6 +504,18 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="VideoTypeId" ColumnName="VideoTypeId" />
                 <ScalarProperty Name="VideoId" ColumnName="VideoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PopularFate">
+            <EntityTypeMapping TypeName="FortuneTellingModel.PopularFate">
+              <MappingFragment StoreEntitySet="PopularFate">
+                <ScalarProperty Name="PicType" ColumnName="PicType" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Pic" ColumnName="Pic" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PopularId" ColumnName="PopularId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -152,6 +152,10 @@ namespace Fate.Controllers
 
             if (request.Properties.ContainsKey("MS_HttpContext"))
             {
+                var HTTP_X_FORWARDED_FOR = ((HttpContextWrapper)request.Properties["MS_HttpContext"]).Request.ServerVariables.Get("HTTP_X_FORWARDED_FOR");
+                if (!string.IsNullOrEmpty(HTTP_X_FORWARDED_FOR)) {
+                    return HTTP_X_FORWARDED_FOR;
+                }
                 return ((HttpContextWrapper)request.Properties["MS_HttpContext"]).Request.UserHostAddress;
             }
             else if (request.Properties.ContainsKey(RemoteEndpointMessageProperty.Name))

@@ -102,7 +102,7 @@ namespace Fate.Controllers
             try
             {
                 string urlDeconde = HttpUtility.HtmlDecode(data);
-                string json = AESHelper.Decrypt(urlDeconde);
+                string json = AESHelper.Decrypt(urlDeconde, string.Empty);
                 CreateOrderRequest order = JsonConvert.DeserializeObject<CreateOrderRequest>(json);
                 string orderId = CreateOrderId();
                 using (var db = new FortuneTellingEntities())
@@ -183,10 +183,49 @@ namespace Fate.Controllers
             return string.Format("{0:x}", i - DateTime.Now.Ticks);
         }
 
-        //[HttpPost]
-        //public IHttpActionResult CallBack(string cid, string data)
-        //{
-            
-        //}
+        [HttpPost]
+        [Route("callback")]
+        public IHttpActionResult Callback(string cid, string Data)
+        {
+            var productId = string.Empty;
+            switch (cid.ToUpper())
+            {
+                case "CC_20190001":
+                    productId = "Ziwei";
+                    break;
+                case "CC_20190002":
+                    productId = "ST01";
+                    break;
+                case "CC_20190003":
+                    productId = "NA01";
+                    break;
+            }
+
+            string dataString = AESHelper.Decrypt(Data, productId);
+            var callbackResult = JsonConvert.DeserializeObject<CallbackModel>(dataString);
+
+            using (var db = new FortuneTellingEntities())
+            {
+                var order = db.Order.FirstOrDefault(x => x.OrderId == callbackResult.orderId);
+                if (order == null) {
+                    return BadRequest($"order is null, message is |||{dataString}|||");
+                }
+                order.IsPayed = true;
+                db.SaveChanges();
+            }
+
+            return Ok(new { resultCode = "0000", resultMsg = "更新成功" });
+        }
+
+        private class CallbackModel
+        {
+            public string orderId { get; set; }
+            public string uid { get; set; }
+            public string commodityId { get; set; }
+            public int amount { get; set; }
+            public int useUsage { get; set; }
+            public string memo { get; set; }
+            public string txId { get; set; }
+        }
     }
 }

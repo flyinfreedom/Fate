@@ -91,10 +91,10 @@
       <publishTime>11/10/2019 16:42:47</publishTime>
     </File>
     <File Include="bin/Fate.dll">
-      <publishTime>11/22/2019 07:33:14</publishTime>
+      <publishTime>11/24/2019 17:29:59</publishTime>
     </File>
     <File Include="bin/Fate.pdb">
-      <publishTime>11/22/2019 07:33:14</publishTime>
+      <publishTime>11/24/2019 17:29:59</publishTime>
     </File>
     <File Include="bin/Fate.Resource.dll">
       <publishTime>11/18/2019 23:28:28</publishTime>
@@ -643,7 +643,7 @@
       <publishTime>11/10/2019 16:42:46</publishTime>
     </File>
     <File Include="Models/Model.edmx.diagram">
-      <publishTime>11/20/2019 07:28:37</publishTime>
+      <publishTime>11/24/2019 10:50:35</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.js">
       <publishTime>11/10/2019 16:42:46</publishTime>

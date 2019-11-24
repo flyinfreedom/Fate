@@ -19,6 +19,7 @@
       <End Role="Product" EntitySet="Product" />
       <End Role="OrderDetail" EntitySet="OrderDetail" />
     </AssociationSet>
+    <EntitySet Name="PopularFate" EntityType="FortuneTellingModel.PopularFate" />
   </EntityContainer>
   <EntityType Name="FateAdmin">
     <Key>
@@ -169,4 +170,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="PopularFate">
+    <Key>
+      <PropertyRef Name="PopularId" />
+    </Key>
+    <Property Name="PopularId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Pic" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="PicType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
 </Schema>

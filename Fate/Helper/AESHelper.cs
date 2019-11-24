@@ -9,8 +9,8 @@ namespace Fate.Helper
 {
     public static class AESHelper
     {
-        private const string _key = "8E02183B322FFAEAE692AC9D754B7FD1";
-        private const string _iv = "19F502BD7134CBBB";
+        private const string _key = "A5HA6F1MDMJ5207VLFL38XJ26RJ47AAV";
+        private const string _iv = "ONNQ18IOSJBB2HH2";
 
         private const string ZiweiKey = "914DWEWUBXAZCUS0GO5F73WLZCS7G7KX";
         private const string ZiweiIv = "IBGYAQ9O1XNUVUTN";
@@ -52,16 +52,33 @@ namespace Fate.Helper
             return Convert.ToBase64String(resultArray, 0, resultArray.Length);
         }
  
-        public static string Decrypt(string toDecrypt)
+        public static string Decrypt(string toDecrypt, string productId)
         {
             byte[] keyArray = UTF8Encoding.UTF8.GetBytes(_key);
             byte[] ivArray = UTF8Encoding.UTF8.GetBytes(_iv);
             byte[] toEncryptArray = Convert.FromBase64String(toDecrypt);
- 
+
+            switch (productId.ToUpper())
+            {
+                case "ZIWEI":
+                    keyArray = UTF8Encoding.UTF8.GetBytes(ZiweiKey);
+                    ivArray = UTF8Encoding.UTF8.GetBytes(ZiweiIv);
+                    break;
+                case "ST01":
+                    keyArray = UTF8Encoding.UTF8.GetBytes(ST01Key);
+                    ivArray = UTF8Encoding.UTF8.GetBytes(ST01Iv);
+                    break;
+                case "NA01":
+                    keyArray = UTF8Encoding.UTF8.GetBytes(NA01Key);
+                    ivArray = UTF8Encoding.UTF8.GetBytes(NA01Iv);
+                    break;
+            }
+
             RijndaelManaged rDel = new RijndaelManaged();
             rDel.Key = keyArray;
             rDel.IV = ivArray;
             rDel.Mode = CipherMode.CBC;
+            rDel.Padding = PaddingMode.None;
  
             ICryptoTransform cTransform = rDel.CreateDecryptor();
             byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);

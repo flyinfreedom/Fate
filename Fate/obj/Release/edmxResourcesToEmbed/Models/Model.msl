@@ -125,5 +125,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="PopularFate">
+      <EntityTypeMapping TypeName="FortuneTellingModel.PopularFate">
+        <MappingFragment StoreEntitySet="PopularFate">
+          <ScalarProperty Name="PicType" ColumnName="PicType" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Pic" ColumnName="Pic" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PopularId" ColumnName="PopularId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

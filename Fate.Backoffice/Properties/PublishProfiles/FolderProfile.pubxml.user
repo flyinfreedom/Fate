@@ -6,7 +6,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Eden\Fate\SourceCode\Fate\Fate.Backoffice\bin\Release\Publish</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Eden\FateBoDeploy</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Antlr3.Runtime.dll">
@@ -22,10 +22,10 @@
       <publishTime>11/10/2019 16:42:47</publishTime>
     </File>
     <File Include="bin/Fate.Backoffice.dll">
-      <publishTime>11/13/2019 20:52:30</publishTime>
+      <publishTime>11/24/2019 17:35:37</publishTime>
     </File>
     <File Include="bin/Fate.Backoffice.pdb">
-      <publishTime>11/13/2019 20:52:30</publishTime>
+      <publishTime>11/24/2019 17:35:37</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>11/10/2019 16:42:48</publishTime>
@@ -5326,7 +5326,7 @@
       <publishTime>11/10/2019 16:42:45</publishTime>
     </File>
     <File Include="Models/Model.edmx.diagram">
-      <publishTime>11/11/2019 23:20:41</publishTime>
+      <publishTime>11/24/2019 08:41:20</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.js">
       <publishTime>11/10/2019 16:42:45</publishTime>
@@ -5491,7 +5491,16 @@
       <publishTime>11/11/2019 07:19:27</publishTime>
     </File>
     <File Include="Views/Order/Index.cshtml">
-      <publishTime>11/11/2019 07:20:06</publishTime>
+      <publishTime>11/23/2019 11:58:22</publishTime>
+    </File>
+    <File Include="Views/Popular/Create.cshtml">
+      <publishTime>11/24/2019 09:00:32</publishTime>
+    </File>
+    <File Include="Views/Popular/Edit.cshtml">
+      <publishTime>11/24/2019 10:43:59</publishTime>
+    </File>
+    <File Include="Views/Popular/Index.cshtml">
+      <publishTime>11/24/2019 10:51:29</publishTime>
     </File>
     <File Include="Views/Product/Index.cshtml">
       <publishTime>11/12/2019 15:59:22</publishTime>
@@ -5503,7 +5512,7 @@
       <publishTime>11/10/2019 16:42:45</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/10/2019 19:50:06</publishTime>
+      <publishTime>11/23/2019 11:43:45</publishTime>
     </File>
     <File Include="Views/VideoType/Index.cshtml">
       <publishTime>11/10/2019 16:42:45</publishTime>

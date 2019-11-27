@@ -22,7 +22,7 @@ namespace Fate.ViewModels
 
         public string GetFullUrl(string productId)
         {
-            var obj = new { orderId, uid, amount, callBackUrl, userIp, snType, gameUrl, countryPrefix, msisdn };
+            var obj = new { orderId, uid, amount, callBackUrl, userIp, snType, gameUrl, countryPrefix, msisdn, channel };
             string json = JsonConvert.SerializeObject(obj);
             string encrypt = AESHelper.Encrypt(json, productId);
             string urlEncode = HttpUtility.UrlEncode(encrypt);

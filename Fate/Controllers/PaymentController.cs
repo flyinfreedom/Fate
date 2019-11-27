@@ -22,20 +22,32 @@ namespace Fate.Controllers
         [HttpPost]
         public GetTxIdResponse GetTxId(GetTxIdRequest request)
         {
-
             using (var db = new FortuneTellingEntities())
             {
                 string email = request.uid.Contains("@") ? request.uid : string.Empty;
                 string orderId = CreateOrderId();
 
+                string uid = string.Empty;
+                string msisdn = string.Empty;
+                if (!string.IsNullOrEmpty(request.uid))
+                {
+                    msisdn = request.uid.Split(' ')[1];
+                    if (request.uid.Contains("+886") && request.uid.Split(' ')[1][0] != '0')
+                    {
+                        uid = request.uid.Split(' ')[0] + "0" + request.uid.Split(' ')[1];
+                        msisdn = "0" + msisdn;
+                    }
+                }
+
                 var requestModel = new GetTxIdRequestModel();
                 requestModel.amount = db.Product.FirstOrDefault(x => x.ProductId == "Ziwei").Amount;
-                requestModel.uid = request.uid.Replace(" ", string.Empty); ;
+                requestModel.uid = uid;
                 requestModel.userIp = GetClientIp(Request);
                 requestModel.orderId = orderId;
                 requestModel.gameUrl = GetGameUrl("", orderId);
                 requestModel.countryPrefix = request.uid.Split(' ')[0];
-                requestModel.msisdn = request.uid.Split(' ')[1];
+                requestModel.msisdn = msisdn;
+                requestModel.channel = request.channel;
 
                 HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(requestModel.GetFullUrl(request.productId));
                 httpRequest.Method = "POST";
@@ -94,7 +106,7 @@ namespace Fate.Controllers
             }
         }
 
-        [Route("order/{data}")]
+        [Route("order")]
         [HttpPost]
         public CreateOrderResponse GetOrder(string data)
         {
@@ -112,8 +124,9 @@ namespace Fate.Controllers
                         OrderId = orderId,
                         Datetime = DateTime.Now,
                         Name = order.Name,
-                        Email = order.Email,
+                        Email = order.Email ?? string.Empty,
                         ContactPhone = order.ContactPhone,
+                        IsPayed = true,
                         OrderDetail = new List<OrderDetail>() { new OrderDetail { 
                             ProductId = order.ProductId,
                             OrderId = orderId,

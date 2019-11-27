@@ -292,15 +292,26 @@ namespace Fate.Controllers
         private GetTxIdResponse GetTxId(GetTxIdRequest request, int amount, string email, string phone, string productId)
         {
             string orderId = CreateOrderId();
+            string uid = string.Empty;
+            string msisdn = string.Empty;
+            if (!string.IsNullOrEmpty(phone))
+            {
+                msisdn = phone.Split(' ')[1];
+                if (phone.Contains("+886") && phone.Split(' ')[1][0] != '0')
+                {
+                    uid = phone.Split(' ')[0] + "0" + phone.Split(' ')[1];
+                    msisdn = "0" + msisdn;
+                }
+            }
 
             var requestModel = new GetTxIdRequestModel();
             requestModel.amount = amount;
-            requestModel.uid = phone.Replace(" ", string.Empty);
+            requestModel.uid = uid;
             requestModel.userIp = GetClientIp();
             requestModel.orderId = orderId;
             requestModel.gameUrl = GetGameUrl(request.productId, orderId);
             requestModel.countryPrefix = phone.Split(' ')[0];
-            requestModel.msisdn = phone.Split(' ')[1];
+            requestModel.msisdn = msisdn;
             requestModel.channel = request.channel;
 
             HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(requestModel.GetFullUrl(productId));

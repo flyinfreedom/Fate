@@ -119,6 +119,7 @@ namespace Fate.Controllers
                 string orderId = CreateOrderId();
                 using (var db = new FortuneTellingEntities())
                 {
+                    int? amount = db.Product.FirstOrDefault(x => x.ProductId == order.ProductId)?.Amount;
                     db.Order.Add(new Order
                     {
                         OrderId = orderId,
@@ -127,6 +128,7 @@ namespace Fate.Controllers
                         Email = order.Email ?? string.Empty,
                         ContactPhone = order.ContactPhone,
                         IsPayed = true,
+                        Amount = amount,
                         OrderDetail = new List<OrderDetail>() { new OrderDetail { 
                             ProductId = order.ProductId,
                             OrderId = orderId,

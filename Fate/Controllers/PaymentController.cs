@@ -37,6 +37,10 @@ namespace Fate.Controllers
                         uid = request.uid.Split(' ')[0] + "0" + request.uid.Split(' ')[1];
                         msisdn = "0" + msisdn;
                     }
+                    else
+                    {
+                        uid = request.uid;
+                    }
                 }
 
                 var requestModel = new GetTxIdRequestModel();
@@ -44,10 +48,31 @@ namespace Fate.Controllers
                 requestModel.uid = uid;
                 requestModel.userIp = GetClientIp(Request);
                 requestModel.orderId = orderId;
-                requestModel.gameUrl = GetGameUrl("", orderId);
+                requestModel.backUrl = GetGameUrl("", orderId);
                 requestModel.countryPrefix = request.uid.Split(' ')[0];
                 requestModel.msisdn = msisdn;
+                requestModel.buyUsage = 1;
+                requestModel.useUsage = 1;
                 requestModel.channel = request.channel;
+                requestModel.commodityId = GetCommodityId(request.productId);
+
+#if DEBUG
+                requestModel.amount = 1;
+#endif
+
+                string GetCommodityId(string productId)
+                {
+                    switch (productId.ToUpper())
+                    {
+                        case "ZIWEI":
+                            return "20190001";
+                        case "ST01":
+                            return "20190002";
+                        case "NA01":
+                            return "20190003";
+                    }
+                    return string.Empty;
+                }
 
                 HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(requestModel.GetFullUrl(request.productId));
                 httpRequest.Method = "POST";
@@ -163,6 +188,9 @@ namespace Fate.Controllers
 
         private string GetClientIp(HttpRequestMessage request = null)
         {
+#if DEBUG
+            return "127.0.0.1";
+#endif
             request = request ?? Request;
 
             if (request.Properties.ContainsKey("MS_HttpContext"))

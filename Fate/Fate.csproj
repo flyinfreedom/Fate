@@ -200,6 +200,7 @@
     <Compile Include="Controllers\FateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MailController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\PopularController.cs" />

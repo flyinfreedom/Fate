@@ -309,10 +309,30 @@ namespace Fate.Controllers
             requestModel.uid = uid;
             requestModel.userIp = GetClientIp();
             requestModel.orderId = orderId;
-            requestModel.gameUrl = GetGameUrl(request.productId, orderId);
+            requestModel.backUrl = GetGameUrl(request.productId, orderId);
             requestModel.countryPrefix = phone.Split(' ')[0];
             requestModel.msisdn = msisdn;
             requestModel.channel = request.channel;
+            requestModel.buyUsage = 1;
+            requestModel.useUsage = 1;
+            requestModel.commodityId = GetCommodityId(request.productId);
+#if DEBUG
+            requestModel.amount = 1;
+#endif
+
+            string GetCommodityId(string pid)
+            {
+                switch (pid.ToUpper())
+                {
+                    case "ZIWEI":
+                        return "20190001";
+                    case "ST01":
+                        return "20190002";
+                    case "NA01":
+                        return "20190003";
+                }
+                return string.Empty;
+            }
 
             HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(requestModel.GetFullUrl(productId));
             httpRequest.Method = "POST";
@@ -393,6 +413,9 @@ namespace Fate.Controllers
 
         private string GetClientIp()
         {
+#if DEBUG
+            return "127.0.0.1";
+#endif
             if (!string.IsNullOrEmpty(Request.ServerVariables.Get("HTTP_X_FORWARDED_FOR")))
             { 
                 return Request.ServerVariables.Get("HTTP_X_FORWARDED_FOR");

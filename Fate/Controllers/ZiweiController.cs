@@ -54,6 +54,7 @@ namespace Fate.Controllers
                     var date = ziweiDetail.BirthDay.Split('-').Select(s => Convert.ToInt32(s)).ToArray();
                     dateTimeHelper = new DateTimeHelper(db, (DateType)ziweiDetail.DateType, date[0], date[1], date[2], ziweiDetail.BirthHour.Value, ziweiDetail.IsLeap ?? false);
                     palaceList = Enum.GetValues(typeof(Palace)).Cast<Palace>().ToList();
+                    request.BirthTime = ziweiDetail.BirthHour ?? 0;
                 }
                 else
                 {

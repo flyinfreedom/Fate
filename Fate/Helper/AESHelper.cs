@@ -40,7 +40,7 @@ namespace Fate.Helper
                     ivArray = UTF8Encoding.UTF8.GetBytes(NA01Iv);
                     break;
             }
- 
+
             RijndaelManaged rDel = new RijndaelManaged();
             rDel.Key = keyArray;
             rDel.IV = ivArray;

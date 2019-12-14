@@ -9,34 +9,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Order">
-      <EntityTypeMapping TypeName="FortuneTellingModel.Order">
-        <MappingFragment StoreEntitySet="Order">
-          <ScalarProperty Name="TxId" ColumnName="TxId" />
-          <ScalarProperty Name="RecipientCode" ColumnName="RecipientCode" />
-          <ScalarProperty Name="Gender" ColumnName="Gender" />
-          <ScalarProperty Name="IsPayed" ColumnName="IsPayed" />
-          <ScalarProperty Name="PayTime" ColumnName="PayTime" />
-          <ScalarProperty Name="InvoiceStatus" ColumnName="InvoiceStatus" />
-          <ScalarProperty Name="PayStatus" ColumnName="PayStatus" />
-          <ScalarProperty Name="Refund" ColumnName="Refund" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="PayMethod" ColumnName="PayMethod" />
-          <ScalarProperty Name="CooperationID" ColumnName="CooperationID" />
-          <ScalarProperty Name="Cooperation" ColumnName="Cooperation" />
-          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-          <ScalarProperty Name="VATNumber" ColumnName="VATNumber" />
-          <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
-          <ScalarProperty Name="ContactAddress" ColumnName="ContactAddress" />
-          <ScalarProperty Name="InvoiceHandle" ColumnName="InvoiceHandle" />
-          <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Datetime" ColumnName="Datetime" />
-          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="OrderDetail">
       <EntityTypeMapping TypeName="FortuneTellingModel.OrderDetail">
         <MappingFragment StoreEntitySet="OrderDetail">
@@ -134,6 +106,35 @@
           <ScalarProperty Name="Pic" ColumnName="Pic" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="PopularId" ColumnName="PopularId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order">
+      <EntityTypeMapping TypeName="FortuneTellingModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="TxId" ColumnName="TxId" />
+          <ScalarProperty Name="RecipientCode" ColumnName="RecipientCode" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="IsPayed" ColumnName="IsPayed" />
+          <ScalarProperty Name="PayTime" ColumnName="PayTime" />
+          <ScalarProperty Name="InvoiceStatus" ColumnName="InvoiceStatus" />
+          <ScalarProperty Name="PayStatus" ColumnName="PayStatus" />
+          <ScalarProperty Name="Refund" ColumnName="Refund" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PayMethod" ColumnName="PayMethod" />
+          <ScalarProperty Name="CooperationID" ColumnName="CooperationID" />
+          <ScalarProperty Name="Cooperation" ColumnName="Cooperation" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="VATNumber" ColumnName="VATNumber" />
+          <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+          <ScalarProperty Name="ContactAddress" ColumnName="ContactAddress" />
+          <ScalarProperty Name="InvoiceHandle" ColumnName="InvoiceHandle" />
+          <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

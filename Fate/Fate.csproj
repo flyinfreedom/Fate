@@ -206,6 +206,7 @@
     <Compile Include="Controllers\PopularController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ResultController.cs" />
+    <Compile Include="Controllers\TestingController.cs" />
     <Compile Include="Controllers\ZiweiController.cs" />
     <Compile Include="Filters\CookieAttribute.cs" />
     <Compile Include="Global.asax.cs">

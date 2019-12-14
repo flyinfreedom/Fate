@@ -33,6 +33,7 @@
     <Property Name="Gender" Type="bit" />
     <Property Name="RecipientCode" Type="nvarchar" MaxLength="50" />
     <Property Name="TxId" Type="nvarchar" MaxLength="50" />
+    <Property Name="Uid" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="OrderDetail">
     <Key>

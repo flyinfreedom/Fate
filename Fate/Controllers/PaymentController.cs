@@ -39,7 +39,7 @@ namespace Fate.Controllers
                     }
                     else
                     {
-                        uid = request.uid;
+                        uid = request.uid.Replace(" ", "");
                     }
                 }
 
@@ -100,6 +100,7 @@ namespace Fate.Controllers
                         Datetime = DateTime.Now,
                         Email = email,
                         ContactPhone = string.IsNullOrEmpty(email) ? request.uid : string.Empty,
+                        Uid = uid,
                         Name = request.name,
                         Amount = amuont,
                         Gender = condition.Gender,
@@ -150,6 +151,7 @@ namespace Fate.Controllers
                         OrderId = orderId,
                         Datetime = DateTime.Now,
                         Name = order.Name,
+                        Uid = order.ContactPhone,
                         Email = order.Email ?? string.Empty,
                         ContactPhone = order.ContactPhone,
                         IsPayed = true,
@@ -160,7 +162,7 @@ namespace Fate.Controllers
                             DateType = order.DateType,
                             BirthDay = order.BirthDay,
                             BirthHour = order.BirthHour,
-                            Gender = order.Gender ?? false,
+                            Gender = order.Gender == 1 ? true : false,
                             IsLeap = order.IsLeap ?? false
                         }}
                     });

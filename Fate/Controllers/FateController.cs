@@ -366,6 +366,7 @@ namespace Fate.Controllers
                     Datetime = DateTime.Now,
                     Email = email,
                     ContactPhone = phone,
+                    Uid = uid,
                     Name = request.name,
                     Amount = amount,
                     Gender = condition.Gender,

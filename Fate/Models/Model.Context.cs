@@ -26,7 +26,6 @@ namespace Fate.Models
         }
     
         public virtual DbSet<FateAdmin> FateAdmin { get; set; }
-        public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Result> Result { get; set; }
@@ -36,5 +35,6 @@ namespace Fate.Models
         public virtual DbSet<WordLibraryUserInput> WordLibraryUserInput { get; set; }
         public virtual DbSet<Video> Video { get; set; }
         public virtual DbSet<PopularFate> PopularFate { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
     }
 }

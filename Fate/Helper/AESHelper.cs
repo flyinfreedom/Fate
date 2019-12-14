@@ -45,7 +45,7 @@ namespace Fate.Helper
             rDel.Key = keyArray;
             rDel.IV = ivArray;
             rDel.Mode = CipherMode.CBC;
- 
+
             ICryptoTransform cTransform = rDel.CreateEncryptor();
             byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
  
@@ -78,7 +78,6 @@ namespace Fate.Helper
             rDel.Key = keyArray;
             rDel.IV = ivArray;
             rDel.Mode = CipherMode.CBC;
-            rDel.Padding = PaddingMode.None;
  
             ICryptoTransform cTransform = rDel.CreateDecryptor();
             byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);

@@ -2,7 +2,6 @@
 <Schema Namespace="FortuneTellingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="FortuneTellingEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="FateAdmin" EntityType="FortuneTellingModel.FateAdmin" />
-    <EntitySet Name="Order" EntityType="FortuneTellingModel.Order" />
     <EntitySet Name="OrderDetail" EntityType="FortuneTellingModel.OrderDetail" />
     <EntitySet Name="Product" EntityType="FortuneTellingModel.Product" />
     <EntitySet Name="Result" EntityType="FortuneTellingModel.Result" />
@@ -11,15 +10,16 @@
     <EntitySet Name="WordLibrary" EntityType="FortuneTellingModel.WordLibrary" />
     <EntitySet Name="WordLibraryUserInput" EntityType="FortuneTellingModel.WordLibraryUserInput" />
     <EntitySet Name="Video" EntityType="FortuneTellingModel.Video" />
-    <AssociationSet Name="FK_OrderDetail_Order" Association="FortuneTellingModel.FK_OrderDetail_Order">
-      <End Role="Order" EntitySet="Order" />
-      <End Role="OrderDetail" EntitySet="OrderDetail" />
-    </AssociationSet>
     <AssociationSet Name="FK_OrderDetail_Product" Association="FortuneTellingModel.FK_OrderDetail_Product">
       <End Role="Product" EntitySet="Product" />
       <End Role="OrderDetail" EntitySet="OrderDetail" />
     </AssociationSet>
     <EntitySet Name="PopularFate" EntityType="FortuneTellingModel.PopularFate" />
+    <EntitySet Name="Order" EntityType="FortuneTellingModel.Order" />
+    <AssociationSet Name="FK_OrderDetail_Order" Association="FortuneTellingModel.FK_OrderDetail_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="FateAdmin">
     <Key>
@@ -27,34 +27,6 @@
     </Key>
     <Property Name="LoginId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="Order">
-    <Key>
-      <PropertyRef Name="OrderId" />
-    </Key>
-    <Property Name="OrderId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Datetime" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="InvoiceHandle" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
-    <Property Name="ContactAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ContactPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="VATNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Cooperation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CooperationID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PayMethod" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Amount" Type="Int32" />
-    <Property Name="Refund" Type="DateTime" Precision="3" />
-    <Property Name="PayStatus" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="InvoiceStatus" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="PayTime" Type="DateTime" Precision="3" />
-    <Property Name="IsPayed" Type="Boolean" Nullable="false" />
-    <Property Name="Gender" Type="Boolean" />
-    <Property Name="RecipientCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="TxId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="OrderDetail" Relationship="FortuneTellingModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
   </EntityType>
   <EntityType Name="OrderDetail">
     <Key>
@@ -70,8 +42,8 @@
     <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IsLeap" Type="Boolean" />
-    <NavigationProperty Name="Order" Relationship="FortuneTellingModel.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
     <NavigationProperty Name="Product" Relationship="FortuneTellingModel.FK_OrderDetail_Product" FromRole="OrderDetail" ToRole="Product" />
+    <NavigationProperty Name="Order" Relationship="FortuneTellingModel.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -146,18 +118,6 @@
     <Property Name="Enable" Type="Boolean" Nullable="false" />
     <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
-  <Association Name="FK_OrderDetail_Order">
-    <End Type="FortuneTellingModel.Order" Role="Order" Multiplicity="1" />
-    <End Type="FortuneTellingModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Order">
-        <PropertyRef Name="OrderId" />
-      </Principal>
-      <Dependent Role="OrderDetail">
-        <PropertyRef Name="OrderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_OrderDetail_Product">
     <End Type="FortuneTellingModel.Product" Role="Product" Multiplicity="1" />
     <End Type="FortuneTellingModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
@@ -181,4 +141,45 @@
     <Property Name="Sort" Type="Int32" Nullable="false" />
     <Property Name="PicType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
   </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Datetime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InvoiceHandle" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="ContactAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VATNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Cooperation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CooperationID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PayMethod" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="Refund" Type="DateTime" Precision="3" />
+    <Property Name="PayStatus" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="InvoiceStatus" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="PayTime" Type="DateTime" Precision="3" />
+    <Property Name="IsPayed" Type="Boolean" Nullable="false" />
+    <Property Name="Gender" Type="Boolean" />
+    <Property Name="RecipientCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TxId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Uid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="OrderDetail" Relationship="FortuneTellingModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
+  </EntityType>
+  <Association Name="FK_OrderDetail_Order">
+    <End Type="FortuneTellingModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="FortuneTellingModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

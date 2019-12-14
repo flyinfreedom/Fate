@@ -14,7 +14,7 @@ namespace Fate.ViewModels
         public int? DateType { get; set; }
         public string BirthDay { get; set; }
         public int? BirthHour { get; set; }
-        public bool? Gender { get; set; }
+        public int? Gender { get; set; }
         public bool? IsLeap { get; set; }
     }
 
